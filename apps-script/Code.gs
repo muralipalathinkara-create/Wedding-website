@@ -115,15 +115,138 @@ function sendConfirmation_(recObj) {
   try {
     var attending = recObj['Attending?'] === 'Yes';
     var subject = COUPLE + ' — RSVP received' + (attending ? '' : ' (regrets)');
-    var body = attending
-      ? 'Thank you, ' + recObj['Primary Guest'] + '!\n\n' +
-        'We received your RSVP for ' + recObj['Confirmed Count'] + ' guest(s).\n\n' +
-        'Sangeet: ' + (recObj['Sangeet'] || '—') + '\n' +
-        'Wedding: ' + (recObj['Wedding'] || '—') + '\n' +
-        'Reception: ' + (recObj['Reception'] || '—') + '\n\n' +
-        'You can update your RSVP anytime by logging back in.\n\nWith love,\n' + COUPLE
-      : 'Thank you for letting us know, ' + recObj['Primary Guest'] + '. We\'ll miss you!\n\n' +
-        'With love,\n' + COUPLE;
-    MailApp.sendEmail(email, subject, body);
+    var hasLogo = (typeof LOGO_B64 !== 'undefined') && LOGO_B64;
+    var options = { name: COUPLE, htmlBody: buildEmailHtml_(recObj, attending, hasLogo) };
+    if (hasLogo) {
+      try {
+        options.inlineImages = {
+          weddinglogo: Utilities.newBlob(Utilities.base64Decode(LOGO_B64), 'image/png', 'logo.png')
+        };
+      } catch (e2) {
+        // logo decode failed — fall back to the text monogram in the HTML
+        options.htmlBody = buildEmailHtml_(recObj, attending, false);
+      }
+    }
+    MailApp.sendEmail(email, subject, buildEmailText_(recObj, attending), options);
   } catch (err) { /* email is non-fatal */ }
+}
+
+function escapeHtmlEmail_(s) {
+  return String(s == null ? '' : s).replace(/[&<>]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c];
+  });
+}
+
+function buildEmailText_(recObj, attending) {
+  if (!attending) {
+    return 'Thank you for letting us know, ' + recObj['Primary Guest'] + '. We\'ll miss you!\n\n' +
+      'With love,\n' + COUPLE;
+  }
+  return 'Thank you, ' + recObj['Primary Guest'] + '!\n\n' +
+    'We received your RSVP for ' + recObj['Confirmed Count'] + ' guest(s).\n\n' +
+    'Sangeet: ' + (recObj['Sangeet'] || '—') + '\n' +
+    'Wedding: ' + (recObj['Wedding'] || '—') + '\n' +
+    'Reception: ' + (recObj['Reception'] || '—') + '\n\n' +
+    'You can update your RSVP anytime by logging back in.\n\nWith love,\n' + COUPLE;
+}
+
+function emailEventRows_(recObj, fontBody) {
+  var rows = '';
+  ['Sangeet', 'Wedding', 'Reception'].forEach(function (ev) {
+    var names = recObj[ev];
+    if (names) {
+      rows +=
+        '<tr>' +
+          '<td style="padding:11px 0;border-bottom:1px solid #f2ecda;font-family:Arial,Helvetica,sans-serif;' +
+            'font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#a07830;width:118px;' +
+            'vertical-align:middle;">' + ev + '</td>' +
+          '<td style="padding:11px 0;border-bottom:1px solid #f2ecda;font-family:' + fontBody + ';' +
+            'font-size:17px;color:#2c2c2c;line-height:1.5;vertical-align:middle;">' + escapeHtmlEmail_(names) + '</td>' +
+        '</tr>';
+    }
+  });
+  return rows;
+}
+
+function buildEmailHtml_(recObj, attending, hasLogo) {
+  // Web fonts (Playfair/Cormorant) load in clients that support them (Apple Mail,
+  // iOS Mail, etc.); Gmail and Outlook ignore the @import and fall back to Georgia.
+  var FONT_HEAD = "'Playfair Display', Georgia, 'Times New Roman', serif";
+  var FONT_BODY = "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
+  var FONT_LABEL = 'Arial, Helvetica, sans-serif';
+  var name = escapeHtmlEmail_(recObj['Primary Guest']);
+
+  var header = hasLogo
+    ? '<img src="cid:weddinglogo" width="120" alt="Shivani &amp; Murali" ' +
+        'style="display:block;margin:0 auto;border:0;outline:none;width:120px;height:auto;">'
+    : '<div style="font-family:' + FONT_HEAD + ';font-size:40px;color:#a07830;line-height:1;">' +
+        'S <span style="font-style:italic;">&amp;</span> M</div>';
+
+  var eyebrow = attending ? 'RSVP CONFIRMED' : 'RSVP RECEIVED';
+  var p = 'font-family:' + FONT_BODY + ';font-size:17px;line-height:1.75;color:#3a3a3a;margin:0 0 18px;';
+  var greeting = '<p style="' + p + 'font-size:19px;color:#2c2c2c;">Dear ' + name + ',</p>';
+  var body;
+  if (attending) {
+    body = greeting +
+      '<p style="' + p + '">Thank you for your reply &mdash; we are <em>overjoyed</em> that you&rsquo;ll be ' +
+        'celebrating with us. We have you down for <strong>' + escapeHtmlEmail_(recObj['Confirmed Count']) +
+        '</strong> guest(s):</p>' +
+      '<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:6px 0 22px;">' +
+        emailEventRows_(recObj, FONT_BODY) +
+      '</table>' +
+      '<p style="' + p + 'font-size:15px;color:#8a8a8a;font-style:italic;">' +
+        'Plans change &mdash; you can update your RSVP anytime by logging back in with your invitation code.</p>';
+  } else {
+    body = greeting +
+      '<p style="' + p + '">Thank you for letting us know. We&rsquo;ll truly miss celebrating with you &mdash; ' +
+        'but we&rsquo;re so grateful you replied. If anything changes, you can update your RSVP anytime by ' +
+        'logging back in.</p>';
+  }
+
+  var diamond =
+    '<table role="presentation" align="center" cellpadding="0" cellspacing="0" style="margin:0 auto;"><tr>' +
+      '<td style="width:54px;height:9px;border-bottom:1px solid #e3d2a0;font-size:0;line-height:0;">&nbsp;</td>' +
+      '<td style="padding:0 12px;font-family:' + FONT_LABEL + ';font-size:9px;color:#c9a84c;vertical-align:middle;">&#9670;</td>' +
+      '<td style="width:54px;height:9px;border-bottom:1px solid #e3d2a0;font-size:0;line-height:0;">&nbsp;</td>' +
+    '</tr></table>';
+
+  return '' +
+  '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+  '<meta name="viewport" content="width=device-width,initial-scale=1"><style>' +
+    "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');" +
+    'body{margin:0;padding:0;background:#f3efe6;}' +
+    '@media only screen and (max-width:620px){.cardpad{padding-left:26px!important;padding-right:26px!important;}}' +
+  '</style></head>' +
+  '<body style="margin:0;padding:0;background:#f3efe6;">' +
+    '<div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">' +
+      (attending ? 'We&rsquo;ve received your RSVP &mdash; we can&rsquo;t wait to celebrate with you.'
+                 : 'We&rsquo;ve received your RSVP. We&rsquo;ll miss you!') +
+      '&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;' +
+    '</div>' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3efe6;">' +
+      '<tr><td align="center" style="padding:28px 12px;">' +
+        '<table role="presentation" width="600" cellpadding="0" cellspacing="0" ' +
+          'style="max-width:600px;width:100%;background:#ffffff;border:1px solid #ece3c8;border-radius:4px;overflow:hidden;">' +
+          '<tr><td style="height:4px;background:#c9a84c;font-size:0;line-height:0;">&nbsp;</td></tr>' +
+          '<tr><td class="cardpad" style="padding:42px 52px 8px;text-align:center;">' + header + '</td></tr>' +
+          '<tr><td class="cardpad" style="padding:14px 52px 0;text-align:center;">' +
+            '<div style="font-family:' + FONT_LABEL + ';font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#a07830;">' + eyebrow + '</div>' +
+            '<div style="font-family:' + FONT_HEAD + ';font-size:34px;color:#2c2c2c;letter-spacing:.5px;padding-top:10px;line-height:1.2;">' +
+              'Shivani <span style="font-style:italic;color:#a07830;">&amp;</span> Murali</div>' +
+            '<div style="font-family:' + FONT_BODY + ';font-style:italic;font-size:17px;color:#8a8a8a;padding-top:6px;">' +
+              'April 23 &ndash; 24, 2027 &middot; Downers Grove, Illinois</div>' +
+          '</td></tr>' +
+          '<tr><td style="padding:22px 52px 6px;">' + diamond + '</td></tr>' +
+          '<tr><td class="cardpad" style="padding:10px 52px 40px;">' + body + '</td></tr>' +
+          '<tr><td style="background:#3d5c3a;padding:28px 52px;text-align:center;">' +
+            '<div style="font-family:' + FONT_BODY + ';font-style:italic;font-size:15px;color:#dfe6da;letter-spacing:1px;">with love &amp; gratitude</div>' +
+            '<div style="font-family:' + FONT_HEAD + ';font-size:22px;color:#ffffff;padding-top:6px;">' +
+              'Shivani <span style="font-style:italic;color:#e8d5a3;">&amp;</span> Murali</div>' +
+            '<div style="font-family:' + FONT_LABEL + ';font-size:10px;color:#aebaa7;letter-spacing:1.5px;padding-top:14px;">' +
+              'LAKES AT LACEY &middot; 3500 LACEY RD, DOWNERS GROVE, IL</div>' +
+          '</td></tr>' +
+        '</table>' +
+      '</td></tr>' +
+    '</table>' +
+  '</body></html>';
 }
