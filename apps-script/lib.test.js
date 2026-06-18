@@ -30,6 +30,20 @@ test('findGuest matches case-insensitively and trims', () => {
   assert.equal(res.record.extraAllowed, true);
 });
 
+test('buildGuestRecord tolerates parenthetical header annotations', () => {
+  const lib = loadLib();
+  // Real sheet header has an annotation appended to the extra-guests column.
+  const annotated = [
+    'Primary Guest First Name', 'Last Name', 'Email Address', 'Phone Number',
+    'Events Invited', 'Extra Guest? (Y/N)', 'How many Guests?',
+    'Names of Extra Guests (spearated by commas)', 'Password'
+  ];
+  const res = lib.findGuest([RITIKA], annotated, 'RPunathil');
+  assert.equal(res.status, 'ok');
+  assert.deepEqual(res.record.extraNames, ['Rohitha Punathil', 'Ravachandran']);
+  assert.equal(res.record.extraCount, 2);
+});
+
 test('findGuest returns notfound for blank/unknown', () => {
   const lib = loadLib();
   assert.equal(lib.findGuest([RITIKA], HEADERS, '').status, 'notfound');

@@ -306,7 +306,7 @@
     <p class="gate-tagline">April 23 – 24, 2027 &middot; Downers Grove</p>
     <div class="gate-divider"><div class="gate-divider-line"></div><div class="gate-divider-diamond"></div><div class="gate-divider-line"></div></div>
     <label class="gate-label" for="sitePassword">Your Invitation Code</label>
-    <input type="password" id="sitePassword" class="gate-input" placeholder="Enter your code" onkeydown="if(event.key==='Enter')unlockSite()" autocomplete="off">
+    <input type="text" id="sitePassword" class="gate-input" placeholder="Enter your code" onkeydown="if(event.key==='Enter')unlockSite()" autocomplete="off" autocapitalize="off" autocorrect="off">
     <button class="gate-submit" onclick="unlockSite()">Enter</button>
     <p class="gate-error" id="gateError">That code doesn't match — please check your invitation.</p>
   </div>

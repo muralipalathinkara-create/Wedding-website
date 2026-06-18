@@ -13,16 +13,31 @@ function splitList(s) {
     .filter(function (x) { return x.length > 0; });
 }
 
+// Drop parenthetical annotations so a sheet header like
+// "Names of Extra Guests (separated by commas)" still matches "names of extra guests".
+function baseHeader(s) {
+  return norm(s).toLowerCase().replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+}
+
 function headerIndexMap(headers) {
   var map = {};
-  for (var i = 0; i < headers.length; i++) {
-    map[norm(headers[i]).toLowerCase()] = i;
+  var i;
+  // Pass 1: exact (lowercased) headers take priority.
+  for (i = 0; i < headers.length; i++) {
+    var full = norm(headers[i]).toLowerCase();
+    if (map[full] === undefined) map[full] = i;
+  }
+  // Pass 2: add annotation-stripped aliases without shadowing a real header.
+  for (i = 0; i < headers.length; i++) {
+    var b = baseHeader(headers[i]);
+    if (b && map[b] === undefined) map[b] = i;
   }
   return map;
 }
 
 function col(row, headerMap, name) {
   var i = headerMap[norm(name).toLowerCase()];
+  if (i === undefined) i = headerMap[baseHeader(name)];
   return i === undefined ? '' : row[i];
 }
 

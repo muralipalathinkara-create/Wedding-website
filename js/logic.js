@@ -77,9 +77,17 @@
     return result;
   }
 
+  // Live-format a US phone number as the user types: 5555555555 -> (555) 555-5555.
+  function formatPhone(v) {
+    var d = String(v == null ? '' : v).replace(/\D/g, '').slice(0, 10);
+    if (d.length < 4) return d;
+    if (d.length < 7) return '(' + d.slice(0, 3) + ') ' + d.slice(3);
+    return '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6);
+  }
+
   return {
     EVENT_NAMES: EVENT_NAMES, isValidEmail: isValidEmail, partyMembers: partyMembers,
     buildPayload: buildPayload, prefillFromExisting: prefillFromExisting,
-    parseNameList: parseNameList, parseDietary: parseDietary
+    parseNameList: parseNameList, parseDietary: parseDietary, formatPhone: formatPhone
   };
 });

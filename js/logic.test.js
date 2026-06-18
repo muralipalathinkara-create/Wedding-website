@@ -62,3 +62,12 @@ test('prefillFromExisting returns empty attendees when no existing row', () => {
   const pre = L.prefillFromExisting(null, GUEST);
   assert.deepEqual(pre.attendees, []);
 });
+
+test('formatPhone formats a US number progressively and ignores non-digits', () => {
+  assert.equal(L.formatPhone('5555555555'), '(555) 555-5555');
+  assert.equal(L.formatPhone('55'), '55');
+  assert.equal(L.formatPhone('5551234'), '(555) 123-4');
+  assert.equal(L.formatPhone('(555) 555-5555'), '(555) 555-5555');
+  assert.equal(L.formatPhone('555555555599'), '(555) 555-5555'); // caps at 10 digits
+  assert.equal(L.formatPhone(''), '');
+});

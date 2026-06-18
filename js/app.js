@@ -165,6 +165,8 @@
     entries.forEach(function (en) { if (en.isIntersecting) en.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal, .event-card').forEach(function (el) { obs.observe(el); });
+  var phoneInput = $('f_phone');
+  if (phoneInput) phoneInput.addEventListener('input', function () { this.value = L.formatPhone(this.value); });
   window.openLightbox = function (src) { $('lbImg').src = src; $('lightbox').classList.add('open'); };
   window.closeLightbox = function () { $('lightbox').classList.remove('open'); };
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
