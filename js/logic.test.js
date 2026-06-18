@@ -2,11 +2,12 @@ const { test } = require('node:test');
 const assert = require('node:assert');
 const L = require('./logic.js');
 
+// Fictional fixture only — no real guest data/passwords in this repo.
 const GUEST = {
-  first: 'Ritika', last: 'Punathil', email: '', phone: '',
+  first: 'Avery', last: 'Stone', email: '', phone: '',
   eventsInvited: ['Sangeet', 'Wedding', 'Reception'],
   extraAllowed: true, extraCount: 2,
-  extraNames: ['Rohitha Punathil', 'Ravachandran'], password: 'RPunathil'
+  extraNames: ['Blair Stone', 'Quinn Lee'], password: 'AStone'
 };
 
 test('isValidEmail', () => {
@@ -18,44 +19,44 @@ test('isValidEmail', () => {
 test('partyMembers lists primary first then extras', () => {
   const m = L.partyMembers(GUEST);
   assert.deepEqual(m, [
-    { name: 'Ritika Punathil', isPrimary: true },
-    { name: 'Rohitha Punathil', isPrimary: false },
-    { name: 'Ravachandran', isPrimary: false }
+    { name: 'Avery Stone', isPrimary: true },
+    { name: 'Blair Stone', isPrimary: false },
+    { name: 'Quinn Lee', isPrimary: false }
   ]);
 });
 
 test('buildPayload filters events to valid names and trims', () => {
   const p = L.buildPayload({
-    password: 'RPunathil', email: ' r@x.com ', phone: '', note: ' hi ', hp: '',
-    attendees: [{ name: ' Ritika Punathil ', isPrimary: true, events: ['Wedding', 'Bogus'], dietary: ' Veg ' }]
+    password: 'AStone', email: ' a@example.com ', phone: '', note: ' hi ', hp: '',
+    attendees: [{ name: ' Avery Stone ', isPrimary: true, events: ['Wedding', 'Bogus'], dietary: ' Veg ' }]
   });
   assert.equal(p.action, 'rsvp');
-  assert.equal(p.email, 'r@x.com');
+  assert.equal(p.email, 'a@example.com');
   assert.equal(p.note, 'hi');
   assert.deepEqual(p.attendees[0].events, ['Wedding']);
-  assert.equal(p.attendees[0].name, 'Ritika Punathil');
+  assert.equal(p.attendees[0].name, 'Avery Stone');
   assert.equal(p.attendees[0].dietary, 'Veg');
 });
 
 test('prefillFromExisting maps summary row back to attendee state', () => {
   const existing = {
-    'Email': 'r@x.com', 'Phone': '123', 'Note': 'Yay',
-    'Sangeet': 'Ritika Punathil, Rohitha Punathil',
-    'Wedding': 'Ritika Punathil', 'Reception': '',
-    'Dietary': 'Ritika Punathil — Vegetarian; Rohitha Punathil — None'
+    'Email': 'a@example.com', 'Phone': '123', 'Note': 'Yay',
+    'Sangeet': 'Avery Stone, Blair Stone',
+    'Wedding': 'Avery Stone', 'Reception': '',
+    'Dietary': 'Avery Stone — Vegetarian; Blair Stone — None'
   };
   const pre = L.prefillFromExisting(existing, GUEST);
-  assert.equal(pre.email, 'r@x.com');
-  const ritika = pre.attendees.find(a => a.name === 'Ritika Punathil');
-  const rohitha = pre.attendees.find(a => a.name === 'Rohitha Punathil');
-  const rav = pre.attendees.find(a => a.name === 'Ravachandran');
-  assert.equal(ritika.coming, true);
-  assert.deepEqual(ritika.events.sort(), ['Sangeet', 'Wedding']);
-  assert.equal(ritika.dietary, 'Vegetarian');
-  assert.equal(rohitha.coming, true);
-  assert.deepEqual(rohitha.events, ['Sangeet']);
-  assert.equal(rohitha.dietary, '');
-  assert.equal(rav.coming, false);
+  assert.equal(pre.email, 'a@example.com');
+  const primary = pre.attendees.find(a => a.name === 'Avery Stone');
+  const extra = pre.attendees.find(a => a.name === 'Blair Stone');
+  const notComing = pre.attendees.find(a => a.name === 'Quinn Lee');
+  assert.equal(primary.coming, true);
+  assert.deepEqual(primary.events.sort(), ['Sangeet', 'Wedding']);
+  assert.equal(primary.dietary, 'Vegetarian');
+  assert.equal(extra.coming, true);
+  assert.deepEqual(extra.events, ['Sangeet']);
+  assert.equal(extra.dietary, '');
+  assert.equal(notComing.coming, false);
 });
 
 test('prefillFromExisting returns empty attendees when no existing row', () => {
