@@ -356,11 +356,11 @@
   <h2 class="section-title">Shivani <em>&amp;</em> Murali</h2>
   <p class="section-sub">Captured moments from our journey</p>
   <div class="gallery-grid">
-    <div class="gp gp-hayride reveal"><img src="images/hero.jpg" alt="Fall hayride" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-sunset reveal" style="transition-delay:.1s"><img src="images/sunset.jpg" alt="Sunset" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-ring reveal" style="transition-delay:.18s"><img src="images/ring.jpg" alt="Engagement" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-proposal reveal" style="transition-delay:.26s"><img src="images/proposal.jpg" alt="Proposal" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-seated reveal" style="transition-delay:.34s"><img src="images/seated.jpg" alt="By the lake" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-hayride reveal"><img src="images/hero.jpg" loading="lazy" alt="Fall hayride" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-sunset reveal" style="transition-delay:.1s"><img src="images/sunset.jpg" loading="lazy" alt="Sunset" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-ring reveal" style="transition-delay:.18s"><img src="images/ring.jpg" loading="lazy" alt="Engagement" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-proposal reveal" style="transition-delay:.26s"><img src="images/proposal.jpg" loading="lazy" alt="Proposal" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-seated reveal" style="transition-delay:.34s"><img src="images/seated.jpg" loading="lazy" alt="By the lake" onclick="openLightbox(this.src)"></div>
   </div>
 </section>
 
@@ -377,7 +377,7 @@
       </div>
       <div class="events-row">
         <div class="event-card reveal">
-          <div class="event-card-photo"><img src="images/seated.jpg" alt="Sangeet" style="object-position:center 20%;"><div class="event-card-photo-overlay"></div></div>
+          <div class="event-card-photo"><img src="images/seated.jpg" loading="lazy" alt="Sangeet" style="object-position:center 20%;"><div class="event-card-photo-overlay"></div></div>
           <div class="event-card-body">
             <p class="event-tag">Evening Celebration</p>
             <h3 class="event-name">The <em>Sangeet</em></h3>
@@ -395,7 +395,7 @@
       </div>
       <div class="events-row">
         <div id="weddingCard" class="event-card reveal" style="display:none">
-          <div class="event-card-photo"><img src="images/proposal.jpg" alt="Wedding" style="object-position:center 25%;"><div class="event-card-photo-overlay"></div></div>
+          <div class="event-card-photo"><img src="images/proposal.jpg" loading="lazy" alt="Wedding" style="object-position:center 25%;"><div class="event-card-photo-overlay"></div></div>
           <div class="event-card-body">
             <p class="event-tag">Morning Ceremony</p>
             <h3 class="event-name">Baraat, Wedding <em>&amp; Luncheon</em></h3>
@@ -406,7 +406,7 @@
         </div>
         <div id="receptionCard" class="event-card reveal" style="display:none;transition-delay:.18s">
           <div class="event-card-photo">
-            <img src="images/sunset.jpg" alt="Reception" style="object-position:center 38%;">
+            <img src="images/sunset.jpg" loading="lazy" alt="Reception" style="object-position:center 38%;">
             <div class="event-card-photo-overlay"></div>
           </div>
           <div class="event-card-body">
@@ -562,32 +562,34 @@
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
           <span id="accessLabel">Your Invitation</span>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" id="f_first" placeholder="Your first name" required></div>
-          <div class="form-group"><label>Last Name</label><input type="text" id="f_last" placeholder="Your last name" required></div>
+        <!-- honeypot: real users never fill this; hidden from view and a11y -->
+        <div aria-hidden="true" style="position:absolute;left:-9999px;height:0;overflow:hidden">
+          <label>Do not fill<input type="text" id="f_hp" tabindex="-1" autocomplete="off"></label>
         </div>
-        <div class="form-group"><label>Email Address</label><input type="email" id="f_email" placeholder="your@email.com" required></div>
-        <div class="form-group">
-          <label>Will you be attending?</label>
-          <div class="att-toggle">
-            <input type="radio" name="att" id="att-yes" class="att-opt" value="yes" checked onchange="setAttending(true)">
-            <label for="att-yes"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>Joyfully Accepts</label>
-            <input type="radio" name="att" id="att-no" class="att-opt" value="no" onchange="setAttending(false)">
-            <label for="att-no"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>Regretfully Declines</label>
+
+        <!-- Step 1: who's coming -->
+        <div id="rsvpStep1">
+          <div class="form-row">
+            <div class="form-group"><label>Email Address</label><input type="email" id="f_email" placeholder="your@email.com" required></div>
+            <div class="form-group"><label>Phone (optional)</label><input type="tel" id="f_phone" placeholder="(555) 555-5555"></div>
           </div>
-        </div>
-        <div id="eventSection">
-          <div class="events-check-group" id="eventCheckGroup"><span class="ecg-label">Which events will you attend?</span></div>
-          <div class="form-group">
-            <label>Number of Guests</label>
-            <select id="f_guests"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select>
+          <div class="events-check-group" id="whoComingGroup">
+            <span class="ecg-label">Who in your party is coming?</span>
           </div>
-          <div class="form-group"><label>Dietary Restrictions</label><input type="text" id="f_diet" placeholder="Vegetarian, gluten-free, allergies…"></div>
+          <button type="button" class="btn-submit" id="toStep2Btn" onclick="goStep2()">Next: Event Details</button>
         </div>
-        <div class="form-group"><label>A Note for the Couple</label><textarea id="f_note" placeholder="Share a message, a memory, or heartfelt wishes…"></textarea></div>
-        <button type="submit" class="btn-submit" id="submitBtn">Send My RSVP</button>
-        <p class="submit-status" id="submitStatus"></p>
-        <p class="rsvp-deadline">Please respond by <strong>February 1, 2027</strong></p>
+
+        <!-- Step 2: per-attendee detail -->
+        <div id="rsvpStep2" style="display:none">
+          <div id="attendeeDetails"></div>
+          <div class="form-group"><label>A Note for the Couple</label><textarea id="f_note" placeholder="Share a message, a memory, or heartfelt wishes…"></textarea></div>
+          <div style="display:flex;gap:.7rem;margin-top:.5rem">
+            <button type="button" class="hotel-btn hotel-btn-secondary" onclick="goStep1()">Back</button>
+            <button type="submit" class="btn-submit" id="submitBtn" style="margin-top:0">Send My RSVP</button>
+          </div>
+          <p class="submit-status" id="submitStatus"></p>
+          <p class="rsvp-deadline">Please respond by <strong>February 1, 2027</strong></p>
+        </div>
       </form>
       <div class="form-success" id="formSuccess">
         <div style="font-size:2.5rem;margin-bottom:1rem">🌿</div>
@@ -600,7 +602,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <img src="images/logo.png" alt="S&M" class="footer-logo">
+  <img src="images/logo.png" loading="lazy" alt="S&M" class="footer-logo">
   <p class="footer-names">Shivani <em>&amp;</em> Murali</p>
   <p class="footer-date">April 23 – 24, 2027 &middot; Downers Grove, Illinois</p>
   <div class="footer-div"></div>
@@ -613,92 +615,11 @@
   <img id="lbImg" src="" alt="">
 </div>
 
+<script src="js/logic.js"></script>
 <script>
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyDMnvnep-xzHiLbr02mLotkPOnNVgt0nacj7QxxX5a7YFwrLwgW4zejKr2htRXCMp4Ig/exec';
-const ACCESS = {
-  'celebrate2027':  { label:'All Events',                   sangeet:true,  wedding:true,  reception:true  },
-  'sangeetonly':    { label:'Sangeet Invitation',           sangeet:true,  wedding:false, reception:false },
-  'saturdayonly':   { label:'Saturday Events',              sangeet:false, wedding:true,  reception:true  },
-  'weddingonly':    { label:'Wedding & Luncheon',           sangeet:false, wedding:true,  reception:false },
-  'receptiononly':  { label:'Reception Invitation',         sangeet:false, wedding:false, reception:true  },
-  'sangeetwedding': { label:'Sangeet & Wedding Invitation', sangeet:true,  wedding:true,  reception:false },
-};
-let currentAccess = null;
-
-function unlockSite() {
-  const val = document.getElementById('sitePassword').value.trim().toLowerCase();
-  const access = ACCESS[val];
-  if (!access) {
-    document.getElementById('gateError').style.display = 'block';
-    const inp = document.getElementById('sitePassword');
-    inp.classList.add('error'); inp.value = ''; inp.focus();
-    return;
-  }
-  currentAccess = access;
-  const hasFriday = access.sangeet, hasSaturday = access.wedding || access.reception;
-  document.getElementById('fridayBlock').style.display   = hasFriday   ? 'block' : 'none';
-  document.getElementById('saturdayBlock').style.display = hasSaturday ? 'block' : 'none';
-  document.getElementById('weddingCard').style.display   = access.wedding   ? '' : 'none';
-  document.getElementById('receptionCard').style.display = access.reception ? '' : 'none';
-  document.getElementById('accessLabel').textContent = access.label;
-  const grp = document.getElementById('eventCheckGroup');
-  grp.innerHTML = '<span class="ecg-label">Which events will you attend?</span>';
-  if (access.sangeet)   grp.innerHTML += `<label class="event-checkbox-row"><input type="checkbox" name="events" value="Sangeet" checked><span><strong>Sangeet</strong> &mdash; Fri, Apr 23</span><span class="ev-sub">6:00 PM</span></label>`;
-  if (access.wedding)   grp.innerHTML += `<label class="event-checkbox-row"><input type="checkbox" name="events" value="Baraat, Wedding & Luncheon" checked><span><strong>Baraat, Wedding &amp; Luncheon</strong> &mdash; Sat, Apr 24</span><span class="ev-sub">10:00 AM</span></label>`;
-  if (access.reception) grp.innerHTML += `<label class="event-checkbox-row"><input type="checkbox" name="events" value="Cocktail Hour & Reception" checked><span><strong>Cocktail Hour &amp; Reception</strong> &mdash; Sat, Apr 24</span><span class="ev-sub">6:00 PM</span></label>`;
-  document.getElementById('siteGate').style.display = 'none';
-  document.getElementById('siteContent').classList.add('unlocked');
-}
-
-function setAttending(yes) {
-  document.getElementById('eventSection').style.display = yes ? 'block' : 'none';
-}
-
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').style.boxShadow = window.scrollY > 40 ? '0 4px 20px rgba(0,0,0,.07)' : 'none';
-});
-
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold:0.1});
-document.querySelectorAll('.reveal, .event-card').forEach(el => obs.observe(el));
-
-function openLightbox(src) { document.getElementById('lbImg').src = src; document.getElementById('lightbox').classList.add('open'); }
-function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-async function submitRSVP(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submitBtn');
-  const status = document.getElementById('submitStatus');
-  btn.disabled = true; status.textContent = 'Sending…';
-  const isAttending = document.querySelector('input[name="att"]:checked').value === 'yes';
-  const checkedEvents = isAttending
-    ? [...document.querySelectorAll('input[name="events"]:checked')].map(c => c.value).join(', ') || 'N/A'
-    : 'N/A';
-  const payload = {
-    first: document.getElementById('f_first').value,
-    last: document.getElementById('f_last').value,
-    email: document.getElementById('f_email').value,
-    attending: isAttending ? 'Yes' : 'No',
-    events: checkedEvents,
-    guests: isAttending ? document.getElementById('f_guests').value : '0',
-    dietary: document.getElementById('f_diet').value || 'None',
-    note: document.getElementById('f_note').value || '',
-    accessLevel: currentAccess ? currentAccess.label : 'Unknown',
-  };
-  try {
-    await fetch(SHEETS_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-    showSuccess();
-  } catch(err) {
-    status.textContent = 'Something went wrong — please try again or contact us directly.';
-    btn.disabled = false;
-  }
-}
-function showSuccess() {
-  document.getElementById('rsvpForm').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
-}
+  // Apps Script Web App /exec URL (container-bound to the wedding spreadsheet):
+  window.SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzAuEHqpDPprPpTbPK4w5VyuU62i09a3fr4Qyl0uVE3P7I6a1CRBKcWvv5DPmqWvLmwaw/exec';
 </script>
+<script src="js/app.js"></script>
 </body>
 </html>
