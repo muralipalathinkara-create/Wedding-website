@@ -1,3 +1,13 @@
 
 # Internal AI workflow artifacts (contain real example data) — do not publish
 docs/superpowers/
+
+# OS junk
+.DS_Store
+
+# Raw source art (kept locally; site uses the vectorized SVGs in images/)
+/Ganesha.png
+/OM-Symbol.png
+
+# Local design preview (not part of the published site)
+/invitation-preview.html

@@ -101,7 +101,7 @@
       var checks = guest.eventsInvited.map(function (ev) {
         var on = events.indexOf(ev) >= 0;
         return '<label class="event-checkbox-row"><input type="checkbox" class="att-event" value="' +
-          ev + '"' + (on ? ' checked' : '') + '><span>' + ev + '</span></label>';
+          ev + '"' + (on ? ' checked' : '') + '><span>' + ((L.EVENT_LABELS && L.EVENT_LABELS[ev]) || ev) + '</span></label>';
       }).join('');
       box.innerHTML = '<p class="event-tag">' + escapeHtml(m.name) + '</p>' +
         '<div class="events-check-group"><span class="ecg-label">Events</span>' + checks + '</div>' +

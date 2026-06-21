@@ -2,9 +2,9 @@
 // here so this file is unit-testable in Node (see lib.test.js). Code.gs holds
 // the Google I/O wrappers and calls into these.
 
-var EVENT_NAMES = ['Sangeet', 'Wedding', 'Reception'];
+var EVENT_NAMES = ['Sangeet', 'Wedding', 'Reception', 'Milwaukee'];
 var RSVP_HEADERS = ['Last Updated', 'Password', 'Primary Guest', 'Email', 'Phone',
-  'Attending?', 'Confirmed Count', 'Sangeet', 'Wedding', 'Reception', 'Dietary', 'Note'];
+  'Attending?', 'Confirmed Count', 'Sangeet', 'Wedding', 'Reception', 'Milwaukee', 'Dietary', 'Note'];
 
 function norm(s) { return String(s == null ? '' : s).trim(); }
 
@@ -122,6 +122,7 @@ function buildRsvpRecord(payload, record, timestamp) {
     'Sangeet': eventAttendeeNames(attendees, 'Sangeet'),
     'Wedding': eventAttendeeNames(attendees, 'Wedding'),
     'Reception': eventAttendeeNames(attendees, 'Reception'),
+    'Milwaukee': eventAttendeeNames(attendees, 'Milwaukee'),
     'Dietary': formatDietary(attendees),
     'Note': norm(payload.note)
   };

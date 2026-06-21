@@ -142,24 +142,32 @@ function buildEmailText_(recObj, attending) {
     return 'Thank you for letting us know, ' + recObj['Primary Guest'] + '. We\'ll miss you!\n\n' +
       'With love,\n' + COUPLE;
   }
-  return 'Thank you, ' + recObj['Primary Guest'] + '!\n\n' +
+  var lines = 'Thank you, ' + recObj['Primary Guest'] + '!\n\n' +
     'We received your RSVP for ' + recObj['Confirmed Count'] + ' guest(s).\n\n' +
     'Sangeet: ' + (recObj['Sangeet'] || '—') + '\n' +
     'Wedding: ' + (recObj['Wedding'] || '—') + '\n' +
-    'Reception: ' + (recObj['Reception'] || '—') + '\n\n' +
-    'You can update your RSVP anytime by logging back in.\n\nWith love,\n' + COUPLE;
+    'Reception: ' + (recObj['Reception'] || '—') + '\n';
+  if (recObj['Milwaukee']) lines += 'Milwaukee Meet & Greet (Sun, Apr 25): ' + recObj['Milwaukee'] + '\n';
+  return lines + '\nYou can update your RSVP anytime by logging back in.\n\nWith love,\n' + COUPLE;
 }
 
 function emailEventRows_(recObj, fontBody) {
   var rows = '';
-  ['Sangeet', 'Wedding', 'Reception'].forEach(function (ev) {
-    var names = recObj[ev];
+  var EVENTS = [
+    ['Sangeet', 'Sangeet'],
+    ['Wedding', 'Wedding'],
+    ['Reception', 'Reception'],
+    ['Milwaukee', 'Milwaukee Meet &amp; Greet']
+  ];
+  EVENTS.forEach(function (pair) {
+    var key = pair[0], label = pair[1];
+    var names = recObj[key];
     if (names) {
       rows +=
         '<tr>' +
           '<td style="padding:11px 0;border-bottom:1px solid #f2ecda;font-family:Arial,Helvetica,sans-serif;' +
             'font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#a07830;width:118px;' +
-            'vertical-align:middle;">' + ev + '</td>' +
+            'vertical-align:middle;">' + label + '</td>' +
           '<td style="padding:11px 0;border-bottom:1px solid #f2ecda;font-family:' + fontBody + ';' +
             'font-size:17px;color:#2c2c2c;line-height:1.5;vertical-align:middle;">' + escapeHtmlEmail_(names) + '</td>' +
         '</tr>';

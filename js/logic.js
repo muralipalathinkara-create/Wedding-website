@@ -4,7 +4,14 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = factory();
   else root.RSVPLogic = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
-  var EVENT_NAMES = ['Sangeet', 'Wedding', 'Reception'];
+  var EVENT_NAMES = ['Sangeet', 'Wedding', 'Reception', 'Milwaukee'];
+  // Friendly display labels (internal key stays short; the UI shows the label).
+  var EVENT_LABELS = {
+    'Sangeet': 'Sangeet',
+    'Wedding': 'Wedding',
+    'Reception': 'Reception',
+    'Milwaukee': 'Milwaukee Meet & Greet · Sun, Apr 25'
+  };
 
   function norm(s) { return String(s == null ? '' : s).trim(); }
 
@@ -86,7 +93,7 @@
   }
 
   return {
-    EVENT_NAMES: EVENT_NAMES, isValidEmail: isValidEmail, partyMembers: partyMembers,
+    EVENT_NAMES: EVENT_NAMES, EVENT_LABELS: EVENT_LABELS, isValidEmail: isValidEmail, partyMembers: partyMembers,
     buildPayload: buildPayload, prefillFromExisting: prefillFromExisting,
     parseNameList: parseNameList, parseDietary: parseDietary, formatPhone: formatPhone
   };
