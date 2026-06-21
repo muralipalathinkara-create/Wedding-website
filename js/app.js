@@ -57,6 +57,7 @@
     $('weddingCard').style.display = inv.Wedding ? '' : 'none';
     $('receptionCard').style.display = inv.Reception ? '' : 'none';
     var mlBlock = $('milwaukeeBlock'); if (mlBlock) mlBlock.style.display = inv.Milwaukee ? 'block' : 'none';
+    var mlTravel = $('milwaukeeTravel'); if (mlTravel) mlTravel.style.display = inv.Milwaukee ? 'block' : 'none';
     $('accessLabel').textContent = guest.eventsInvited.join(' · ') || 'Your Invitation';
     if (prefill.email) $('f_email').value = prefill.email;
     if (prefill.phone) $('f_phone').value = prefill.phone;
