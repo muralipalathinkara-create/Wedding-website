@@ -11,3 +11,9 @@ docs/superpowers/
 
 # Local design preview (not part of the published site)
 /invitation-preview.html
+
+# Floral/image source libraries (only the composed images/ assets are published)
+/FloralLineSVG/
+/Flower vectors/
+/Images for Gallery/
+/fullsite-preview.html
