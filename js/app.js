@@ -160,16 +160,68 @@
   function escapeAttr(s) { return escapeHtml(s).replace(/"/g, '&quot;'); }
 
   // ---- Misc UI (kept from original) ----
+  // Sticky nav: toggle a class on scroll so CSS can shrink + add blur/translucency.
   window.addEventListener('scroll', function () {
-    var nav = $('nav'); if (nav) nav.style.boxShadow = window.scrollY > 40 ? '0 4px 20px rgba(0,0,0,.07)' : 'none';
+    var nav = $('nav'); if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
   });
+
+  // Scroll-reveal: smooth fade/slide-up as elements enter view.
   var obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) { if (en.isIntersecting) en.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal, .event-card').forEach(function (el) { obs.observe(el); });
+    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal, .reveal-up, .event-card').forEach(function (el) { obs.observe(el); });
+
   var phoneInput = $('f_phone');
   if (phoneInput) phoneInput.addEventListener('input', function () { this.value = L.formatPhone(this.value); });
-  window.openLightbox = function (src) { $('lbImg').src = src; $('lightbox').classList.add('open'); };
+
+  // ---- Lightbox gallery (with prev/next + arrow keys) ----
+  var lbList = [], lbIndex = 0;
+  function lbRefresh() {
+    lbList = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'))
+      .map(function (im) { return im.getAttribute('src'); });
+  }
+  window.openLightbox = function (src) {
+    lbRefresh();
+    lbIndex = Math.max(0, lbList.indexOf(src));
+    $('lbImg').src = src;
+    $('lightbox').classList.add('open');
+  };
   window.closeLightbox = function () { $('lightbox').classList.remove('open'); };
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
+  window.lbStep = function (dir) {
+    if (!lbList.length) lbRefresh();
+    if (!lbList.length) return;
+    lbIndex = (lbIndex + dir + lbList.length) % lbList.length;
+    $('lbImg').src = lbList[lbIndex];
+  };
+  document.addEventListener('keydown', function (e) {
+    if (!$('lightbox') || !$('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') lbStep(-1);
+    else if (e.key === 'ArrowRight') lbStep(1);
+  });
+
+  // ---- Countdown to the wedding (April 23, 2027) ----
+  (function () {
+    var el = $('countdown'); if (!el) return;
+    var target = new Date(2027, 3, 23, 0, 0, 0).getTime(); // months are 0-indexed: 3 = April
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function cell(num, lbl) {
+      return '<div class="cd-cell"><div class="cd-num">' + num + '</div><div class="cd-lbl">' + lbl + '</div></div>';
+    }
+    function tick() {
+      var diff = target - Date.now();
+      if (diff <= 0) { el.innerHTML = '<div class="cd-cell"><div class="cd-num">Today!</div></div>'; return; }
+      var s = Math.floor(diff / 1000);
+      var d = Math.floor(s / 86400); s -= d * 86400;
+      var h = Math.floor(s / 3600); s -= h * 3600;
+      var m = Math.floor(s / 60); s -= m * 60;
+      el.innerHTML =
+        cell(d, 'Days') + '<span class="cd-sep">:</span>' +
+        cell(pad(h), 'Hrs') + '<span class="cd-sep">:</span>' +
+        cell(pad(m), 'Min') + '<span class="cd-sep">:</span>' +
+        cell(pad(s), 'Sec');
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
 })();
