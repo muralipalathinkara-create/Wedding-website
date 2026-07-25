@@ -64,6 +64,23 @@ The `/exec` URL is hard-coded in `index.html` as `window.SHEETS_URL`. It is a pu
   `@gmail.com`, 1,500 on Workspace) — fine for this guest count. Send failures are caught and
   non-fatal: the RSVP still records even if the email doesn't go out.
 
+## Milwaukee Meet & Greet — separate standalone page
+
+`milwaukee/` is a second, independent site living inside this same repo, published at
+`/milwaukee/` on the same GitHub Pages domain. It is a completely separate concern from
+everything above:
+
+- **No password gate, no Guests tab.** Anyone with the link RSVPs with their own name/email
+  and lists whichever guests they're bringing.
+- **Its own Google Sheet and Apps Script deployment** (`milwaukee/apps-script/lib.gs` +
+  `Code.gs`, with their own `/exec` URL set as `window.MILWAUKEE_SHEETS_URL` in
+  `milwaukee/index.html`) — Milwaukee RSVPs never touch the main wedding spreadsheet.
+- Upsert key for RSVPs is **email address** (lowercased), not a password.
+- See `docs/MILWAUKEE-SETUP.md` for the full setup walkthrough (new sheet, deploy script,
+  wire up the URL, add photos, fill in the venue once booked).
+- Has its own pure-logic unit tests (`milwaukee/js/logic.test.js`,
+  `milwaukee/apps-script/lib.test.js`) picked up automatically by `npm test`.
+
 ## Tests
 
 `npm test` (Node 18+, no install) runs `node:test`. The pure logic in `apps-script/lib.gs` is
