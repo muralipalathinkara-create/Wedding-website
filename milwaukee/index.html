@@ -86,6 +86,13 @@
     .info-card-main { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--text-dark); line-height:1.4; margin-bottom:.3rem; }
     .info-card-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.98rem; color:var(--text-light); }
     .venue-note { max-width:640px; margin:2.5rem auto 0; text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.05rem; color:var(--text-mid); }
+    .venue-strip { max-width:900px; margin:2.5rem auto 0; background:white; border-radius:8px; padding:2rem 2.4rem; box-shadow:0 8px 32px rgba(46,111,176,.08); border:1px solid rgba(91,151,201,.15); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.2rem; }
+    .venue-strip-tag { font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; color:var(--blue-deep); font-weight:500; margin-bottom:.4rem; }
+    .venue-strip-name { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--text-dark); margin-bottom:.2rem; }
+    .venue-strip-addr { font-family:'Cormorant Garamond',serif; font-size:1.02rem; color:var(--text-mid); }
+    .btn-directions { display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1.6rem; background:var(--blue-deep); color:white; font-family:'Jost',sans-serif; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; text-decoration:none; border-radius:3px; transition:all .3s; flex-shrink:0; white-space:nowrap; }
+    .btn-directions:hover { background:#245a8c; transform:translateY(-2px); }
+    @media(max-width:600px) { .venue-strip { padding:1.6rem; justify-content:center; text-align:center; } }
 
     /* GALLERY */
     #gallery { padding:5.5rem 2rem; background:var(--cream); }
@@ -167,11 +174,11 @@
     <img src="../images/sunset.jpg" alt="Shivani and Murali">
   </div>
   <div class="hero-content-half">
-    <p class="hero-eyebrow">Shivani &amp; Murali invite you to a</p>
+    <p class="hero-eyebrow">Vinod &amp; Raji invite you to a</p>
     <h1 class="hero-title">Milwaukee <em>Meet &amp; Greet</em></h1>
     <div class="hero-rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
-    <p class="hero-date">Sunday, April 25, 2027 &middot; 3:00 &ndash; 8:00 PM</p>
-    <p class="hero-venue">Milwaukee, Wisconsin</p>
+    <p class="hero-date">Sunday, April 25, 2027 &middot; 5:30 &ndash; 8:00 PM</p>
+    <p class="hero-venue">Crowne Plaza Milwaukee Airport</p>
     <p class="hero-note">A relaxed afternoon for our Milwaukee-area family and friends to celebrate together
       — casual attire, good food, and time to catch up. No formal ceremony, just a fun get-together!</p>
     <a href="#rsvp" class="hero-cta">
@@ -191,13 +198,13 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       <p class="info-card-tag">When</p>
       <p class="info-card-main">Sunday, April 25, 2027</p>
-      <p class="info-card-sub">3:00 &ndash; 8:00 PM</p>
+      <p class="info-card-sub">5:30 &ndash; 8:00 PM</p>
     </div>
     <div class="info-card reveal" style="transition-delay:.1s">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
       <p class="info-card-tag">Where</p>
-      <p class="info-card-main">Milwaukee, WI</p>
-      <p class="info-card-sub">Venue details to follow</p>
+      <p class="info-card-main">Crowne Plaza Milwaukee Airport</p>
+      <p class="info-card-sub">6401 South 13th Street, Milwaukee, WI 53221</p>
     </div>
     <div class="info-card reveal" style="transition-delay:.2s">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.4 14.5L16 10 4 20"/><circle cx="8.5" cy="8.5" r="1.5"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
@@ -206,8 +213,17 @@
       <p class="info-card-sub">Come as you are</p>
     </div>
   </div>
-  <p class="venue-note">We'll share the exact venue address here and by email as soon as it's confirmed —
-    check back closer to the date, or look for it in your RSVP confirmation.</p>
+  <div class="venue-strip reveal">
+    <div>
+      <p class="venue-strip-tag">Venue &amp; Address</p>
+      <p class="venue-strip-name">Crowne Plaza Milwaukee Airport</p>
+      <p class="venue-strip-addr">6401 South 13th Street, Milwaukee, WI 53221</p>
+    </div>
+    <a class="btn-directions" href="https://www.google.com/maps/search/?api=1&query=Crowne+Plaza+Milwaukee+Airport+6401+South+13th+Street+Milwaukee+WI+53221" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      Get Directions
+    </a>
+  </div>
 </section>
 
 <!-- GALLERY -->

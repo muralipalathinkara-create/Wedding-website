@@ -105,14 +105,15 @@ function escapeHtmlEmail_(s) {
 function buildEmailText_(recObj, attending) {
   if (!attending) {
     return 'Thank you for letting us know, ' + recObj['Name'] + '. We\'ll miss you in Milwaukee!\n\n' +
-      'With love,\nShivani & Murali';
+      'With love,\nVinod & Raji';
   }
   var lines = 'Thank you, ' + recObj['Name'] + '!\n\n' +
-    'We received your RSVP for the Milwaukee Meet & Greet (Sunday, April 25, 2027, 3:00-8:00 PM).\n' +
+    'We received your RSVP for the Milwaukee Meet & Greet (Sunday, April 25, 2027, 5:30-8:00 PM)\n' +
+    'at the Crowne Plaza Milwaukee Airport, 6401 South 13th Street, Milwaukee, WI 53221.\n' +
     'Total in your party: ' + (1 + recObj['Guest Count']) + '\n';
   if (recObj['Guest Names']) lines += 'Guests: ' + recObj['Guest Names'] + '\n';
   if (recObj['Dietary']) lines += 'Dietary notes: ' + recObj['Dietary'] + '\n';
-  return lines + '\nWe\'ll send the exact venue address as soon as it\'s confirmed.\n\nWith love,\nShivani & Murali';
+  return lines + '\nWith love,\nVinod & Raji';
 }
 
 function buildEmailHtml_(recObj, attending) {
@@ -130,9 +131,8 @@ function buildEmailHtml_(recObj, attending) {
       '<p style="' + p + '">Thank you for your reply &mdash; we can\'t wait to see you in Milwaukee! ' +
         'We have you down for <strong>' + total + '</strong> guest(s)' +
         (recObj['Guest Names'] ? ' (' + escapeHtmlEmail_(recObj['Guest Names']) + ')' : '') + '.</p>' +
-      '<p style="' + p + '"><strong>Sunday, April 25, 2027</strong> &middot; 3:00 &ndash; 8:00 PM &middot; Milwaukee, WI</p>' +
-      '<p style="' + p + 'font-size:15px;color:#8a8a8a;font-style:italic;">' +
-        'We\'ll follow up with the exact venue address as soon as it\'s confirmed.</p>';
+      '<p style="' + p + '"><strong>Sunday, April 25, 2027</strong> &middot; 5:30 &ndash; 8:00 PM<br>' +
+        'Crowne Plaza Milwaukee Airport &middot; 6401 South 13th Street, Milwaukee, WI 53221</p>';
   } else {
     body = greeting +
       '<p style="' + p + '">Thank you for letting us know. We\'ll miss celebrating with you in Milwaukee, ' +
@@ -155,7 +155,7 @@ function buildEmailHtml_(recObj, attending) {
             '<div style="font-family:' + FONT_HEAD + ';font-size:30px;color:#2c2c2c;letter-spacing:.5px;padding-top:10px;line-height:1.2;">' +
               'Milwaukee <span style="font-style:italic;color:#2e6fb0;">Meet &amp; Greet</span></div>' +
             '<div style="font-family:' + FONT_BODY + ';font-style:italic;font-size:16px;color:#8a8a8a;padding-top:6px;">' +
-              'Shivani &amp; Murali</div>' +
+              'Vinod &amp; Raji</div>' +
           '</td></tr>' +
           '<tr><td style="padding:24px 44px 36px;">' + body + '</td></tr>' +
           '<tr><td style="background:#2e6fb0;padding:22px 44px;text-align:center;">' +
