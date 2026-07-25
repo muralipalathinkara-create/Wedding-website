@@ -15,24 +15,37 @@ test('formatPhone live-formats as digits are typed', () => {
   assert.equal(L.formatPhone('555-123-4567 x9'), '(555) 123-4567'); // extra digits truncated
 });
 
-test('buildPayload trims fields and drops empty guest names', () => {
+test('buildAttendees puts the primary first with their own dietary, then named guests', () => {
+  const attendees = L.buildAttendees(' Avery Stone ', ' Veg ', [
+    { name: ' Blair Stone ', dietary: ' Gluten-free ' }, { name: '', dietary: 'ignored, no name' }, { name: 'Quinn Lee' }
+  ]);
+  assert.deepEqual(attendees, [
+    { name: 'Avery Stone', isPrimary: true, dietary: 'Veg' },
+    { name: 'Blair Stone', isPrimary: false, dietary: 'Gluten-free' },
+    { name: 'Quinn Lee', isPrimary: false, dietary: '' }
+  ]);
+});
+
+test('buildPayload trims fields and builds per-attendee dietary list', () => {
   const p = L.buildPayload({
-    name: ' Avery Stone ', email: ' a@example.com ', phone: '', attending: true,
-    guestNames: [' Blair Stone ', '', '  '], dietary: ' Veg ', note: ' hi ', hp: ''
+    name: ' Avery Stone ', email: ' a@example.com ', phone: '', attending: true, dietary: 'Veg',
+    guests: [{ name: 'Blair Stone', dietary: 'Gluten-free' }], note: ' hi ', hp: ''
   });
   assert.equal(p.action, 'rsvp');
   assert.equal(p.name, 'Avery Stone');
   assert.equal(p.email, 'a@example.com');
   assert.equal(p.attending, true);
-  assert.deepEqual(p.guestNames, ['Blair Stone']);
-  assert.equal(p.dietary, 'Veg');
+  assert.deepEqual(p.attendees, [
+    { name: 'Avery Stone', isPrimary: true, dietary: 'Veg' },
+    { name: 'Blair Stone', isPrimary: false, dietary: 'Gluten-free' }
+  ]);
   assert.equal(p.note, 'hi');
 });
 
-test('buildPayload clears guests when not attending', () => {
-  const p = L.buildPayload({ name: 'Avery Stone', email: 'a@example.com', attending: false, guestNames: ['Blair'] });
+test('buildPayload clears attendees when not attending', () => {
+  const p = L.buildPayload({ name: 'Avery Stone', email: 'a@example.com', attending: false, guests: [{ name: 'Blair' }] });
   assert.equal(p.attending, false);
-  assert.deepEqual(p.guestNames, []);
+  assert.deepEqual(p.attendees, []);
 });
 
 test('validatePayload requires name and a valid email', () => {

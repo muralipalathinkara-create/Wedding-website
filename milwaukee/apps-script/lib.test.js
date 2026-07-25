@@ -18,26 +18,41 @@ test('validateRsvp requires name and valid email', () => {
   assert.equal(lib.validateRsvp({ name: 'Avery Stone', email: 'nope' }).ok, false);
 });
 
-test('buildRsvpRecord computes guest count/names and Attending?', () => {
+test('buildRsvpRecord computes guest count/names and a per-attendee Dietary column', () => {
   const lib = loadLib();
   const rec = lib.buildRsvpRecord({
     name: ' Avery Stone ', email: ' a@b.com ', phone: '5551234567', attending: true,
-    guestNames: [' Blair Stone ', '', 'Quinn Lee'], dietary: 'Vegetarian', note: 'Excited!'
+    attendees: [
+      { name: 'Avery Stone', isPrimary: true, dietary: 'Vegetarian' },
+      { name: 'Blair Stone', isPrimary: false, dietary: '' },
+      { name: 'Quinn Lee', isPrimary: false, dietary: 'Gluten-free' }
+    ],
+    note: 'Excited!'
   }, '2027-01-01T00:00:00.000Z');
   assert.equal(rec['Name'], 'Avery Stone');
   assert.equal(rec['Email'], 'a@b.com');
   assert.equal(rec['Attending?'], 'Yes');
   assert.equal(rec['Guest Count'], 2);
   assert.equal(rec['Guest Names'], 'Blair Stone, Quinn Lee');
-  assert.equal(rec['Dietary'], 'Vegetarian');
+  assert.equal(rec['Dietary'], 'Avery Stone — Vegetarian; Blair Stone — None; Quinn Lee — Gluten-free');
 });
 
-test('buildRsvpRecord zeroes out guests when not attending', () => {
+test('buildRsvpRecord zeroes out guests and dietary when not attending', () => {
   const lib = loadLib();
-  const rec = lib.buildRsvpRecord({ name: 'Avery Stone', email: 'a@b.com', attending: false, guestNames: ['Blair'] }, 'ts');
+  const rec = lib.buildRsvpRecord({
+    name: 'Avery Stone', email: 'a@b.com', attending: false,
+    attendees: [{ name: 'Avery Stone', isPrimary: true, dietary: 'Vegetarian' }]
+  }, 'ts');
   assert.equal(rec['Attending?'], 'No');
   assert.equal(rec['Guest Count'], 0);
   assert.equal(rec['Guest Names'], '');
+  assert.equal(rec['Dietary'], '');
+});
+
+test('formatDietary lists each attendee, defaulting to "None"', () => {
+  const lib = loadLib();
+  const s = lib.formatDietary([{ name: 'Avery', dietary: 'Vegan' }, { name: 'Blair', dietary: '' }]);
+  assert.equal(s, 'Avery — Vegan; Blair — None');
 });
 
 test('headerIndexMap tolerates parenthetical header annotations', () => {

@@ -47,18 +47,32 @@ function validateRsvp(payload) {
   return { ok: errors.length === 0, errors: errors };
 }
 
+// Each attendee (payload.attendees) is { name, isPrimary, dietary } — the
+// primary RSVP'er plus every guest they added, each with their own dietary
+// restrictions.
+function extraAttendees(attendees) {
+  return (attendees || []).filter(function (a) { return a && !a.isPrimary; });
+}
+
+function formatDietary(attendees) {
+  return (attendees || []).map(function (a) {
+    return norm(a.name) + ' — ' + (norm(a.dietary) || 'None');
+  }).join('; ');
+}
+
 function buildRsvpRecord(payload, timestamp) {
   var attending = !!(payload && payload.attending);
-  var guestNames = attending && payload.guestNames ? payload.guestNames.map(norm).filter(function (n) { return n.length > 0; }) : [];
+  var attendees = attending ? (payload.attendees || []) : [];
+  var extras = extraAttendees(attendees);
   return {
     'Last Updated': timestamp,
     'Name': norm(payload.name),
     'Email': norm(payload.email),
     'Phone': norm(payload.phone),
     'Attending?': attending ? 'Yes' : 'No',
-    'Guest Count': guestNames.length,
-    'Guest Names': guestNames.join(', '),
-    'Dietary': norm(payload.dietary),
+    'Guest Count': extras.length,
+    'Guest Names': extras.map(function (a) { return norm(a.name); }).join(', '),
+    'Dietary': formatDietary(attendees),
     'Note': norm(payload.note)
   };
 }
@@ -75,7 +89,7 @@ function recordToRow(recordObj, headers) {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     RSVP_HEADERS: RSVP_HEADERS, norm: norm, headerIndexMap: headerIndexMap, col: col,
-    isValidEmail: isValidEmail, validateRsvp: validateRsvp,
+    isValidEmail: isValidEmail, validateRsvp: validateRsvp, formatDietary: formatDietary,
     buildRsvpRecord: buildRsvpRecord, recordToRow: recordToRow
   };
 }

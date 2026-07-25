@@ -19,19 +19,27 @@
     return '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6);
   }
 
+  // Each attendee (the primary RSVP'er plus every guest they add) gets their
+  // own name + dietary restrictions, mirroring the main wedding site's per-
+  // attendee dietary model.
+  function buildAttendees(name, dietary, guests) {
+    var attendees = [{ name: norm(name), isPrimary: true, dietary: norm(dietary) }];
+    (guests || []).forEach(function (g) {
+      var gname = norm(g && g.name);
+      if (gname) attendees.push({ name: gname, isPrimary: false, dietary: norm(g && g.dietary) });
+    });
+    return attendees;
+  }
+
   function buildPayload(state) {
     var attending = !!state.attending;
-    var guestNames = attending
-      ? (state.guestNames || []).map(norm).filter(function (n) { return n.length > 0; })
-      : [];
     return {
       action: 'rsvp',
       name: norm(state.name),
       email: norm(state.email),
       phone: norm(state.phone),
       attending: attending,
-      guestNames: guestNames,
-      dietary: norm(state.dietary),
+      attendees: attending ? buildAttendees(state.name, state.dietary, state.guests) : [],
       note: norm(state.note),
       hp: state.hp || ''
     };
@@ -47,6 +55,7 @@
   return {
     isValidEmail: isValidEmail,
     formatPhone: formatPhone,
+    buildAttendees: buildAttendees,
     buildPayload: buildPayload,
     validatePayload: validatePayload
   };

@@ -116,10 +116,13 @@
     .attending-opt input { position:absolute; opacity:0; }
     .attending-opt span { display:block; text-align:center; padding:.85rem; border:1px solid var(--sage-light); border-radius:4px; cursor:pointer; font-size:.75rem; letter-spacing:.15em; text-transform:uppercase; color:var(--text-mid); transition:all .25s; }
     .attending-opt input:checked + span { border-color:var(--blue-deep); background:var(--blue-pale); color:var(--blue-deep); }
-    .guest-list { display:flex; flex-direction:column; gap:.6rem; margin-bottom:1rem; }
-    .guest-row { display:flex; gap:.6rem; align-items:center; }
-    .guest-row input { flex:1; }
-    .guest-remove { flex-shrink:0; width:34px; height:34px; border:1px solid var(--sage-light); border-radius:4px; background:var(--warm-white); color:var(--text-light); cursor:pointer; font-size:1rem; line-height:1; transition:all .2s; }
+    .guest-list { display:flex; flex-direction:column; gap:.8rem; margin-bottom:1rem; }
+    .guest-row { display:flex; gap:.6rem; align-items:flex-start; border:1px solid var(--sage-light); border-radius:6px; padding:.8rem; }
+    .guest-row-fields { flex:1; display:flex; flex-direction:column; gap:.5rem; }
+    .guest-row-fields input { padding:.65rem .85rem; border:1px solid var(--sage-light); border-radius:4px; font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--text-dark); background:var(--warm-white); outline:none; transition:border-color .3s,box-shadow .3s; width:100%; }
+    .guest-row-fields input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(91,151,201,.12); }
+    .guest-row-fields input.guest-diet { font-size:.92rem; color:var(--text-mid); }
+    .guest-remove { flex-shrink:0; width:34px; height:34px; margin-top:.1rem; border:1px solid var(--sage-light); border-radius:4px; background:var(--warm-white); color:var(--text-light); cursor:pointer; font-size:1rem; line-height:1; transition:all .2s; }
     .guest-remove:hover { border-color:#c0392b; color:#c0392b; }
     .add-guest-btn { display:inline-flex; align-items:center; gap:.4rem; padding:.55rem 1rem; border:1px dashed var(--blue); border-radius:4px; background:none; color:var(--blue-deep); font-family:'Jost',sans-serif; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:all .25s; margin-bottom:1.2rem; }
     .add-guest-btn:hover { background:var(--blue-pale); }
@@ -255,6 +258,7 @@
           <div class="form-group"><label>Email Address</label><input type="email" id="f_email" placeholder="your@email.com" required></div>
           <div class="form-group"><label>Phone (optional)</label><input type="tel" id="f_phone" placeholder="(555) 555-5555"></div>
         </div>
+        <div class="form-group"><label>Your Dietary Restrictions (optional)</label><input type="text" id="f_diet" placeholder="Vegetarian, gluten-free, allergies…"></div>
 
         <div class="form-group">
           <label>Will you be attending?</label>
@@ -270,7 +274,6 @@
           <button type="button" class="add-guest-btn" onclick="addGuestRow()">+ Add a guest</button>
         </div>
 
-        <div class="form-group"><label>Dietary Restrictions (optional)</label><input type="text" id="f_diet" placeholder="Vegetarian, gluten-free, allergies…"></div>
         <div class="form-group"><label>A Note (optional)</label><textarea id="f_note" placeholder="Anything else you'd like us to know?"></textarea></div>
 
         <button type="submit" class="btn-submit" id="submitBtn">Send My RSVP</button>

@@ -15,21 +15,29 @@
     return res.json();
   }
 
-  // ---- Dynamic guest rows ----
+  // ---- Dynamic guest rows (each with its own dietary field) ----
   var guestCounter = 0;
 
-  window.addGuestRow = function (value) {
+  window.addGuestRow = function (name, dietary) {
     guestCounter++;
     var row = document.createElement('div');
     row.className = 'guest-row';
-    row.innerHTML = '<input type="text" class="guest-name" placeholder="Guest name" value="' +
-      escapeAttr(value || '') + '">' +
+    row.innerHTML =
+      '<div class="guest-row-fields">' +
+        '<input type="text" class="guest-name" placeholder="Guest name" value="' + escapeAttr(name || '') + '">' +
+        '<input type="text" class="guest-diet" placeholder="Dietary restrictions (optional)" value="' + escapeAttr(dietary || '') + '">' +
+      '</div>' +
       '<button type="button" class="guest-remove" onclick="this.parentElement.remove()" aria-label="Remove guest">&times;</button>';
     $('guestList').appendChild(row);
   };
 
-  function guestNames() {
-    return [].slice.call(document.querySelectorAll('.guest-name')).map(function (i) { return i.value; });
+  function guestEntries() {
+    return [].slice.call(document.querySelectorAll('.guest-row')).map(function (row) {
+      return {
+        name: row.querySelector('.guest-name').value,
+        dietary: row.querySelector('.guest-diet').value
+      };
+    });
   }
 
   // ---- Attending toggle: hide the guest list when declining ----
@@ -56,8 +64,8 @@
     var attending = document.querySelector('input[name="attending"]:checked').value === 'yes';
     var payload = L.buildPayload({
       name: name, email: email, phone: $('f_phone').value,
-      attending: attending, guestNames: guestNames(),
-      dietary: $('f_diet').value, note: $('f_note').value, hp: $('f_hp').value
+      attending: attending, dietary: $('f_diet').value, guests: guestEntries(),
+      note: $('f_note').value, hp: $('f_hp').value
     });
 
     try {
