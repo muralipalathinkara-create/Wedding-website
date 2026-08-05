@@ -43,6 +43,9 @@
       --red-soft: #b5485a;
       --ink: #43261c;
       --ink-soft: #6b4a3a;
+      --maroon-black: #1c0709;
+      --maroon-deep: #340d12;
+      --maroon-mid: #4a141b;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
@@ -313,38 +316,103 @@
     .lb-close:hover { opacity:1; }
 
     /* ── INVITATION ───────────────────────────── */
-    #invitation { padding:5.5rem 1.2rem; background:radial-gradient(circle at 50% 0%,rgba(158,34,51,.08),transparent 45%),radial-gradient(circle at 50% 100%,rgba(158,34,51,.07),transparent 45%),var(--cream); }
+    #invitation {
+      padding:6rem 1.2rem;
+      background:
+        radial-gradient(circle at 50% 0%,rgba(201,168,76,.10),transparent 50%),
+        radial-gradient(circle at 15% 85%,rgba(158,34,51,.22),transparent 45%),
+        radial-gradient(circle at 85% 20%,rgba(158,34,51,.18),transparent 45%),
+        linear-gradient(160deg,var(--maroon-black) 0%,var(--maroon-deep) 55%,var(--maroon-black) 100%);
+    }
     #invitation .invite-shell { max-width:780px; margin:0 auto; position:relative; }
-    #invitation .invite { position:relative; background:var(--warm-white); padding:3.4rem 3.2rem 3.8rem; border:2px solid var(--gold); box-shadow:0 0 0 9px var(--warm-white),0 0 0 11px var(--gold-deep),0 30px 80px rgba(122,19,32,.18); }
-    #invitation .invite::before { content:''; position:absolute; inset:14px; border:1px solid var(--red); opacity:.4; pointer-events:none; }
-    #invitation .sym { position:absolute; top:30px; width:60px; height:60px; display:flex; align-items:center; justify-content:center; z-index:2; }
-    #invitation .sym.om { left:32px; } #invitation .sym.ganesha { right:32px; }
-    #invitation .sym img { width:100%; height:100%; object-fit:contain; display:block; }
+    #invitation .invite {
+      position:relative;
+      background:radial-gradient(circle at 50% 0%,var(--maroon-mid) 0%,var(--maroon-deep) 45%,var(--maroon-black) 100%);
+      padding:5.6rem 3.2rem 3.8rem;
+      border:1px solid var(--gold);
+      box-shadow: 0 0 0 5px var(--maroon-black), 0 0 0 6px rgba(255,255,255,.85), 0 0 0 8px var(--gold-deep), 0 0 0 9px var(--maroon-black), 0 0 0 11px var(--gold), 0 0 0 12px rgba(255,255,255,.5), 0 30px 90px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+    #invitation .invite::before { content:''; position:absolute; inset:16px; border:1px solid var(--gold); opacity:.4; pointer-events:none; }
+    #invitation .inner-line2 { position:absolute; inset:23px; border:1px dashed rgba(255,255,255,.3); pointer-events:none; z-index:1; }
+    /* ── Ornate corner brackets ── */
+    #invitation .ornate-corner { position:absolute; width:46px; height:46px; z-index:3; pointer-events:none; }
+    #invitation .ornate-corner svg { width:100%; height:100%; display:block; }
+    #invitation .ornate-corner.tl { top:2px; left:2px; }
+    #invitation .ornate-corner.tr { top:2px; right:2px; transform:scaleX(-1); }
+    #invitation .ornate-corner.bl2 { bottom:2px; left:2px; transform:scaleY(-1); }
+    #invitation .ornate-corner.br2 { bottom:2px; right:2px; transform:scale(-1,-1); }
+    /* ── Top corner florals (reusing lotus.svg) ── */
+    /* scattered gold sparkle texture, echoing the reference invitation's dotted backdrop */
+    #invitation .invite::after {
+      content:''; position:absolute; inset:0; pointer-events:none; opacity:.5;
+      background-image:
+        radial-gradient(1px 1px at 10% 12%,var(--gold-light) 0,transparent 60%),
+        radial-gradient(1px 1px at 85% 8%,var(--gold-light) 0,transparent 60%),
+        radial-gradient(1px 1px at 92% 30%,var(--gold-light) 0,transparent 60%),
+        radial-gradient(1px 1px at 6% 40%,var(--gold-light) 0,transparent 60%),
+        radial-gradient(1px 1px at 78% 92%,var(--gold-light) 0,transparent 60%),
+        radial-gradient(1px 1px at 18% 88%,var(--gold-light) 0,transparent 60%),
+        radial-gradient(1px 1px at 50% 5%,var(--gold-light) 0,transparent 60%);
+    }
+    /* ── Moorish arch frame, echoing the invitation photo ── */
+    #invitation .arch-frame { position:absolute; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:520px; height:150px; pointer-events:none; z-index:1; }
+    #invitation .arch-frame svg { width:100%; height:100%; display:block; }
+    #invitation .sym { position:absolute; top:140px; width:68px; height:68px; display:flex; align-items:center; justify-content:center; z-index:2; }
+    #invitation .sym.om { left:22px; } #invitation .sym.ganesha { right:22px; }
+    #invitation .sym img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 0 6px rgba(201,168,76,.35)); }
     #invitation .crown { text-align:center; position:relative; z-index:1; margin-top:.6rem; }
-    #invitation .logo-medallion { width:150px; height:150px; margin:0 auto 1rem; border-radius:50%; background:var(--warm-white); border:3px solid var(--gold); box-shadow:0 0 0 4px var(--red-deep),0 0 0 7px var(--gold-light); display:flex; align-items:center; justify-content:center; }
+    #invitation .logo-medallion { width:150px; height:150px; margin:0 auto 1rem; border-radius:50%; background:var(--maroon-black); border:3px solid var(--gold); box-shadow:0 0 0 4px var(--maroon-deep),0 0 0 7px var(--gold-light),0 0 30px rgba(201,168,76,.25); display:flex; align-items:center; justify-content:center; }
     #invitation .logo-medallion img { width:112px; height:auto; display:block; }
     #invitation .flourish { display:flex; align-items:center; justify-content:center; gap:.7rem; margin:2rem auto; }
-    #invitation .flourish .line { height:1px; width:74px; background:linear-gradient(to right,transparent,var(--gold-deep)); }
-    #invitation .flourish .line.r { background:linear-gradient(to left,transparent,var(--gold-deep)); }
-    #invitation .flourish .dot { width:7px; height:7px; background:var(--gold-deep); transform:rotate(45deg); }
-    #invitation .flourish .leaf { color:var(--gold-deep); width:30px; height:18px; }
-    #invitation .lead { font-family:'Cormorant Garamond',serif; font-size:1.3rem; line-height:1.75; color:var(--ink); text-align:center; max-width:540px; margin:0 auto; }
+    #invitation .flourish .line { height:1px; width:74px; background:linear-gradient(to right,transparent,var(--gold)); }
+    #invitation .flourish .line.r { background:linear-gradient(to left,transparent,var(--gold)); }
+    #invitation .flourish .dot { width:7px; height:7px; background:var(--gold); transform:rotate(45deg); }
+    #invitation .flourish .leaf { color:var(--gold); width:30px; height:18px; }
+    #invitation .lead { font-family:'Cormorant Garamond',serif; font-size:1.3rem; line-height:1.75; color:var(--gold-pale); text-align:center; max-width:540px; margin:0 auto; }
     #invitation .couple { text-align:center; margin:2rem 0 1.9rem; }
-    #invitation .couple .name { font-family:'Playfair Display',serif; font-size:clamp(2.3rem,6vw,3.4rem); font-weight:500; color:var(--red-deep); line-height:1.1; }
-    #invitation .couple .amp { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.9rem; color:var(--gold-deep); display:block; margin:.25rem 0; }
+    #invitation .couple .name { font-family:'Playfair Display',serif; font-size:clamp(4.6rem,15vw,8.5rem); font-weight:500; color:var(--gold); line-height:1.05; text-shadow:0 0 18px rgba(201,168,76,.3); }
+    #invitation .couple .amp { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.5rem; color:var(--gold); display:block; margin:.3rem 0; }
     #invitation .families { display:grid; grid-template-columns:1fr 1px 1fr; gap:1.4rem; align-items:start; max-width:640px; margin:0 auto; }
     #invitation .fam { text-align:center; }
-    #invitation .fam .side { font-size:.62rem; letter-spacing:.26em; text-transform:uppercase; color:var(--red); font-weight:500; margin-bottom:.7rem; }
-    #invitation .fam .role { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.95rem; color:var(--gold-deep); margin-top:.9rem; }
-    #invitation .fam .ppl { font-family:'Playfair Display',serif; font-size:1.04rem; color:var(--ink); line-height:1.55; }
-    #invitation .fam .ppl.gp { font-family:'Cormorant Garamond',serif; font-size:1.02rem; color:var(--ink-soft); line-height:1.6; }
+    #invitation .fam .side { font-size:.62rem; letter-spacing:.26em; text-transform:uppercase; color:var(--red-soft); font-weight:500; margin-bottom:.7rem; }
+    #invitation .fam .role { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.95rem; color:var(--gold); margin-top:.9rem; }
+    #invitation .fam .ppl { font-family:'Playfair Display',serif; font-size:1.04rem; color:var(--gold-light); line-height:1.55; }
+    #invitation .fam .ppl.gp { font-family:'Cormorant Garamond',serif; font-size:1.02rem; color:var(--gold); opacity:.9; line-height:1.6; }
     #invitation .fam .placeholder { color:var(--red-soft); font-style:italic; }
-    #invitation .fam-div { background:linear-gradient(to bottom,transparent,var(--gold-light),transparent); }
+    #invitation .fam-div { background:linear-gradient(to bottom,transparent,var(--gold-deep),transparent); }
+    /* ── Corner floral flourishes ── */
+    #invitation .corner-fl { position:absolute; width:110px; height:110px; z-index:1; opacity:.95; pointer-events:none; }
+    #invitation .corner-fl img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 2px 10px rgba(0,0,0,.45)) drop-shadow(0 0 14px rgba(201,168,76,.4)); }
+    #invitation .corner-fl.bl { left:-14px; bottom:-14px; }
+    #invitation .corner-fl.br { right:-14px; bottom:-14px; transform:scaleX(-1); }
+    /* diagonal shimmer sheen, clipped to the flower's own silhouette */
+    #invitation .corner-fl::after {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(115deg,transparent 25%,rgba(255,255,255,.05) 40%,rgba(255,250,225,.85) 50%,rgba(255,255,255,.05) 60%,transparent 75%);
+      background-size:280% 280%;
+      background-position:0% 0%;
+      -webkit-mask-image:url('images/lotus-gold.svg'); mask-image:url('images/lotus-gold.svg');
+      -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+      -webkit-mask-size:contain; mask-size:contain;
+      -webkit-mask-position:center; mask-position:center;
+      mix-blend-mode:overlay;
+      animation:shimmerSweep 6s ease-in-out infinite;
+    }
+    #invitation .corner-fl.br::after { animation-delay:1.4s; }
+    @keyframes shimmerSweep {
+      0%, 100% { background-position:0% 0%; }
+      50% { background-position:100% 100%; }
+    }
     @media(max-width:620px){
-      #invitation .invite { padding:3rem 1.4rem 3rem; }
+      #invitation .invite { padding:4.6rem 1.4rem 3rem; }
       #invitation .families { grid-template-columns:1fr; gap:1.8rem; }
       #invitation .fam-div { display:none; }
-      #invitation .sym { width:44px; } #invitation .sym.om { left:18px; } #invitation .sym.ganesha { right:18px; }
+      #invitation .sym { width:50px; height:50px; top:133px; } #invitation .sym.om { left:8px; } #invitation .sym.ganesha { right:8px; }
+      #invitation .arch-frame { height:110px; }
+      #invitation .corner-fl { width:64px; height:64px; left:-8px; bottom:-8px; }
+      #invitation .corner-fl.br { right:-8px; left:auto; }
+      #invitation .ornate-corner { width:32px; height:32px; }
     }
 
     /* ── COLOR THEME: accents + soft washes ───── */
@@ -502,12 +570,62 @@
 <section id="invitation">
   <div class="invite-shell">
     <div class="invite">
+      <div class="inner-line2" aria-hidden="true"></div>
+      <div class="ornate-corner tl" aria-hidden="true">
+        <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M2,20 L2,4 Q2,2 4,2 L20,2" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M8,26 L8,10 Q8,8 10,8 L26,8" stroke="#e8d5a3" stroke-width=".8"/>
+          <path d="M2,20 C8,18 10,10 20,2" stroke="#a07830" stroke-width=".8"/>
+          <circle cx="4" cy="4" r="2" fill="#c9a84c"/>
+          <circle cx="12" cy="12" r="1.3" fill="#e8d5a3"/>
+        </svg>
+      </div>
+      <div class="ornate-corner tr" aria-hidden="true">
+        <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M2,20 L2,4 Q2,2 4,2 L20,2" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M8,26 L8,10 Q8,8 10,8 L26,8" stroke="#e8d5a3" stroke-width=".8"/>
+          <path d="M2,20 C8,18 10,10 20,2" stroke="#a07830" stroke-width=".8"/>
+          <circle cx="4" cy="4" r="2" fill="#c9a84c"/>
+          <circle cx="12" cy="12" r="1.3" fill="#e8d5a3"/>
+        </svg>
+      </div>
+      <div class="ornate-corner bl2" aria-hidden="true">
+        <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M2,20 L2,4 Q2,2 4,2 L20,2" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M8,26 L8,10 Q8,8 10,8 L26,8" stroke="#e8d5a3" stroke-width=".8"/>
+          <path d="M2,20 C8,18 10,10 20,2" stroke="#a07830" stroke-width=".8"/>
+          <circle cx="4" cy="4" r="2" fill="#c9a84c"/>
+          <circle cx="12" cy="12" r="1.3" fill="#e8d5a3"/>
+        </svg>
+      </div>
+      <div class="ornate-corner br2" aria-hidden="true">
+        <svg viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M2,20 L2,4 Q2,2 4,2 L20,2" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M8,26 L8,10 Q8,8 10,8 L26,8" stroke="#e8d5a3" stroke-width=".8"/>
+          <path d="M2,20 C8,18 10,10 20,2" stroke="#a07830" stroke-width=".8"/>
+          <circle cx="4" cy="4" r="2" fill="#c9a84c"/>
+          <circle cx="12" cy="12" r="1.3" fill="#e8d5a3"/>
+        </svg>
+      </div>
+      <div class="arch-frame" aria-hidden="true">
+        <svg viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M40,150 Q40,32 260,14 Q480,32 480,150" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M62,150 Q62,50 260,34 Q458,50 458,150" stroke="#a07830" stroke-width="1"/>
+          <circle cx="260" cy="14" r="3" fill="#c9a84c"/>
+          <circle cx="150" cy="42" r="2" fill="#e8d5a3"/>
+          <circle cx="370" cy="42" r="2" fill="#e8d5a3"/>
+          <circle cx="90" cy="86" r="1.6" fill="#e8d5a3"/>
+          <circle cx="430" cy="86" r="1.6" fill="#e8d5a3"/>
+        </svg>
+      </div>
+      <div class="corner-fl bl" aria-hidden="true"><img src="images/lotus-gold.svg" alt=""></div>
+      <div class="corner-fl br" aria-hidden="true"><img src="images/lotus-gold.svg" alt=""></div>
       <div class="sym om"><img src="images/om.svg" alt="Om"></div>
       <div class="sym ganesha"><img src="images/ganesha.svg" alt="Ganesha"></div>
       <div class="crown">
         <div class="logo-medallion"><img src="images/logo-mark.png" alt="Shivani &amp; Murali"></div>
       </div>
-      <div class="flourish"><span class="line"></span><span class="dot"></span><svg class="leaf" viewBox="0 0 30 18" fill="currentColor"><path d="M15 0c4 6 10 7 15 9-5 2-11 3-15 9-4-6-10-7-15-9 5-2 11-3 15-9z"/></svg><span class="dot"></span><span class="line r"></span></div>
+      <div class="flourish"><span class="line"></span><span class="dot"></span><svg class="leaf" viewBox="0 0 30 18"><path fill="#c9a84c" d="M15 0c4 6 10 7 15 9-5 2-11 3-15 9-4-6-10-7-15-9 5-2 11-3 15-9z"/></svg><span class="dot"></span><span class="line r"></span></div>
       <p class="lead">It is with hearts full of joy and gratitude that we request your gracious presence at the wedding and celebration of our beloved children</p>
       <div class="couple">
         <div class="name">Shivani Kumar</div>
@@ -526,12 +644,12 @@
         <div class="fam">
           <p class="side">The Groom</p>
           <p class="role">Beloved son of</p>
-          <p class="ppl">Vinod &amp; Rajasree Palathinkara</p>
+          <p class="ppl">Vinod &amp; Raji Palathinkara</p>
           <p class="role">Grandson of</p>
-          <p class="ppl gp">Leela Devi &amp; PVS Namboodiripad<br>Kunnath Sreedharan Namboodiri &amp; <span style="font-style:italic">the late</span> Santha Kumari</p>
+          <p class="ppl gp">Leela Devi &amp; PVS Namboodiripad<br>Kunnath Sreedharan Namboodiri &amp; <span style="font-style:italic">the late</span> Santhakumari</p>
         </div>
       </div>
-      <div class="flourish"><span class="line"></span><span class="dot"></span><svg class="leaf" viewBox="0 0 30 18" fill="currentColor"><path d="M15 0c4 6 10 7 15 9-5 2-11 3-15 9-4-6-10-7-15-9 5-2 11-3 15-9z"/></svg><span class="dot"></span><span class="line r"></span></div>
+      <div class="flourish"><span class="line"></span><span class="dot"></span><svg class="leaf" viewBox="0 0 30 18"><path fill="#c9a84c" d="M15 0c4 6 10 7 15 9-5 2-11 3-15 9-4-6-10-7-15-9 5-2 11-3 15-9z"/></svg><span class="dot"></span><span class="line r"></span></div>
     </div>
   </div>
 </section>
