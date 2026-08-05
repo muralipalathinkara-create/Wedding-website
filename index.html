@@ -358,8 +358,8 @@
         radial-gradient(1px 1px at 50% 5%,var(--gold-light) 0,transparent 60%);
     }
     /* ── Moorish arch frame, echoing the invitation photo ── */
-    #invitation .arch-frame { position:absolute; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:520px; height:150px; pointer-events:none; z-index:1; }
-    #invitation .arch-frame svg { width:100%; height:100%; display:block; }
+    #invitation .arch-frame { position:absolute; top:0; left:50%; transform:translateX(-50%); width:min(58%,290px); pointer-events:none; z-index:1; filter:drop-shadow(0 0 10px rgba(201,168,76,.25)); }
+    #invitation .arch-frame img { width:100%; height:auto; display:block; }
     #invitation .sym { position:absolute; top:140px; width:68px; height:68px; display:flex; align-items:center; justify-content:center; z-index:2; }
     #invitation .sym.om { left:38px; } #invitation .sym.ganesha { right:38px; }
     #invitation .sym img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 0 6px rgba(201,168,76,.35)); }
@@ -411,7 +411,7 @@
       #invitation .families { grid-template-columns:1fr; gap:1.8rem; }
       #invitation .fam-div { display:none; }
       #invitation .sym { width:50px; height:50px; top:133px; } #invitation .sym.om { left:20px; } #invitation .sym.ganesha { right:20px; }
-      #invitation .arch-frame { height:110px; }
+      #invitation .arch-frame { width:min(70%,220px); }
       #invitation .corner-fl { width:64px; height:64px; left:-8px; bottom:-8px; }
       #invitation .corner-fl.br { right:-8px; left:auto; }
       #invitation .ornate-corner { width:32px; height:32px; }
@@ -609,17 +609,7 @@
           <circle cx="12" cy="12" r="1.3" fill="#e8d5a3"/>
         </svg>
       </div>
-      <div class="arch-frame" aria-hidden="true">
-        <svg viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" fill="none">
-          <path d="M40,150 Q40,32 260,14 Q480,32 480,150" stroke="#c9a84c" stroke-width="1.5"/>
-          <path d="M62,150 Q62,50 260,34 Q458,50 458,150" stroke="#a07830" stroke-width="1"/>
-          <circle cx="260" cy="14" r="3" fill="#c9a84c"/>
-          <circle cx="150" cy="42" r="2" fill="#e8d5a3"/>
-          <circle cx="370" cy="42" r="2" fill="#e8d5a3"/>
-          <circle cx="90" cy="86" r="1.6" fill="#e8d5a3"/>
-          <circle cx="430" cy="86" r="1.6" fill="#e8d5a3"/>
-        </svg>
-      </div>
+      <div class="arch-frame" aria-hidden="true"><img src="images/arch-gold.svg" alt=""></div>
       <div class="corner-fl bl" aria-hidden="true"><img src="images/lotus-gold.svg" alt=""></div>
       <div class="corner-fl br" aria-hidden="true"><img src="images/lotus-gold.svg" alt=""></div>
       <div class="sym om"><img src="images/om.svg" alt="Om"></div>
