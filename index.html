@@ -46,6 +46,8 @@
       --maroon-black: #1c0709;
       --maroon-deep: #340d12;
       --maroon-mid: #4a141b;
+      --blush: #f7e7e6;
+      --blush-deep: #eed4d6;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
@@ -319,10 +321,10 @@
     #invitation {
       padding:6rem 1.2rem;
       background:
-        radial-gradient(circle at 50% 0%,rgba(201,168,76,.10),transparent 50%),
-        radial-gradient(circle at 15% 85%,rgba(158,34,51,.22),transparent 45%),
-        radial-gradient(circle at 85% 20%,rgba(158,34,51,.18),transparent 45%),
-        linear-gradient(160deg,var(--maroon-black) 0%,var(--maroon-deep) 55%,var(--maroon-black) 100%);
+        radial-gradient(circle at 50% 0%,rgba(201,168,76,.08),transparent 50%),
+        radial-gradient(circle at 15% 85%,rgba(181,72,90,.10),transparent 45%),
+        radial-gradient(circle at 85% 20%,rgba(181,72,90,.08),transparent 45%),
+        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
     }
     #invitation .invite-shell { max-width:780px; margin:0 auto; position:relative; }
     #invitation .invite {
@@ -359,7 +361,7 @@
     #invitation .arch-frame { position:absolute; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:520px; height:150px; pointer-events:none; z-index:1; }
     #invitation .arch-frame svg { width:100%; height:100%; display:block; }
     #invitation .sym { position:absolute; top:140px; width:68px; height:68px; display:flex; align-items:center; justify-content:center; z-index:2; }
-    #invitation .sym.om { left:22px; } #invitation .sym.ganesha { right:22px; }
+    #invitation .sym.om { left:38px; } #invitation .sym.ganesha { right:38px; }
     #invitation .sym img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 0 6px rgba(201,168,76,.35)); }
     #invitation .crown { text-align:center; position:relative; z-index:1; margin-top:.6rem; }
     #invitation .logo-medallion { width:150px; height:150px; margin:0 auto 1rem; border-radius:50%; background:var(--maroon-black); border:3px solid var(--gold); box-shadow:0 0 0 4px var(--maroon-deep),0 0 0 7px var(--gold-light),0 0 30px rgba(201,168,76,.25); display:flex; align-items:center; justify-content:center; }
@@ -371,7 +373,7 @@
     #invitation .flourish .leaf { color:var(--gold); width:30px; height:18px; }
     #invitation .lead { font-family:'Cormorant Garamond',serif; font-size:1.3rem; line-height:1.75; color:var(--gold-pale); text-align:center; max-width:540px; margin:0 auto; }
     #invitation .couple { text-align:center; margin:2rem 0 1.9rem; }
-    #invitation .couple .name { font-family:'Playfair Display',serif; font-size:clamp(4.6rem,15vw,8.5rem); font-weight:500; color:var(--gold); line-height:1.05; text-shadow:0 0 18px rgba(201,168,76,.3); }
+    #invitation .couple .name { font-family:'Playfair Display',serif; font-size:clamp(1.84rem,6vw,3.4rem); font-weight:500; color:var(--gold); line-height:1.15; text-shadow:0 0 18px rgba(201,168,76,.3); }
     #invitation .couple .amp { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.5rem; color:var(--gold); display:block; margin:.3rem 0; }
     #invitation .families { display:grid; grid-template-columns:1fr 1px 1fr; gap:1.4rem; align-items:start; max-width:640px; margin:0 auto; }
     #invitation .fam { text-align:center; }
@@ -408,7 +410,7 @@
       #invitation .invite { padding:4.6rem 1.4rem 3rem; }
       #invitation .families { grid-template-columns:1fr; gap:1.8rem; }
       #invitation .fam-div { display:none; }
-      #invitation .sym { width:50px; height:50px; top:133px; } #invitation .sym.om { left:8px; } #invitation .sym.ganesha { right:8px; }
+      #invitation .sym { width:50px; height:50px; top:133px; } #invitation .sym.om { left:20px; } #invitation .sym.ganesha { right:20px; }
       #invitation .arch-frame { height:110px; }
       #invitation .corner-fl { width:64px; height:64px; left:-8px; bottom:-8px; }
       #invitation .corner-fl.br { right:-8px; left:auto; }
