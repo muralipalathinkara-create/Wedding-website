@@ -43,9 +43,9 @@
       --red-soft: #b5485a;
       --ink: #43261c;
       --ink-soft: #6b4a3a;
-      --maroon-black: #1c0709;
-      --maroon-deep: #340d12;
-      --maroon-mid: #4a141b;
+      --maroon-black: #4a1019;
+      --maroon-deep: #6b1a24;
+      --maroon-mid: #932532;
       --blush: #f7e7e6;
       --blush-deep: #eed4d6;
     }
@@ -187,24 +187,35 @@
     /* ── EVENTS ───────────────────────────────── */
     #details { padding:6rem 2rem; background:linear-gradient(180deg,#faf8f2 0%,#f4f6ef 55%,#fdfcf8 100%); position:relative; overflow:hidden; }
     #details::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 10% 90%,rgba(201,168,76,.07) 0%,transparent 55%),radial-gradient(circle at 90% 10%,rgba(92,122,90,.07) 0%,transparent 55%); }
-    .events-wrapper { max-width:1100px; margin:3.5rem auto 0; display:flex; flex-direction:column; gap:3rem; position:relative; z-index:1; }
-    .day-header { display:flex; align-items:center; gap:1.2rem; margin-bottom:1.5rem; }
+    .events-wrapper { max-width:1140px; margin:3.5rem auto 0; display:flex; flex-direction:column; gap:3rem; position:relative; z-index:1; }
+    .day-header { display:flex; align-items:center; gap:1.2rem; margin-bottom:1.8rem; }
     .day-header-line { flex:1; height:1px; background:linear-gradient(to right,var(--gold-light),transparent); }
-    .day-header-label { font-family:'Playfair Display',serif; font-size:1.05rem; font-style:italic; color:var(--gold-deep); white-space:nowrap; }
-    .events-row { display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; }
-    .event-card { width:380px; max-width:100%; background:white; border-radius:8px; overflow:hidden; box-shadow:0 8px 32px rgba(61,92,58,.07); border:1px solid rgba(201,168,76,.12); opacity:0; transform:translateY(18px); transition:opacity .6s ease,transform .6s ease; }
+    .day-header-label { font-family:'Playfair Display',serif; font-size:2rem; font-style:normal; font-weight:500; color:var(--gold-deep); white-space:nowrap; letter-spacing:.01em; }
+    .events-row { display:flex; flex-direction:column; gap:1.75rem; }
+    .event-card { width:100%; display:flex; align-items:stretch; background:white; border-radius:10px; overflow:hidden; box-shadow:0 8px 32px rgba(61,92,58,.07); border:1px solid rgba(201,168,76,.12); opacity:0; transform:translateY(18px); transition:opacity .6s ease,transform .6s ease; }
     .event-card.visible { opacity:1; transform:translateY(0); }
-    .event-card-photo { aspect-ratio:3/2; overflow:hidden; position:relative; background:#efe7d6; }
-    .event-card-photo img { width:100%; height:100%; object-fit:contain; object-position:center; transition:transform .6s; }
+    .event-card-photo { flex:0 0 40%; overflow:hidden; position:relative; background:#efe7d6; }
+    .event-card-photo img { width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .6s; }
     .event-card:hover .event-card-photo img { transform:scale(1.05); }
     .event-card-photo-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,transparent 40%,rgba(30,45,28,.35)); }
-    .event-card-body { padding:1.6rem 1.8rem 2rem; }
-    .event-tag { font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:var(--sage-deep); font-weight:500; margin-bottom:.5rem; }
-    .event-name { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:400; color:var(--text-dark); margin-bottom:.3rem; line-height:1.3; }
+    .event-card-body { flex:1; min-width:0; padding:2.2rem 2.6rem; display:flex; flex-direction:column; justify-content:center; }
+    .event-tag { font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--sage-deep); font-weight:500; margin-bottom:.5rem; }
+    .event-name { font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:400; color:var(--text-dark); margin-bottom:.5rem; line-height:1.3; }
     .event-name em { font-style:italic; color:var(--gold-deep); }
-    .event-meta { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:var(--text-light); line-height:1.7; margin-bottom:1.2rem; }
+    .event-meta { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.12rem; color:var(--text-light); line-height:1.7; margin-bottom:1.3rem; }
+    .event-schedule { display:flex; flex-wrap:wrap; gap:.6rem .9rem; margin-bottom:.4rem; }
+    .event-schedule-item { display:flex; align-items:baseline; gap:.4rem; padding:.4rem 1rem; border:1px solid var(--gold-light); border-radius:100px; background:var(--gold-pale); }
+    .es-label { font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); font-weight:500; }
+    .es-time { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.92rem; color:var(--text-mid); }
     .event-time-badge { display:inline-block; padding:.3rem 1rem; border:1px solid var(--gold-light); border-radius:100px; font-size:.72rem; letter-spacing:.1em; color:var(--gold-deep); background:var(--gold-pale); }
-    .event-dresscode { font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-light); margin-top:.7rem; font-weight:500; }
+    .event-dresscode { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-light); margin-top:.9rem; font-weight:500; }
+    @media(max-width:768px) {
+      .event-card { flex-direction:column; }
+      .event-card-photo { flex:none; width:100%; aspect-ratio:16/10; }
+      .event-card-body { padding:1.7rem 1.6rem 2rem; }
+      .event-name { font-size:1.4rem; }
+      .day-header-label { font-size:1.4rem; }
+    }
     .venue-strip { background:white; border-radius:8px; padding:2.5rem 3rem; box-shadow:0 8px 32px rgba(61,92,58,.07); border:1px solid rgba(201,168,76,.12); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; }
     .venue-strip p { font-family:'Jost',sans-serif; font-size:.88rem; color:var(--text-mid); line-height:1.9; margin-top:.3rem; }
     .venue-strip strong { color:var(--text-dark); font-weight:500; }
@@ -363,6 +374,8 @@
     #invitation .sym { position:absolute; top:140px; width:68px; height:68px; display:flex; align-items:center; justify-content:center; z-index:2; }
     #invitation .sym.om { left:38px; } #invitation .sym.ganesha { right:38px; }
     #invitation .sym img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 0 6px rgba(201,168,76,.35)); }
+    /* Ganesha ~20% larger than the Om symbol, re-centered so it doesn't drift */
+    #invitation .sym.ganesha { width:82px; height:82px; top:133px; right:31px; }
     #invitation .crown { text-align:center; position:relative; z-index:1; margin-top:.6rem; }
     #invitation .logo-medallion { width:150px; height:150px; margin:0 auto 1rem; border-radius:50%; background:var(--maroon-black); border:3px solid var(--gold); box-shadow:0 0 0 4px var(--maroon-deep),0 0 0 7px var(--gold-light),0 0 30px rgba(201,168,76,.25); display:flex; align-items:center; justify-content:center; }
     #invitation .logo-medallion img { width:112px; height:auto; display:block; }
@@ -383,25 +396,28 @@
     #invitation .fam .ppl.gp { font-family:'Cormorant Garamond',serif; font-size:1.02rem; color:var(--gold); opacity:.9; line-height:1.6; }
     #invitation .fam .placeholder { color:var(--red-soft); font-style:italic; }
     #invitation .fam-div { background:linear-gradient(to bottom,transparent,var(--gold-deep),transparent); }
-    /* ── Corner floral flourishes ── */
-    #invitation .corner-fl { position:absolute; width:110px; height:110px; z-index:1; opacity:.95; pointer-events:none; }
-    #invitation .corner-fl img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 2px 10px rgba(0,0,0,.45)) drop-shadow(0 0 14px rgba(201,168,76,.4)); }
+    /* ── Corner floral flourishes (colorful, echoing the printable invite) ── */
+    #invitation .corner-fl { position:absolute; width:120px; height:120px; z-index:1; opacity:1; pointer-events:none; }
+    #invitation .corner-fl img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 2px 10px rgba(0,0,0,.45)); }
     #invitation .corner-fl.bl { left:-14px; bottom:-14px; }
     #invitation .corner-fl.br { right:-14px; bottom:-14px; transform:scaleX(-1); }
+    #invitation .corner-fl.tl { left:-14px; top:-14px; }
+    #invitation .corner-fl.tr { right:-14px; top:-14px; transform:scaleX(-1); }
     /* diagonal shimmer sheen, clipped to the flower's own silhouette */
     #invitation .corner-fl::after {
       content:''; position:absolute; inset:0; pointer-events:none;
       background:linear-gradient(115deg,transparent 25%,rgba(255,255,255,.05) 40%,rgba(255,250,225,.85) 50%,rgba(255,255,255,.05) 60%,transparent 75%);
       background-size:280% 280%;
       background-position:0% 0%;
-      -webkit-mask-image:url('images/lotus-gold.svg'); mask-image:url('images/lotus-gold.svg');
+      -webkit-mask-image:url('images/invite-corner-floral.svg'); mask-image:url('images/invite-corner-floral.svg');
       -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
       -webkit-mask-size:contain; mask-size:contain;
       -webkit-mask-position:center; mask-position:center;
       mix-blend-mode:overlay;
+      opacity:.4;
       animation:shimmerSweep 6s ease-in-out infinite;
     }
-    #invitation .corner-fl.br::after { animation-delay:1.4s; }
+    #invitation .corner-fl.br::after, #invitation .corner-fl.tr::after { animation-delay:1.4s; }
     @keyframes shimmerSweep {
       0%, 100% { background-position:0% 0%; }
       50% { background-position:100% 100%; }
@@ -412,8 +428,10 @@
       #invitation .fam-div { display:none; }
       #invitation .sym { width:50px; height:50px; top:133px; } #invitation .sym.om { left:20px; } #invitation .sym.ganesha { right:20px; }
       #invitation .arch-frame { width:min(70%,220px); }
-      #invitation .corner-fl { width:64px; height:64px; left:-8px; bottom:-8px; }
+      #invitation .corner-fl { width:66px; height:66px; left:-8px; bottom:-8px; }
       #invitation .corner-fl.br { right:-8px; left:auto; }
+      #invitation .corner-fl.tl { left:-8px; top:-8px; bottom:auto; }
+      #invitation .corner-fl.tr { right:-8px; left:auto; top:-8px; bottom:auto; }
       #invitation .ornate-corner { width:32px; height:32px; }
     }
 
@@ -610,8 +628,10 @@
         </svg>
       </div>
       <div class="arch-frame" aria-hidden="true"><img src="images/arch-gold.svg" alt=""></div>
-      <div class="corner-fl bl" aria-hidden="true"><img src="images/lotus-gold.svg" alt=""></div>
-      <div class="corner-fl br" aria-hidden="true"><img src="images/lotus-gold.svg" alt=""></div>
+      <div class="corner-fl tl" aria-hidden="true"><img src="images/invite-corner-floral.svg" alt=""></div>
+      <div class="corner-fl tr" aria-hidden="true"><img src="images/invite-corner-floral.svg" alt=""></div>
+      <div class="corner-fl bl" aria-hidden="true"><img src="images/invite-corner-floral.svg" alt=""></div>
+      <div class="corner-fl br" aria-hidden="true"><img src="images/invite-corner-floral.svg" alt=""></div>
       <div class="sym om"><img src="images/om.svg" alt="Om"></div>
       <div class="sym ganesha"><img src="images/ganesha.svg" alt="Ganesha"></div>
       <div class="crown">
@@ -672,17 +692,21 @@
   <div class="events-wrapper">
     <div id="fridayBlock" style="display:none">
       <div class="day-header reveal">
-        <div class="day-header-line"></div><span class="day-header-label">Friday, April 23rd</span>
+        <div class="day-header-line"></div><span class="day-header-label">Friday, April 23, 2027</span>
         <div class="day-header-line" style="background:linear-gradient(to left,var(--gold-light),transparent)"></div>
       </div>
       <div class="events-row">
         <div class="event-card reveal">
-          <div class="event-card-photo"><img src="images/seated.jpg" loading="lazy" alt="Sangeet"><div class="event-card-photo-overlay"></div></div>
+          <div class="event-card-photo"><img src="images/seated.jpg" loading="lazy" alt="Mehendi, Sangeet &amp; Cocktails"><div class="event-card-photo-overlay"></div></div>
           <div class="event-card-body">
             <p class="event-tag">Evening Celebration</p>
-            <h3 class="event-name">The <em>Sangeet</em></h3>
-            <p class="event-meta">An evening of music, dance, and joy as both families come together to celebrate the union of Shivani and Murali.</p>
-            <span class="event-time-badge">6:00 PM &ndash; Late</span>
+            <h3 class="event-name">Mehendi, Sangeet <em>&amp; Cocktails</em></h3>
+            <p class="event-meta">The Palathinkara and Kumar Families invites you to an evening of music, dance and dinner</p>
+            <div class="event-schedule">
+              <span class="event-schedule-item"><span class="es-label">Ring Ceremony</span><span class="es-time">6:30 PM</span></span>
+              <span class="event-schedule-item"><span class="es-label">Mehendi</span><span class="es-time">6&ndash;8 PM</span></span>
+              <span class="event-schedule-item"><span class="es-label">Dance &amp; Dinner</span><span class="es-time">7&ndash;11 PM</span></span>
+            </div>
             <p class="event-dresscode">Dress suggestions: Semiformal Indian or Western</p>
           </div>
         </div>
@@ -690,7 +714,7 @@
     </div>
     <div id="saturdayBlock" style="display:none">
       <div class="day-header reveal">
-        <div class="day-header-line"></div><span class="day-header-label">Saturday, April 24th</span>
+        <div class="day-header-line"></div><span class="day-header-label">Saturday, April 24, 2027</span>
         <div class="day-header-line" style="background:linear-gradient(to left,var(--gold-light),transparent)"></div>
       </div>
       <div class="events-row">
@@ -700,7 +724,13 @@
             <p class="event-tag">Morning Ceremony</p>
             <h3 class="event-name">Baraat, Wedding <em>&amp; Luncheon</em></h3>
             <p class="event-meta">The ceremonial procession and wedding where vows are exchanged, followed by a celebratory luncheon with family and close friends.</p>
-            <span class="event-time-badge">10:00 AM &ndash; Baraat</span>
+            <div class="event-schedule">
+              <span class="event-schedule-item"><span class="es-label">Baraat</span><span class="es-time">10:00 AM</span></span>
+              <span class="event-schedule-item"><span class="es-label">Wedding Ceremony</span><span class="es-time">11:15 AM</span></span>
+              <span class="event-schedule-item"><span class="es-label">Lunch</span><span class="es-time">12:15&ndash;1:15 PM</span></span>
+              <span class="event-schedule-item"><span class="es-label">Vidaai</span><span class="es-time">1:30 PM</span></span>
+              <span class="event-schedule-item"><span class="es-label">Kudiveppu</span><span class="es-time">1:45 PM</span></span>
+            </div>
             <p class="event-dresscode">Dress suggestions: Formal Indian or Western</p>
           </div>
         </div>
@@ -721,7 +751,7 @@
     </div>
     <div id="milwaukeeBlock" style="display:none">
       <div class="day-header reveal">
-        <div class="day-header-line"></div><span class="day-header-label">Sunday, April 25th</span>
+        <div class="day-header-line"></div><span class="day-header-label">Sunday, April 25, 2027</span>
         <div class="day-header-line" style="background:linear-gradient(to left,var(--gold-light),transparent)"></div>
       </div>
       <div class="events-row">

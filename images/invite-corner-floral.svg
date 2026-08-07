@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <g id="marigold">
+      <circle cx="0" cy="-14" r="9" fill="#e8963c"/>
+      <circle cx="10" cy="-10" r="9" fill="#e8963c"/>
+      <circle cx="14" cy="0" r="9" fill="#e8963c"/>
+      <circle cx="10" cy="10" r="9" fill="#e8963c"/>
+      <circle cx="0" cy="14" r="9" fill="#e8963c"/>
+      <circle cx="-10" cy="10" r="9" fill="#e8963c"/>
+      <circle cx="-14" cy="0" r="9" fill="#e8963c"/>
+      <circle cx="-10" cy="-10" r="9" fill="#e8963c"/>
+      <circle cx="0" cy="0" r="8" fill="#f5c451"/>
+    </g>
+    <g id="bluebloom">
+      <path d="M0,-11 C6,-11 8,-5 8,0 C8,5 6,11 0,11 C-6,11 -8,5 -8,0 C-8,-5 -6,-11 0,-11 Z" fill="#5b97c9"/>
+      <circle cx="0" cy="0" r="3.6" fill="#eef5fb"/>
+    </g>
+    <g id="leaf">
+      <path d="M0,0 C10,-4 20,-2 26,6 C18,8 8,8 0,0 Z" fill="#5c8a52"/>
+    </g>
+  </defs>
+
+  <!-- vine -->
+  <path d="M4,10 C30,4 55,20 60,48 C64,72 46,86 30,96" fill="none" stroke="#5c8a52" stroke-width="2.5" opacity=".85"/>
+
+  <use href="#leaf" transform="translate(14,8) rotate(30) scale(0.9)"/>
+  <use href="#leaf" transform="translate(46,26) rotate(115) scale(0.95)"/>
+  <use href="#leaf" transform="translate(56,58) rotate(190) scale(0.8)"/>
+  <use href="#leaf" transform="translate(34,88) rotate(255) scale(0.85)"/>
+
+  <use href="#marigold" transform="translate(20,22) scale(1.15)"/>
+  <use href="#bluebloom" transform="translate(52,14) rotate(-18) scale(1.05)"/>
+  <use href="#marigold" transform="translate(64,52) scale(0.85)"/>
+  <use href="#bluebloom" transform="translate(24,60) rotate(12) scale(0.9)"/>
+  <use href="#marigold" transform="translate(44,84) scale(0.7)"/>
+</svg>
