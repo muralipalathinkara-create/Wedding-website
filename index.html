@@ -192,13 +192,13 @@
     .day-header-line { flex:1; height:1px; background:linear-gradient(to right,var(--gold-light),transparent); }
     .day-header-label { font-family:'Playfair Display',serif; font-size:2rem; font-style:normal; font-weight:500; color:var(--gold-deep); white-space:nowrap; letter-spacing:.01em; }
     .events-row { display:flex; flex-direction:column; gap:1.75rem; }
-    .event-card { width:100%; display:flex; align-items:stretch; background:white; border-radius:10px; overflow:hidden; box-shadow:0 8px 32px rgba(61,92,58,.07); border:1px solid rgba(201,168,76,.12); opacity:0; transform:translateY(18px); transition:opacity .6s ease,transform .6s ease; }
+    .event-card { width:100%; display:flex; flex-direction:column; background:white; border-radius:10px; overflow:hidden; box-shadow:0 8px 32px rgba(61,92,58,.07); border:1px solid rgba(201,168,76,.12); opacity:0; transform:translateY(18px); transition:opacity .6s ease,transform .6s ease; }
     .event-card.visible { opacity:1; transform:translateY(0); }
-    .event-card-photo { flex:0 0 40%; overflow:hidden; position:relative; background:#efe7d6; }
+    .event-card-photo { width:100%; aspect-ratio:16/9; overflow:hidden; position:relative; background:#efe7d6; }
     .event-card-photo img { width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .6s; }
     .event-card:hover .event-card-photo img { transform:scale(1.05); }
     .event-card-photo-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,transparent 40%,rgba(30,45,28,.35)); }
-    .event-card-body { flex:1; min-width:0; padding:2.2rem 2.6rem; display:flex; flex-direction:column; justify-content:center; }
+    .event-card-body { padding:2rem 2.6rem 2.4rem; }
     .event-tag { font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--sage-deep); font-weight:500; margin-bottom:.5rem; }
     .event-name { font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:400; color:var(--text-dark); margin-bottom:.5rem; line-height:1.3; }
     .event-name em { font-style:italic; color:var(--gold-deep); }
@@ -210,8 +210,7 @@
     .event-time-badge { display:inline-block; padding:.3rem 1rem; border:1px solid var(--gold-light); border-radius:100px; font-size:.72rem; letter-spacing:.1em; color:var(--gold-deep); background:var(--gold-pale); }
     .event-dresscode { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-light); margin-top:.9rem; font-weight:500; }
     @media(max-width:768px) {
-      .event-card { flex-direction:column; }
-      .event-card-photo { flex:none; width:100%; aspect-ratio:16/10; }
+      .event-card-photo { aspect-ratio:4/3; }
       .event-card-body { padding:1.7rem 1.6rem 2rem; }
       .event-name { font-size:1.4rem; }
       .day-header-label { font-size:1.4rem; }
@@ -371,11 +370,13 @@
     /* ── Moorish arch frame, echoing the invitation photo ── */
     #invitation .arch-frame { position:absolute; top:0; left:50%; transform:translateX(-50%); width:min(58%,290px); pointer-events:none; z-index:1; filter:drop-shadow(0 0 10px rgba(201,168,76,.25)); }
     #invitation .arch-frame img { width:100%; height:auto; display:block; }
-    #invitation .sym { position:absolute; top:140px; width:68px; height:68px; display:flex; align-items:center; justify-content:center; z-index:2; }
-    #invitation .sym.om { left:38px; } #invitation .sym.ganesha { right:38px; }
+    /* vertically centered on the S&M medallion: padding-top(89.6) + crown margin-top(9.6)
+       + half of the 150px medallion(75) = 174.2px from the top of .invite */
+    #invitation .sym { position:absolute; top:130px; width:88px; height:88px; display:flex; align-items:center; justify-content:center; z-index:2; }
+    #invitation .sym.om { left:100px; } #invitation .sym.ganesha { right:100px; }
     #invitation .sym img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 0 6px rgba(201,168,76,.35)); }
     /* Ganesha ~20% larger than the Om symbol, re-centered so it doesn't drift */
-    #invitation .sym.ganesha { width:82px; height:82px; top:133px; right:31px; }
+    #invitation .sym.ganesha { width:106px; height:106px; top:121px; right:90px; }
     #invitation .crown { text-align:center; position:relative; z-index:1; margin-top:.6rem; }
     #invitation .logo-medallion { width:150px; height:150px; margin:0 auto 1rem; border-radius:50%; background:var(--maroon-black); border:3px solid var(--gold); box-shadow:0 0 0 4px var(--maroon-deep),0 0 0 7px var(--gold-light),0 0 30px rgba(201,168,76,.25); display:flex; align-items:center; justify-content:center; }
     #invitation .logo-medallion img { width:112px; height:auto; display:block; }
@@ -396,13 +397,17 @@
     #invitation .fam .ppl.gp { font-family:'Cormorant Garamond',serif; font-size:1.02rem; color:var(--gold); opacity:.9; line-height:1.6; }
     #invitation .fam .placeholder { color:var(--red-soft); font-style:italic; }
     #invitation .fam-div { background:linear-gradient(to bottom,transparent,var(--gold-deep),transparent); }
-    /* ── Corner floral flourishes (colorful, echoing the printable invite) ── */
-    #invitation .corner-fl { position:absolute; width:120px; height:120px; z-index:1; opacity:1; pointer-events:none; }
-    #invitation .corner-fl img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 2px 10px rgba(0,0,0,.45)); }
-    #invitation .corner-fl.bl { left:-14px; bottom:-14px; }
-    #invitation .corner-fl.br { right:-14px; bottom:-14px; transform:scaleX(-1); }
-    #invitation .corner-fl.tl { left:-14px; top:-14px; }
-    #invitation .corner-fl.tr { right:-14px; top:-14px; transform:scaleX(-1); }
+    /* ── Corner floral flourishes (traced from the vecteezy corner-border set, colorized) ── */
+    /* base artwork is anchored at the bottom-left corner (vine runs down the left
+       edge through a rose bloom, marigold peony and blue bloom, then flourishes
+       right along the bottom edge into a small violet bloom); the other three
+       corners reuse it via mirror/flip transforms */
+    #invitation .corner-fl { position:absolute; width:354px; height:378px; z-index:1; opacity:1; pointer-events:none; transform-origin:center; }
+    #invitation .corner-fl img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 2px 8px rgba(0,0,0,.35)); }
+    #invitation .corner-fl.bl { left:-36px; bottom:-36px; }
+    #invitation .corner-fl.br { right:-36px; bottom:-36px; transform:scaleX(-1); }
+    #invitation .corner-fl.tl { left:-36px; top:-36px; transform:scaleY(-1); }
+    #invitation .corner-fl.tr { right:-36px; top:-36px; transform:scale(-1,-1); }
     /* diagonal shimmer sheen, clipped to the flower's own silhouette */
     #invitation .corner-fl::after {
       content:''; position:absolute; inset:0; pointer-events:none;
@@ -422,17 +427,28 @@
       0%, 100% { background-position:0% 0%; }
       50% { background-position:100% 100%; }
     }
+    /* ── One tall green vine flanking the invite text, sitting on the burgundy
+       card itself (not out in the page margins) ── */
+    #invitation .invite-side-vine { position:absolute; top:344px; bottom:344px; width:112px; z-index:1; pointer-events:none; opacity:.92; }
+    #invitation .invite-side-vine img { width:100%; height:100%; display:block; filter:drop-shadow(0 1px 4px rgba(0,0,0,.3)); }
+    #invitation .invite-side-vine.left { left:4px; }
+    #invitation .invite-side-vine.right { right:4px; transform:scaleX(-1); }
     @media(max-width:620px){
       #invitation .invite { padding:4.6rem 1.4rem 3rem; }
       #invitation .families { grid-template-columns:1fr; gap:1.8rem; }
       #invitation .fam-div { display:none; }
-      #invitation .sym { width:50px; height:50px; top:133px; } #invitation .sym.om { left:20px; } #invitation .sym.ganesha { right:20px; }
+      #invitation .sym { width:56px; height:56px; top:130px; } #invitation .sym.om { left:46px; } #invitation .sym.ganesha { right:44px; }
+      #invitation .sym.ganesha { width:67px; height:67px; top:124px; right:38px; }
       #invitation .arch-frame { width:min(70%,220px); }
-      #invitation .corner-fl { width:66px; height:66px; left:-8px; bottom:-8px; }
-      #invitation .corner-fl.br { right:-8px; left:auto; }
-      #invitation .corner-fl.tl { left:-8px; top:-8px; bottom:auto; }
-      #invitation .corner-fl.tr { right:-8px; left:auto; top:-8px; bottom:auto; }
+      #invitation .corner-fl { width:105px; height:113px; }
+      #invitation .corner-fl.bl { left:-11px; bottom:-11px; }
+      #invitation .corner-fl.br { right:-11px; left:auto; bottom:-11px; }
+      #invitation .corner-fl.tl { left:-11px; top:-11px; }
+      #invitation .corner-fl.tr { right:-11px; left:auto; top:-11px; }
       #invitation .ornate-corner { width:32px; height:32px; }
+      #invitation .invite-side-vine { width:66px; top:106px; bottom:106px; }
+      #invitation .invite-side-vine.left { left:1px; }
+      #invitation .invite-side-vine.right { right:1px; }
     }
 
     /* ── COLOR THEME: accents + soft washes ───── */
@@ -449,13 +465,7 @@
     #rsvp     .section-label { color:var(--c-pink); }
     .event-tag, .travel-card-tag, .gh-tag { color:var(--c-blue) !important; }
 
-    /* ── FLORAL SIDE BORDERS (invitation → last section) ── */
     body { position:relative; }
-    .page-vine { position:absolute; width:80px; pointer-events:none; z-index:5;
-      background:url('images/vine-garden.svg') repeat-y top center; background-size:80px auto; opacity:.95; }
-    .page-vine.left { left:0; }
-    .page-vine.right { right:0; transform:scaleX(-1); }
-    @media(max-width:1100px) { .page-vine { display:none; } }
 
     /* ── FLORAL SECTION DIVIDERS (all screen sizes; main floral element on mobile) ──
        Each divider is a gradient band from the section above's color to the one below's,
@@ -546,8 +556,6 @@
 
 <!-- SITE -->
 <div id="siteContent">
-  <div class="page-vine left"></div>
-  <div class="page-vine right"></div>
 
 <nav id="nav">
   <a href="#hero"><img src="images/logo.png" alt="S&M" class="nav-logo"></a>
@@ -632,6 +640,8 @@
       <div class="corner-fl tr" aria-hidden="true"><img src="images/invite-corner-floral.svg" alt=""></div>
       <div class="corner-fl bl" aria-hidden="true"><img src="images/invite-corner-floral.svg" alt=""></div>
       <div class="corner-fl br" aria-hidden="true"><img src="images/invite-corner-floral.svg" alt=""></div>
+      <div class="invite-side-vine left" aria-hidden="true"><img src="images/invite-vine-side.svg" alt=""></div>
+      <div class="invite-side-vine right" aria-hidden="true"><img src="images/invite-vine-side.svg" alt=""></div>
       <div class="sym om"><img src="images/om.svg" alt="Om"></div>
       <div class="sym ganesha"><img src="images/ganesha.svg" alt="Ganesha"></div>
       <div class="crown">
@@ -648,7 +658,7 @@
         <div class="fam">
           <p class="side">The Bride</p>
           <p class="role">Beloved daughter of</p>
-          <p class="ppl">Girish &amp; Ritu Kumar</p>
+          <p class="ppl">Ritu &amp; Girish Kumar</p>
           <p class="role">Granddaughter of</p>
           <p class="ppl gp placeholder">[Shivani's paternal grandparents]<br>[Shivani's maternal grandparents]</p>
         </div>
@@ -656,7 +666,7 @@
         <div class="fam">
           <p class="side">The Groom</p>
           <p class="role">Beloved son of</p>
-          <p class="ppl">Vinod &amp; Raji Palathinkara</p>
+          <p class="ppl">Raji &amp; Vinod Palathinkara</p>
           <p class="role">Grandson of</p>
           <p class="ppl gp">Leela Devi &amp; PVS Namboodiripad<br>Kunnath Sreedharan Namboodiri &amp; <span style="font-style:italic">the late</span> Santhakumari</p>
         </div>
@@ -697,7 +707,7 @@
       </div>
       <div class="events-row">
         <div class="event-card reveal">
-          <div class="event-card-photo"><img src="images/seated.jpg" loading="lazy" alt="Mehendi, Sangeet &amp; Cocktails"><div class="event-card-photo-overlay"></div></div>
+          <div class="event-card-photo"><img src="images/hero.jpg" loading="lazy" alt="Mehendi, Sangeet &amp; Cocktails"><div class="event-card-photo-overlay"></div></div>
           <div class="event-card-body">
             <p class="event-tag">Evening Celebration</p>
             <h3 class="event-name">Mehendi, Sangeet <em>&amp; Cocktails</em></h3>
@@ -736,7 +746,7 @@
         </div>
         <div id="receptionCard" class="event-card reveal" style="display:none;transition-delay:.18s">
           <div class="event-card-photo">
-            <img src="images/sunset.jpg" loading="lazy" alt="Reception">
+            <img src="images/hero.jpg" loading="lazy" alt="Reception">
             <div class="event-card-photo-overlay"></div>
           </div>
           <div class="event-card-body">
@@ -756,7 +766,7 @@
       </div>
       <div class="events-row">
         <div class="event-card reveal">
-          <div class="event-card-photo"><img src="images/sunset.jpg" loading="lazy" alt="Milwaukee Meet &amp; Greet"><div class="event-card-photo-overlay"></div></div>
+          <div class="event-card-photo"><img src="images/proposal.jpg" loading="lazy" alt="Milwaukee Meet &amp; Greet"><div class="event-card-photo-overlay"></div></div>
           <div class="event-card-body">
             <p class="event-tag">Post-Wedding Gathering</p>
             <h3 class="event-name">Milwaukee <em>Meet &amp; Greet</em></h3>
@@ -996,28 +1006,5 @@
   window.SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwRPpJCObgBiqyPQy4-HKSk1TDKV0reVigB1uzqvsgTDD6GExdfM5cQsw8EyfB61J0/exec';
 </script>
 <script src="js/app.js"></script>
-<script>
-  // Position the floral side borders to span from the Invitation section to the footer
-  // (so the splash and footer stay clean). Runs after unlock, load, and resize.
-  (function () {
-    function posVines() {
-      var inv = document.getElementById('invitation');
-      var ft = document.querySelector('footer');
-      if (!inv || !ft) return;
-      var top = inv.getBoundingClientRect().top + window.scrollY;
-      var bottom = ft.getBoundingClientRect().top + window.scrollY;
-      document.querySelectorAll('.page-vine').forEach(function (v) {
-        v.style.top = top + 'px';
-        v.style.height = (bottom - top) + 'px';
-      });
-    }
-    window.addEventListener('load', posVines);
-    window.addEventListener('resize', posVines);
-    var sc = document.getElementById('siteContent');
-    if (sc) new MutationObserver(function () { setTimeout(posVines, 60); })
-      .observe(sc, { attributes: true, attributeFilter: ['class'] });
-    setTimeout(posVines, 300); setTimeout(posVines, 1200);
-  })();
-</script>
 </body>
 </html>
