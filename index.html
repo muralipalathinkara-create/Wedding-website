@@ -281,7 +281,7 @@
     .registry-card { margin-top:2.5rem; padding:3rem 3.5rem; background:linear-gradient(135deg,#f5f0e8,#eef2eb); border-radius:8px; border:1px solid rgba(201,168,76,.2); position:relative; overflow:hidden; }
     .registry-card::before { content:'"'; position:absolute; top:-.5rem; left:1.5rem; font-family:'Playfair Display',serif; font-size:8rem; line-height:1; color:rgba(201,168,76,.12); pointer-events:none; }
     .registry-quote { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:300; font-style:italic; line-height:1.85; color:var(--text-dark); position:relative; z-index:1; }
-    .registry-quote strong { font-style:normal; font-weight:400; color:var(--sage-dark); }
+    .registry-quote strong { font-weight:500; color:var(--sage-dark); }
     .registry-hearts { margin-top:1.5rem; color:var(--gold); font-size:1.1rem; letter-spacing:.3rem; }
 
     /* ── RSVP ─────────────────────────────────── */
@@ -431,21 +431,43 @@
     #invitation .corner-fl.br { right:-36px; bottom:-36px; transform:scaleX(-1); }
     #invitation .corner-fl.tl { left:-36px; top:-36px; transform:scaleY(-1); }
     #invitation .corner-fl.tr { right:-36px; top:-36px; transform:scale(-1,-1); }
-    /* diagonal shimmer sheen, clipped to the flower's own silhouette */
-    #invitation .corner-fl::after {
+    /* diagonal shimmer sheen, clipped to each artwork's own silhouette — a bright,
+       tight foil-like highlight streak sweeping across, so the gold ink reads as
+       reflective metallic paper catching the light rather than flat printed color */
+    #invitation .corner-fl::after, #invitation .invite-side-vine::after {
       content:''; position:absolute; inset:0; pointer-events:none;
-      background:linear-gradient(115deg,transparent 25%,rgba(255,255,255,.05) 40%,rgba(255,250,225,.85) 50%,rgba(255,255,255,.05) 60%,transparent 75%);
-      background-size:280% 280%;
+      background:linear-gradient(115deg,
+        transparent 30%,
+        rgba(255,255,255,.1) 42%,
+        rgba(255,252,232,1) 48%,
+        #fff 50%,
+        rgba(255,252,232,1) 52%,
+        rgba(255,255,255,.1) 58%,
+        transparent 70%);
+      background-size:230% 230%;
       background-position:0% 0%;
+      mix-blend-mode:overlay;
+      opacity:.85;
+      animation:shimmerSweep 4.2s ease-in-out infinite;
+    }
+    #invitation .corner-fl::after {
       -webkit-mask-image:url('images/invite-corner-floral.svg'); mask-image:url('images/invite-corner-floral.svg');
       -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
       -webkit-mask-size:contain; mask-size:contain;
       -webkit-mask-position:center; mask-position:center;
-      mix-blend-mode:overlay;
-      opacity:.4;
-      animation:shimmerSweep 6s ease-in-out infinite;
     }
-    #invitation .corner-fl.br::after, #invitation .corner-fl.tr::after { animation-delay:1.4s; }
+    #invitation .invite-side-vine::after {
+      -webkit-mask-image:url('images/invite-vine-side.svg'); mask-image:url('images/invite-vine-side.svg');
+      -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+      -webkit-mask-size:100% 100%; mask-size:100% 100%;
+      -webkit-mask-position:center; mask-position:center;
+    }
+    #invitation .corner-fl.tl::after { animation-delay:0s; }
+    #invitation .corner-fl.tr::after { animation-delay:.9s; }
+    #invitation .corner-fl.bl::after { animation-delay:1.8s; }
+    #invitation .corner-fl.br::after { animation-delay:2.7s; }
+    #invitation .invite-side-vine.left::after { animation-delay:.5s; }
+    #invitation .invite-side-vine.right::after { animation-delay:2.1s; }
     @keyframes shimmerSweep {
       0%, 100% { background-position:0% 0%; }
       50% { background-position:100% 100%; }
@@ -489,6 +511,13 @@
       #invitation .invite-side-vine img { display:none; }
       #invitation .invite-side-vine.left { left:2px; }
       #invitation .invite-side-vine.right { right:2px; }
+      /* mobile vine is tiled, so its shimmer mask must tile the same way instead
+         of stretching one shape over the whole tall strip */
+      #invitation .invite-side-vine::after {
+        -webkit-mask-size:30px 102px; mask-size:30px 102px;
+        -webkit-mask-repeat:repeat-y; mask-repeat:repeat-y;
+        -webkit-mask-position:top center; mask-position:top center;
+      }
       /* Smaller couple names + grandparent lines so they don't run under the side vines */
       #invitation .couple .name { font-size:1.45rem; }
       #invitation .fam .ppl.grands { font-size:.82rem; }
@@ -613,6 +642,7 @@
       .has-js .reveal-up, .reveal, .event-card { opacity:1 !important; transform:none !important; transition:none !important; }
       .hero-photo-half img { animation:none !important; }
       .hero-logo-wrap, .hero-eyebrow, .hero-names, .hero-rule, .hero-date, .hero-venue, .hero-cta, .hero-countdown { animation:none !important; opacity:1 !important; }
+      #invitation .corner-fl::after, #invitation .invite-side-vine::after { animation:none !important; background-position:35% 35% !important; }
       html { scroll-behavior:auto; }
     }
   </style>
@@ -1008,7 +1038,7 @@
       <p class="registry-quote">
         We do not have a registry and we mean it sincerely when we say
         <strong>your presence is the greatest gift of all.</strong>
-        Having you by our side as we begin this new chapter is everything we could ever ask for. We know how wonderfully generous you are, and that alone fills our hearts.
+        Having you by our side as we begin this new chapter is everything we could ever ask for. We know how wonderfully generous you are and that alone fills our hearts.
       </p>
       <div class="registry-hearts">♥ &nbsp; ♥ &nbsp; ♥</div>
     </div>
