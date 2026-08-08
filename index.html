@@ -164,7 +164,7 @@
     .reveal.visible { opacity:1; transform:translateY(0); }
 
     /* ── GALLERY ──────────────────────────────── */
-    #gallery { padding:5.5rem 2rem; background:var(--cream); }
+    #gallery { padding:5.5rem 2rem; background:var(--cream); position:relative; z-index:0; overflow:hidden; }
     .gallery-grid { display:grid; grid-template-columns:repeat(12,1fr); grid-template-rows:280px 280px; gap:1rem; max-width:1140px; margin:0 auto; }
     .gp { border-radius:6px; overflow:hidden; position:relative; cursor:zoom-in; }
     .gp img { width:100%; height:100%; object-fit:cover; transition:transform .55s ease; display:block; }
@@ -185,7 +185,7 @@
     @media(max-width:500px) { .gallery-grid { grid-template-columns:1fr; } .gp { aspect-ratio:3/2; } }
 
     /* ── EVENTS ───────────────────────────────── */
-    #details { padding:6rem 2rem; background:linear-gradient(180deg,#faf8f2 0%,#f4f6ef 55%,#fdfcf8 100%); position:relative; overflow:hidden; }
+    #details { padding:6rem 2rem; background:linear-gradient(180deg,#faf8f2 0%,#f4f6ef 55%,#fdfcf8 100%); position:relative; z-index:0; overflow:hidden; }
     #details::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 10% 90%,rgba(201,168,76,.07) 0%,transparent 55%),radial-gradient(circle at 90% 10%,rgba(92,122,90,.07) 0%,transparent 55%); }
     .events-wrapper { max-width:1140px; margin:3.5rem auto 0; display:flex; flex-direction:column; gap:3rem; position:relative; z-index:1; }
     .day-header { display:flex; align-items:center; gap:1.2rem; margin-bottom:1.8rem; }
@@ -222,7 +222,7 @@
     .btn-directions:hover { background:var(--sage-deep); }
 
     /* ── TRAVEL ───────────────────────────────── */
-    #travel { padding:6rem 2rem; background:var(--warm-white); }
+    #travel { padding:6rem 2rem; background:var(--warm-white); position:relative; z-index:0; overflow:hidden; }
     .travel-inner { max-width:1100px; margin:0 auto; }
 
     /* Map */
@@ -276,7 +276,7 @@
     .getting-here strong { color:var(--text-dark); font-weight:500; }
 
     /* ── REGISTRY ─────────────────────────────── */
-    #registry { padding:5rem 2rem; background:var(--cream); }
+    #registry { padding:5rem 2rem; background:var(--cream); position:relative; z-index:0; overflow:hidden; }
     .registry-inner { max-width:660px; margin:0 auto; text-align:center; }
     .registry-card { margin-top:2.5rem; padding:3rem 3.5rem; background:linear-gradient(135deg,#f5f0e8,#eef2eb); border-radius:8px; border:1px solid rgba(201,168,76,.2); position:relative; overflow:hidden; }
     .registry-card::before { content:'"'; position:absolute; top:-.5rem; left:1.5rem; font-family:'Playfair Display',serif; font-size:8rem; line-height:1; color:rgba(201,168,76,.12); pointer-events:none; }
@@ -285,7 +285,7 @@
     .registry-hearts { margin-top:1.5rem; color:var(--gold); font-size:1.1rem; letter-spacing:.3rem; }
 
     /* ── RSVP ─────────────────────────────────── */
-    #rsvp { padding:6rem 2rem; background:var(--warm-white); }
+    #rsvp { padding:6rem 2rem; background:var(--warm-white); position:relative; z-index:0; overflow:hidden; }
     .rsvp-inner { max-width:680px; margin:0 auto; }
     .rsvp-card { background:white; border-radius:8px; padding:3.5rem; box-shadow:0 20px 60px rgba(61,92,58,.07); border:1px solid rgba(201,168,76,.15); margin-top:3rem; }
     .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
@@ -330,6 +330,7 @@
     /* ── INVITATION ───────────────────────────── */
     #invitation {
       padding:6rem 1.2rem;
+      position:relative; z-index:0; overflow:hidden;
       background:
         radial-gradient(circle at 50% 0%,rgba(201,168,76,.08),transparent 50%),
         radial-gradient(circle at 15% 85%,rgba(181,72,90,.10),transparent 45%),
@@ -473,13 +474,38 @@
       #invitation .lead { font-size:1.05rem; max-width:230px; margin:0 auto; }
     }
 
-    /* ── COLOR THEME: accents + soft washes ───── */
+    /* ── COLOR THEME: blush mesh-gradient backgrounds, tinted per section ───── */
     :root { --c-blue:#5b97c9; --c-green:#3f8c39; --c-lav:#9b7fc9; --c-yellow:#cf9f12; --c-pink:#e23d8a; }
-    #gallery  { background:#9fd086; }
-    #details  { background:#8dbfe8; }
-    #travel   { background:#c2a3e6; }
-    #registry { background:#eccf6b; }
-    #rsvp     { background:#f0a8cb; }
+    #gallery {
+      background:
+        radial-gradient(circle at 12% 15%,rgba(159,208,134,.16),transparent 48%),
+        radial-gradient(circle at 88% 82%,rgba(201,168,76,.10),transparent 45%),
+        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+    }
+    #details {
+      background:
+        radial-gradient(circle at 85% 8%,rgba(141,191,232,.16),transparent 48%),
+        radial-gradient(circle at 10% 88%,rgba(201,168,76,.09),transparent 45%),
+        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+    }
+    #travel {
+      background:
+        radial-gradient(circle at 15% 82%,rgba(194,163,230,.17),transparent 48%),
+        radial-gradient(circle at 90% 12%,rgba(181,72,90,.08),transparent 45%),
+        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+    }
+    #registry {
+      background:
+        radial-gradient(circle at 82% 85%,rgba(236,207,107,.18),transparent 48%),
+        radial-gradient(circle at 15% 18%,rgba(201,168,76,.13),transparent 45%),
+        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+    }
+    #rsvp {
+      background:
+        radial-gradient(circle at 50% 0%,rgba(240,168,203,.16),transparent 50%),
+        radial-gradient(circle at 15% 85%,rgba(181,72,90,.10),transparent 45%),
+        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+    }
     #gallery  .section-label { color:var(--c-green); }
     #details  .section-label { color:var(--c-blue); }
     #travel   .section-label { color:var(--c-lav); }
@@ -487,18 +513,40 @@
     #rsvp     .section-label { color:var(--c-pink); }
     .event-tag, .travel-card-tag, .gh-tag { color:var(--c-blue) !important; }
 
+    /* Paper-grain texture, layered over every mesh-gradient section for warmth/depth */
+    #invitation::before, #gallery::before, #details::before, #travel::before, #registry::before, #rsvp::before {
+      content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+      opacity:.06;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="saturate" values="0"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+      background-repeat:repeat; background-size:160px 160px;
+    }
+
+    /* Oversized faint gold lotus watermark, one per section, varied in placement for rhythm */
+    #gallery::after, #details::after, #travel::after, #registry::after, #rsvp::after {
+      content:''; position:absolute; z-index:-1; pointer-events:none;
+      width:520px; height:403px;
+      background:url('images/lotus-gold.svg') no-repeat center/contain;
+      opacity:.10;
+    }
+    #gallery::after  { top:-60px; left:-100px; transform:rotate(-15deg); }
+    #details::after  { bottom:-80px; right:-120px; transform:rotate(12deg) scaleX(-1); }
+    #travel::after   { top:-50px; right:-110px; transform:rotate(20deg); }
+    #registry::after { bottom:-70px; left:-100px; transform:rotate(-10deg) scaleX(-1); }
+    #rsvp::after     { top:-40px; left:50%; width:600px; height:465px; transform:translateX(-50%); }
+
     body { position:relative; }
 
     /* ── FLORAL SECTION DIVIDERS (all screen sizes; main floral element on mobile) ──
-       Each divider is a gradient band from the section above's color to the one below's,
-       so the page flows smoothly hue-to-hue with the floral riding on top. */
+       Each divider is a soft gradient band easing from the blush above into a light
+       tint of the section below's accent hue, so the page flows gently hue-to-hue
+       without breaking the overall blush palette. */
     .sec-divider { padding:4rem 1rem; text-align:center; line-height:0; }
     .sec-divider img { display:block; margin:0 auto; width:min(440px,74%); height:auto; }
-    .d-grn { background:linear-gradient(180deg,var(--blush),#9fd086); }
-    .d-blu { background:linear-gradient(180deg,#9fd086,#8dbfe8); }
-    .d-vio { background:linear-gradient(180deg,#8dbfe8,#c2a3e6); }
-    .d-amb { background:linear-gradient(180deg,#c2a3e6,#eccf6b); }
-    .d-ros { background:linear-gradient(180deg,#eccf6b,#f0a8cb); }
+    .d-grn { background:linear-gradient(180deg,var(--blush),#dfe8d6); }
+    .d-blu { background:linear-gradient(180deg,#dfe8d6,#d9e6ee); }
+    .d-vio { background:linear-gradient(180deg,#d9e6ee,#e3dbee); }
+    .d-amb { background:linear-gradient(180deg,#e3dbee,#f2e4c0); }
+    .d-ros { background:linear-gradient(180deg,#f2e4c0,#f6dbe4); }
     @media(max-width:600px) { .sec-divider { padding:3rem 1rem; } .sec-divider img { width:80%; } }
 
     /* ── POLISH: scroll-reveal (flash-free, JS-gated) ── */
