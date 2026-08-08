@@ -320,12 +320,38 @@
     .footer-div { width:50px; height:1px; background:rgba(201,168,76,.4); margin:0 auto 1.5rem; }
     footer p { font-size:.78rem; letter-spacing:.08em; }
 
-    /* ── LIGHTBOX ─────────────────────────────── */
-    .lightbox { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.93); align-items:center; justify-content:center; }
-    .lightbox.open { display:flex; }
-    .lightbox img { max-width:92vw; max-height:92vh; object-fit:contain; border-radius:4px; }
-    .lb-close { position:absolute; top:1.2rem; right:1.5rem; color:white; font-size:2rem; cursor:pointer; opacity:.8; transition:opacity .2s; line-height:1; }
+    /* ── LIGHTBOX: full-screen scrollable portfolio viewer ───── */
+    body.lb-locked { overflow:hidden; }
+    .lightbox {
+      display:none; position:fixed; inset:0; z-index:1000;
+      background:#0b0b0c;
+      overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain;
+    }
+    .lightbox.open { display:block; }
+    .lb-track { min-height:100%; }
+    .lb-slide {
+      width:100%; min-height:100vh;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:6vh 5vw; box-sizing:border-box;
+      opacity:0; transform:scale(.94) translateY(28px);
+      transition:opacity .9s cubic-bezier(.16,.8,.24,1), transform .9s cubic-bezier(.16,.8,.24,1);
+    }
+    .lb-slide.visible { opacity:1; transform:scale(1) translateY(0); }
+    .lb-slide img { max-width:88vw; max-height:76vh; object-fit:contain; border-radius:4px; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+    .lb-caption {
+      margin-top:1.4rem; color:rgba(255,255,255,.72); font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-size:1.15rem; letter-spacing:.02em;
+      opacity:0; transform:translateY(8px); transition:opacity .7s ease .2s, transform .7s ease .2s;
+    }
+    .lb-slide.visible .lb-caption { opacity:1; transform:translateY(0); }
+    .lb-progress { position:fixed; top:0; left:0; height:2px; width:0; background:var(--gold); z-index:1003; transition:width .12s linear; }
+    .lb-close { position:fixed; top:1.2rem; right:1.5rem; color:white; font-size:2rem; cursor:pointer; opacity:.8; transition:opacity .2s; line-height:1; z-index:1002; }
     .lb-close:hover { opacity:1; }
+    .lb-counter {
+      position:fixed; bottom:1.4rem; left:50%; transform:translateX(-50%);
+      color:rgba(255,255,255,.6); font-family:'Jost',sans-serif; font-size:.75rem; letter-spacing:.18rem;
+      z-index:1002; pointer-events:none;
+    }
 
     /* ── INVITATION ───────────────────────────── */
     #invitation {
@@ -575,10 +601,9 @@
     .cd-sep { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--gold-light); align-self:flex-start; margin-top:.1rem; }
     @media(max-width:768px) { .hero-countdown { justify-content:center; gap:1rem; } .cd-num { font-size:1.6rem; } }
 
-    /* ── POLISH: lightbox arrows + caption ── */
-    .lightbox img { box-shadow:0 30px 80px rgba(0,0,0,.5); }
-    .lb-arrow { position:absolute; top:50%; transform:translateY(-50%); color:white; font-size:2.6rem;
-      cursor:pointer; opacity:.65; transition:opacity .2s, transform .2s; user-select:none; padding:1rem 1.4rem; line-height:1; }
+    /* ── POLISH: lightbox nav arrows (fixed on screen, independent of scroll) ── */
+    .lb-arrow { position:fixed; top:50%; transform:translateY(-50%); color:white; font-size:2.6rem;
+      cursor:pointer; opacity:.65; transition:opacity .2s, transform .2s; user-select:none; padding:1rem 1.4rem; line-height:1; z-index:1002; }
     .lb-arrow:hover { opacity:1; }
     .lb-prev { left:.4rem; } .lb-next { right:.4rem; }
     @media(max-width:600px) { .lb-arrow { font-size:2rem; padding:.6rem .8rem; } }
@@ -981,9 +1006,9 @@
     <h2 class="section-title reveal-up">A <em>Gift</em> Note</h2>
     <div class="registry-card reveal">
       <p class="registry-quote">
-        We do not have a registry &mdash; and we mean it sincerely when we say
+        We do not have a registry and we mean it sincerely when we say
         <strong>your presence is the greatest gift of all.</strong>
-        Having you by our side as we begin this beautiful new chapter is everything we could ever ask for. We know how wonderfully generous you are, and that alone fills our hearts.
+        Having you by our side as we begin this new chapter is everything we could ever ask for. We know how wonderfully generous you are, and that alone fills our hearts.
       </p>
       <div class="registry-hearts">♥ &nbsp; ♥ &nbsp; ♥</div>
     </div>
@@ -1052,11 +1077,13 @@
 </footer>
 </div>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<div class="lightbox" id="lightbox">
+  <div class="lb-progress" id="lbProgress"></div>
   <span class="lb-close" onclick="event.stopPropagation();closeLightbox()">&times;</span>
   <span class="lb-arrow lb-prev" onclick="event.stopPropagation();lbStep(-1)" aria-label="Previous">&#8249;</span>
-  <img id="lbImg" src="" alt="" onclick="event.stopPropagation()">
   <span class="lb-arrow lb-next" onclick="event.stopPropagation();lbStep(1)" aria-label="Next">&#8250;</span>
+  <span class="lb-counter" id="lbCounter"></span>
+  <div class="lb-track" id="lbTrack"></div>
 </div>
 
 <script src="js/logic.js"></script>

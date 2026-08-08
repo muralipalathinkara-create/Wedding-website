@@ -174,30 +174,93 @@
   var phoneInput = $('f_phone');
   if (phoneInput) phoneInput.addEventListener('input', function () { this.value = L.formatPhone(this.value); });
 
-  // ---- Lightbox gallery (with prev/next + arrow keys) ----
-  var lbList = [], lbIndex = 0;
-  function lbRefresh() {
-    lbList = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'))
-      .map(function (im) { return im.getAttribute('src'); });
+  // ---- Lightbox: full-screen scrollable "portfolio" viewer ----
+  // Clicking a gallery photo opens every gallery photo stacked as full-screen
+  // slides you scroll through, each fading/scaling in as it comes into view,
+  // with a live counter + progress bar. Arrow keys/buttons smooth-scroll
+  // between slides; Escape or clicking the dark backdrop closes it.
+  var lb = $('lightbox'), lbTrack = $('lbTrack'), lbCounter = $('lbCounter'), lbProgressEl = $('lbProgress');
+  var lbSlides = [], lbObserver = null;
+
+  function lbPad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function lbBuild() {
+    if (!lbTrack) return;
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'));
+    lbTrack.innerHTML = '';
+    if (lbObserver) lbObserver.disconnect();
+    lbSlides = imgs.map(function (im) {
+      var slide = document.createElement('div');
+      slide.className = 'lb-slide';
+      var img = document.createElement('img');
+      img.src = im.src; // resolved URL, matches what onclick="openLightbox(this.src)" passes
+      img.alt = im.getAttribute('alt') || '';
+      img.addEventListener('click', function (e) { e.stopPropagation(); });
+      slide.appendChild(img);
+      if (img.alt) {
+        var cap = document.createElement('p');
+        cap.className = 'lb-caption';
+        cap.textContent = img.alt;
+        slide.appendChild(cap);
+      }
+      lbTrack.appendChild(slide);
+      return slide;
+    });
+    lbObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) en.target.classList.add('visible'); });
+    }, { root: lb, threshold: .35 });
+    lbSlides.forEach(function (s) { lbObserver.observe(s); });
   }
+
+  function lbCurrentIndex() {
+    var best = 0, bestDist = Infinity;
+    lbSlides.forEach(function (s, i) {
+      var d = Math.abs(s.getBoundingClientRect().top);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    return best;
+  }
+
+  function lbUpdateCounter() {
+    if (!lbCounter || !lbSlides.length) return;
+    lbCounter.textContent = lbPad2(lbCurrentIndex() + 1) + ' / ' + lbPad2(lbSlides.length);
+  }
+
   window.openLightbox = function (src) {
-    lbRefresh();
-    lbIndex = Math.max(0, lbList.indexOf(src));
-    $('lbImg').src = src;
-    $('lightbox').classList.add('open');
+    lbBuild();
+    if (!lbSlides.length) return;
+    var idx = Math.max(0, lbSlides.findIndex(function (s) { return s.querySelector('img').src === src; }));
+    document.body.classList.add('lb-locked');
+    lb.classList.add('open');
+    lb.scrollTop = 0;
+    lbSlides[idx].scrollIntoView({ block: 'start' });
+    lbSlides[idx].classList.add('visible');
+    lbUpdateCounter();
   };
-  window.closeLightbox = function () { $('lightbox').classList.remove('open'); };
+  window.closeLightbox = function () {
+    lb.classList.remove('open');
+    document.body.classList.remove('lb-locked');
+  };
   window.lbStep = function (dir) {
-    if (!lbList.length) lbRefresh();
-    if (!lbList.length) return;
-    lbIndex = (lbIndex + dir + lbList.length) % lbList.length;
-    $('lbImg').src = lbList[lbIndex];
+    if (!lbSlides.length) return;
+    var next = Math.max(0, Math.min(lbSlides.length - 1, lbCurrentIndex() + dir));
+    lbSlides[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+  if (lb) {
+    lb.addEventListener('click', closeLightbox);
+    lb.addEventListener('scroll', function () {
+      lbUpdateCounter();
+      if (lbProgressEl) {
+        var scrollable = lb.scrollHeight - lb.clientHeight;
+        lbProgressEl.style.width = (scrollable > 0 ? (lb.scrollTop / scrollable) * 100 : 0) + '%';
+      }
+    });
+  }
   document.addEventListener('keydown', function (e) {
     if (!$('lightbox') || !$('lightbox').classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
-    else if (e.key === 'ArrowLeft') lbStep(-1);
-    else if (e.key === 'ArrowRight') lbStep(1);
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') lbStep(-1);
+    else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') lbStep(1);
   });
 
   // ---- Countdown to the wedding (April 23, 2027) ----
