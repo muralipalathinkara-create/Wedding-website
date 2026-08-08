@@ -436,14 +436,14 @@
     @media(max-width:620px){
       /* Bottom corner flowers reach ~102px up from the edge, so give the last
          grandparent line enough bottom padding to clear them */
-      #invitation .invite { padding:4.6rem 1.4rem 5rem; }
+      #invitation .invite { padding:4.6rem 1.4rem 4.5rem; }
       /* Switched from grid to flex for the stacked single-column layout — the
          grid version was leaving large unexplained blank gaps below each
          family block on mobile Safari, flex stacks them predictably. */
       #invitation .families { display:flex; flex-direction:column; align-items:stretch; gap:1rem; max-width:none; }
       #invitation .fam-div { display:none; }
-      #invitation .sym { width:56px; height:56px; top:130px; } #invitation .sym.om { left:46px; } #invitation .sym.ganesha { right:44px; }
-      #invitation .sym.ganesha { width:67px; height:67px; top:124px; right:38px; }
+      #invitation .sym { width:56px; height:56px; top:130px; } #invitation .sym.om { left:34px; } #invitation .sym.ganesha { right:44px; }
+      #invitation .sym.ganesha { width:67px; height:67px; top:124px; right:26px; }
       #invitation .corner-fl { width:105px; height:113px; }
       #invitation .corner-fl.bl { left:-11px; bottom:-11px; }
       #invitation .corner-fl.br { right:-11px; left:auto; bottom:-11px; }
@@ -458,7 +458,7 @@
          block stacks to one column and the card gets much taller — so on mobile
          only, tile the same artwork as a repeating pattern down the side instead. */
       #invitation .invite-side-vine {
-        width:30px; top:150px; bottom:255px;
+        width:30px; top:150px; bottom:231px;
         background-image:url('images/invite-vine-side.svg');
         background-repeat:repeat-y; background-size:30px 102px; background-position:top center;
         opacity:.75;
@@ -567,7 +567,7 @@
     <div class="gate-logo-wrap">
       <img src="images/logo.png" alt="S & M">
     </div>
-    <p class="gate-tagline">April 23 – 24, 2027 &middot; Downers Grove</p>
+    <p class="gate-tagline">April 23 – 24, 2027 &middot; Downers Grove, IL</p>
     <div class="gate-divider"><div class="gate-divider-line"></div><div class="gate-divider-diamond"></div><div class="gate-divider-line"></div></div>
     <label class="gate-label" for="sitePassword">Your Invitation Code</label>
     <input type="text" id="sitePassword" class="gate-input" placeholder="Enter your code" onkeydown="if(event.key==='Enter')unlockSite()" autocomplete="off" autocapitalize="off" autocorrect="off">
