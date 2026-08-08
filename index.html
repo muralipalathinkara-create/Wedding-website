@@ -444,10 +444,28 @@
       #invitation .corner-fl.br { right:-11px; left:auto; bottom:-11px; }
       #invitation .corner-fl.tl { left:-11px; top:-11px; }
       #invitation .corner-fl.tr { right:-11px; left:auto; top:-11px; }
+      /* Top two corners enlarged relative to the bottom two */
+      #invitation .corner-fl.tl, #invitation .corner-fl.tr { width:142px; height:153px; }
+      #invitation .corner-fl.tl { left:-15px; top:-15px; }
+      #invitation .corner-fl.tr { right:-15px; left:auto; top:-15px; }
       #invitation .ornate-corner { width:32px; height:32px; }
-      #invitation .invite-side-vine { width:66px; top:106px; bottom:106px; }
-      #invitation .invite-side-vine.left { left:1px; }
-      #invitation .invite-side-vine.right { right:1px; }
+      /* A single stretched vine reads as an odd, distorted smear once the family
+         block stacks to one column and the card gets much taller — so on mobile
+         only, tile the same artwork as a repeating pattern down the side instead. */
+      #invitation .invite-side-vine {
+        width:46px; top:150px; bottom:255px;
+        background-image:url('images/invite-vine-side.svg');
+        background-repeat:repeat-y; background-size:46px 157px; background-position:top center;
+        opacity:.85;
+      }
+      #invitation .invite-side-vine img { display:none; }
+      #invitation .invite-side-vine.left { left:2px; }
+      #invitation .invite-side-vine.right { right:2px; }
+      /* Smaller couple names + grandparent lines so they don't run under the side vines */
+      #invitation .couple .name { font-size:1.45rem; }
+      #invitation .fam .ppl.gp { font-size:.82rem; }
+      /* Narrower + smaller lead paragraph so it doesn't run under the side vines */
+      #invitation .lead { font-size:1.05rem; max-width:230px; margin:0 auto; }
     }
 
     /* ── COLOR THEME: accents + soft washes ───── */
