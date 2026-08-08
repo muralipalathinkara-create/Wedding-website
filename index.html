@@ -334,8 +334,7 @@
       background:
         radial-gradient(circle at 50% 0%,rgba(201,168,76,.08),transparent 50%),
         radial-gradient(circle at 15% 85%,rgba(181,72,90,.10),transparent 45%),
-        radial-gradient(circle at 85% 20%,rgba(181,72,90,.08),transparent 45%),
-        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+        radial-gradient(circle at 85% 20%,rgba(181,72,90,.08),transparent 45%);
     }
     #invitation .invite-shell { max-width:780px; margin:0 auto; position:relative; }
     #invitation .invite {
@@ -479,32 +478,27 @@
     #gallery {
       background:
         radial-gradient(circle at 12% 15%,rgba(159,208,134,.16),transparent 48%),
-        radial-gradient(circle at 88% 82%,rgba(201,168,76,.10),transparent 45%),
-        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+        radial-gradient(circle at 88% 82%,rgba(201,168,76,.10),transparent 45%);
     }
     #details {
       background:
         radial-gradient(circle at 85% 8%,rgba(141,191,232,.16),transparent 48%),
-        radial-gradient(circle at 10% 88%,rgba(201,168,76,.09),transparent 45%),
-        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+        radial-gradient(circle at 10% 88%,rgba(201,168,76,.09),transparent 45%);
     }
     #travel {
       background:
         radial-gradient(circle at 15% 82%,rgba(194,163,230,.17),transparent 48%),
-        radial-gradient(circle at 90% 12%,rgba(181,72,90,.08),transparent 45%),
-        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+        radial-gradient(circle at 90% 12%,rgba(181,72,90,.08),transparent 45%);
     }
     #registry {
       background:
         radial-gradient(circle at 82% 85%,rgba(236,207,107,.18),transparent 48%),
-        radial-gradient(circle at 15% 18%,rgba(201,168,76,.13),transparent 45%),
-        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+        radial-gradient(circle at 15% 18%,rgba(201,168,76,.13),transparent 45%);
     }
     #rsvp {
       background:
         radial-gradient(circle at 50% 0%,rgba(240,168,203,.16),transparent 50%),
-        radial-gradient(circle at 15% 85%,rgba(181,72,90,.10),transparent 45%),
-        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 55%,var(--blush) 100%);
+        radial-gradient(circle at 15% 85%,rgba(181,72,90,.10),transparent 45%);
     }
     #gallery  .section-label { color:var(--c-green); }
     #details  .section-label { color:var(--c-blue); }
@@ -534,7 +528,10 @@
     #registry::after { bottom:-70px; left:-100px; transform:rotate(-10deg) scaleX(-1); }
     #rsvp::after     { top:-40px; left:50%; width:600px; height:465px; transform:translateX(-50%); }
 
-    body { position:relative; }
+    body {
+      position:relative;
+      background:linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 50%,var(--blush) 100%);
+    }
 
     /* ── FLORAL SECTION DIVIDERS (all screen sizes; main floral element on mobile) ──
        Each divider is a soft gradient band easing from the blush above into a light
@@ -542,7 +539,7 @@
        without breaking the overall blush palette. */
     .sec-divider { padding:4rem 1rem; text-align:center; line-height:0; }
     .sec-divider img { display:block; margin:0 auto; width:min(440px,74%); height:auto; }
-    .d-grn, .d-blu, .d-vio, .d-amb, .d-ros { background:linear-gradient(180deg,var(--blush),var(--blush-deep),var(--blush)); }
+    .d-grn, .d-blu, .d-vio, .d-amb, .d-ros { background:transparent; }
     @media(max-width:600px) { .sec-divider { padding:3rem 1rem; } .sec-divider img { width:80%; } }
 
     /* ── POLISH: scroll-reveal (flash-free, JS-gated) ── */
