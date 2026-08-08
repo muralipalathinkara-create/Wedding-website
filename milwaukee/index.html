@@ -31,6 +31,9 @@
     /* NAV */
     nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:.9rem 2.5rem; display:flex; justify-content:space-between; align-items:center; background:rgba(253,252,248,.93); backdrop-filter:blur(14px); border-bottom:1px solid rgba(91,151,201,.15); transition:padding .35s ease, box-shadow .35s ease; }
     nav.scrolled { padding:.4rem 2.5rem; box-shadow:0 6px 24px rgba(46,111,176,.1); }
+    .nav-brand { display:flex; align-items:center; gap:.7rem; text-decoration:none; }
+    .nav-logo { height:44px; width:auto; display:block; transition:height .35s ease; }
+    nav.scrolled .nav-logo { height:34px; }
     .nav-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--text-dark); text-decoration:none; }
     .nav-title em { font-style:italic; color:var(--blue-deep); }
     nav ul { display:flex; gap:1.8rem; list-style:none; }
@@ -51,6 +54,8 @@
     @keyframes kenburns { from{transform:scale(1);} to{transform:scale(1.08);} }
     .hero-photo-half::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,transparent 50%,rgba(253,252,248,.5)); }
     .hero-content-half { display:flex; flex-direction:column; align-items:flex-start; justify-content:center; padding:7rem 4rem 4rem 3rem; background:linear-gradient(135deg,#eef4fa 0%,#f5f0e8 100%); position:relative; }
+    .hero-logo-wrap { width:130px; margin-bottom:1.1rem; }
+    .hero-logo-wrap img { width:100%; height:auto; display:block; }
     .hero-eyebrow { font-size:.65rem; font-weight:500; letter-spacing:.35em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:.8rem; }
     .hero-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.4rem); font-weight:400; line-height:1.15; color:var(--text-dark); }
     .hero-title em { font-style:italic; color:var(--blue-deep); }
@@ -67,6 +72,7 @@
       .hero-photo-half { height:60vw; max-height:380px; }
       .hero-content-half { padding:2.5rem 1.5rem 3rem; align-items:center; text-align:center; }
       .hero-rule, .hero-note { margin-left:auto; margin-right:auto; }
+      .hero-logo-wrap { margin:0 auto 1.1rem; }
     }
 
     /* SECTION COMMONS */
@@ -160,7 +166,10 @@
 <body>
 
 <nav id="nav">
-  <a href="#hero" class="nav-title">Milwaukee Meet <em>&amp;</em> Greet</a>
+  <a href="#hero" class="nav-brand">
+    <img src="../images/logo.png" alt="S &amp; M" class="nav-logo">
+    <span class="nav-title">Milwaukee Meet <em>&amp;</em> Greet</span>
+  </a>
   <ul id="navMenu">
     <li><a href="#details">Details</a></li>
     <li><a href="#gallery">Gallery</a></li>
@@ -177,6 +186,9 @@
     <img src="../images/sunset.jpg" alt="Shivani and Murali">
   </div>
   <div class="hero-content-half">
+    <div class="hero-logo-wrap">
+      <img src="../images/logo.png" alt="S &amp; M">
+    </div>
     <p class="hero-eyebrow">Vinod &amp; Raji invite you to a</p>
     <h1 class="hero-title">Milwaukee <em>Meet &amp; Greet</em></h1>
     <div class="hero-rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
