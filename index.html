@@ -434,7 +434,10 @@
       /* Bottom corner flowers reach ~102px up from the edge, so give the last
          grandparent line enough bottom padding to clear them */
       #invitation .invite { padding:4.6rem 1.4rem 7rem; }
-      #invitation .families { grid-template-columns:1fr; gap:1rem; }
+      /* Switched from grid to flex for the stacked single-column layout — the
+         grid version was leaving large unexplained blank gaps below each
+         family block on mobile Safari, flex stacks them predictably. */
+      #invitation .families { display:flex; flex-direction:column; align-items:stretch; gap:1rem; max-width:none; }
       #invitation .fam-div { display:none; }
       #invitation .sym { width:56px; height:56px; top:130px; } #invitation .sym.om { left:46px; } #invitation .sym.ganesha { right:44px; }
       #invitation .sym.ganesha { width:67px; height:67px; top:124px; right:38px; }
