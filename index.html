@@ -542,11 +542,7 @@
        without breaking the overall blush palette. */
     .sec-divider { padding:4rem 1rem; text-align:center; line-height:0; }
     .sec-divider img { display:block; margin:0 auto; width:min(440px,74%); height:auto; }
-    .d-grn { background:linear-gradient(180deg,var(--blush),#dfe8d6); }
-    .d-blu { background:linear-gradient(180deg,#dfe8d6,#d9e6ee); }
-    .d-vio { background:linear-gradient(180deg,#d9e6ee,#e3dbee); }
-    .d-amb { background:linear-gradient(180deg,#e3dbee,#f2e4c0); }
-    .d-ros { background:linear-gradient(180deg,#f2e4c0,#f6dbe4); }
+    .d-grn, .d-blu, .d-vio, .d-amb, .d-ros { background:linear-gradient(180deg,var(--blush),var(--blush-deep),var(--blush)); }
     @media(max-width:600px) { .sec-divider { padding:3rem 1rem; } .sec-divider img { width:80%; } }
 
     /* ── POLISH: scroll-reveal (flash-free, JS-gated) ── */
