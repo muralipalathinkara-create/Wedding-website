@@ -331,10 +331,7 @@
     #invitation {
       padding:6rem 1.2rem;
       position:relative; z-index:0; overflow:hidden;
-      background:
-        radial-gradient(circle at 50% 0%,rgba(201,168,76,.08),transparent 50%),
-        radial-gradient(circle at 15% 85%,rgba(181,72,90,.10),transparent 45%),
-        radial-gradient(circle at 85% 20%,rgba(181,72,90,.08),transparent 45%);
+      background:transparent;
     }
     #invitation .invite-shell { max-width:780px; margin:0 auto; position:relative; }
     #invitation .invite {
@@ -475,31 +472,7 @@
 
     /* ── COLOR THEME: blush mesh-gradient backgrounds, tinted per section ───── */
     :root { --c-blue:#5b97c9; --c-green:#3f8c39; --c-lav:#9b7fc9; --c-yellow:#cf9f12; --c-pink:#e23d8a; }
-    #gallery {
-      background:
-        radial-gradient(circle at 12% 15%,rgba(159,208,134,.16),transparent 48%),
-        radial-gradient(circle at 88% 82%,rgba(201,168,76,.10),transparent 45%);
-    }
-    #details {
-      background:
-        radial-gradient(circle at 85% 8%,rgba(141,191,232,.16),transparent 48%),
-        radial-gradient(circle at 10% 88%,rgba(201,168,76,.09),transparent 45%);
-    }
-    #travel {
-      background:
-        radial-gradient(circle at 15% 82%,rgba(194,163,230,.17),transparent 48%),
-        radial-gradient(circle at 90% 12%,rgba(181,72,90,.08),transparent 45%);
-    }
-    #registry {
-      background:
-        radial-gradient(circle at 82% 85%,rgba(236,207,107,.18),transparent 48%),
-        radial-gradient(circle at 15% 18%,rgba(201,168,76,.13),transparent 45%);
-    }
-    #rsvp {
-      background:
-        radial-gradient(circle at 50% 0%,rgba(240,168,203,.16),transparent 50%),
-        radial-gradient(circle at 15% 85%,rgba(181,72,90,.10),transparent 45%);
-    }
+    #gallery, #details, #travel, #registry, #rsvp { background:transparent; }
     #gallery  .section-label { color:var(--c-green); }
     #details  .section-label { color:var(--c-blue); }
     #travel   .section-label { color:var(--c-lav); }
@@ -528,9 +501,26 @@
     #registry::after { bottom:-70px; left:-100px; transform:rotate(-10deg) scaleX(-1); }
     #rsvp::after     { top:-40px; left:50%; width:600px; height:465px; transform:translateX(-50%); }
 
+    /* One continuous mesh-gradient painted on body across the FULL document height, so
+       there is no per-section background to create a seam at the dividers — every blob
+       below is positioned as a % of the whole page, landing inside its matching section. */
     body {
       position:relative;
-      background:linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 50%,var(--blush) 100%);
+      background:
+        radial-gradient(500px circle at 50% 11%,rgba(201,168,76,.08),transparent),
+        radial-gradient(450px circle at 15% 23%,rgba(181,72,90,.10),transparent),
+        radial-gradient(450px circle at 85% 14%,rgba(181,72,90,.08),transparent),
+        radial-gradient(450px circle at 12% 30%,rgba(159,208,134,.16),transparent),
+        radial-gradient(420px circle at 88% 37%,rgba(201,168,76,.10),transparent),
+        radial-gradient(400px circle at 85% 43%,rgba(141,191,232,.16),transparent),
+        radial-gradient(380px circle at 10% 48%,rgba(201,168,76,.09),transparent),
+        radial-gradient(650px circle at 15% 70%,rgba(194,163,230,.17),transparent),
+        radial-gradient(600px circle at 90% 55%,rgba(181,72,90,.08),transparent),
+        radial-gradient(400px circle at 82% 84%,rgba(236,207,107,.18),transparent),
+        radial-gradient(380px circle at 15% 79%,rgba(201,168,76,.13),transparent),
+        radial-gradient(450px circle at 50% 88%,rgba(240,168,203,.16),transparent),
+        radial-gradient(400px circle at 15% 95%,rgba(181,72,90,.10),transparent),
+        linear-gradient(160deg,var(--blush) 0%,var(--blush-deep) 50%,var(--blush) 100%);
     }
 
     /* ── FLORAL SECTION DIVIDERS (all screen sizes; main floral element on mobile) ──
