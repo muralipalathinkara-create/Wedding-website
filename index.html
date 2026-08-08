@@ -50,7 +50,7 @@
       --blush-deep: #eed4d6;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
+    html { scroll-behavior:smooth; overflow-x:hidden; }
     body { font-family:'Jost',sans-serif; background:var(--warm-white); color:var(--text-dark); overflow-x:hidden; }
 
     /* ── GATE ─────────────────────────────────── */
@@ -488,24 +488,27 @@
       background-repeat:repeat; background-size:160px 160px;
     }
 
-    /* Oversized faint gold lotus watermark, one per section, varied in placement for rhythm */
-    #gallery::after, #details::after, #travel::after, #registry::after, #rsvp::after {
-      content:''; position:absolute; z-index:-1; pointer-events:none;
-      width:520px; height:403px;
+    /* Oversized faint gold lotus watermarks, anchored to the page itself (not any one
+       section) and centered on each divider, so the artwork bleeds continuously from
+       the section above, through the transition, into the section below instead of
+       being clipped at a section edge. */
+    .bg-lotus {
+      position:absolute; z-index:-1; pointer-events:none;
       background:url('images/lotus-gold.svg') no-repeat center/contain;
       opacity:.10;
     }
-    #gallery::after  { top:-60px; left:-100px; transform:rotate(-15deg); }
-    #details::after  { bottom:-80px; right:-120px; transform:rotate(12deg) scaleX(-1); }
-    #travel::after   { top:-50px; right:-110px; transform:rotate(20deg); }
-    #registry::after { bottom:-70px; left:-100px; transform:rotate(-10deg) scaleX(-1); }
-    #rsvp::after     { top:-40px; left:50%; width:600px; height:465px; transform:translateX(-50%); }
+    .bg-lotus-1 { top:1800px; left:-180px; width:900px; height:698px; transform:rotate(-15deg); }
+    .bg-lotus-2 { top:3020px; right:-160px; width:850px; height:659px; transform:rotate(12deg) scaleX(-1); }
+    .bg-lotus-3 { top:3820px; right:-150px; width:850px; height:659px; transform:rotate(20deg); }
+    .bg-lotus-4 { top:5870px; left:-170px; width:850px; height:659px; transform:rotate(-10deg) scaleX(-1); }
+    .bg-lotus-5 { top:6660px; left:50%; width:1000px; height:775px; transform:translateX(-50%); }
 
     /* One continuous mesh-gradient painted on body across the FULL document height, so
        there is no per-section background to create a seam at the dividers — every blob
        below is positioned as a % of the whole page, landing inside its matching section. */
     body {
       position:relative;
+      overflow-x:hidden;
       background:
         radial-gradient(500px circle at 50% 11%,rgba(201,168,76,.08),transparent),
         radial-gradient(450px circle at 15% 23%,rgba(181,72,90,.10),transparent),
@@ -591,6 +594,11 @@
   <script>document.documentElement.classList.add('has-js');</script>
 </head>
 <body>
+  <div class="bg-lotus bg-lotus-1" aria-hidden="true"></div>
+  <div class="bg-lotus bg-lotus-2" aria-hidden="true"></div>
+  <div class="bg-lotus bg-lotus-3" aria-hidden="true"></div>
+  <div class="bg-lotus bg-lotus-4" aria-hidden="true"></div>
+  <div class="bg-lotus bg-lotus-5" aria-hidden="true"></div>
 
 <!-- GATE -->
 <div id="siteGate">
