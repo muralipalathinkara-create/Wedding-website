@@ -129,7 +129,7 @@
     .hero-content-half::before { content:''; position:absolute; left:0; top:15%; bottom:15%; width:1px; background:linear-gradient(to bottom,transparent,var(--gold-light),transparent); }
 
     /* Hero logo — transparent bg + gold lines blends into the cream gradient */
-    .hero-logo-wrap { width:140px; margin-bottom:1.2rem; opacity:0; animation:fadeUp .8s .2s forwards; }
+    .hero-logo-wrap { width:280px; margin-bottom:1.2rem; opacity:0; animation:fadeUp .8s .2s forwards; }
     .hero-logo-wrap img { width:100%; height:auto; display:block; }
 
     .hero-eyebrow { font-size:.65rem; font-weight:500; letter-spacing:.35em; text-transform:uppercase; color:var(--sage-deep); margin-bottom:.8rem; opacity:0; animation:fadeUp .8s .4s forwards; }
@@ -152,12 +152,12 @@
       .hero-content-half { padding:2.5rem 1.5rem 3rem; align-items:center; text-align:center; }
       .hero-content-half::before { display:none; }
       .hero-rule { justify-content:center; }
-      .hero-logo-wrap { margin:0 auto 1.2rem; }
+      .hero-logo-wrap { width:180px; margin:0 auto 1.2rem; }
     }
 
     /* ── SECTION COMMONS ──────────────────────── */
     .section-label { text-align:center; font-size:.68rem; letter-spacing:.35em; text-transform:uppercase; color:var(--sage-deep); margin-bottom:.8rem; }
-    .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:400; text-align:center; color:var(--text-dark); margin-bottom:.4rem; }
+    .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:400; text-align:center; color:var(--text-dark); margin-bottom:2.6rem; }
     .section-title em { font-style:italic; color:var(--gold-deep); }
     .section-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.05rem; color:var(--text-light); text-align:center; margin-bottom:3rem; }
     .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s ease,transform .65s ease; }
@@ -402,7 +402,7 @@
     #invitation .sym.om { left:100px; } #invitation .sym.ganesha { right:100px; }
     #invitation .sym img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 0 6px rgba(201,168,76,.35)); }
     /* Ganesha ~20% larger than the Om symbol, re-centered so it doesn't drift */
-    #invitation .sym.ganesha { width:106px; height:106px; top:121px; right:90px; }
+    #invitation .sym.ganesha { width:106px; height:106px; top:121px; right:106px; }
     #invitation .crown { text-align:center; position:relative; z-index:1; margin-top:.6rem; }
     #invitation .logo-medallion { width:150px; height:150px; margin:0 auto 1rem; border-radius:50%; background:var(--maroon-black); border:3px solid var(--gold); box-shadow:0 0 0 4px var(--maroon-deep),0 0 0 7px var(--gold-light),0 0 30px rgba(201,168,76,.25); display:flex; align-items:center; justify-content:center; }
     #invitation .logo-medallion img { width:112px; height:auto; display:block; }
@@ -494,7 +494,7 @@
       #invitation .families { display:flex; flex-direction:column; align-items:stretch; gap:1rem; max-width:none; }
       #invitation .fam-div { display:none; }
       #invitation .sym { width:56px; height:56px; top:130px; } #invitation .sym.om { left:34px; } #invitation .sym.ganesha { right:44px; }
-      #invitation .sym.ganesha { width:67px; height:67px; top:124px; right:26px; }
+      #invitation .sym.ganesha { width:67px; height:67px; top:124px; right:36px; }
       #invitation .corner-fl { width:105px; height:113px; }
       #invitation .corner-fl.bl { left:-11px; bottom:-11px; }
       #invitation .corner-fl.br { right:-11px; left:auto; bottom:-11px; }
@@ -532,14 +532,14 @@
     }
 
     /* ── COLOR THEME: blush mesh-gradient backgrounds, tinted per section ───── */
-    :root { --c-blue:#5b97c9; --c-green:#3f8c39; --c-lav:#9b7fc9; --c-yellow:#cf9f12; --c-pink:#e23d8a; }
+    :root { --c-gold:#b5840c; }
     #gallery, #details, #travel, #registry, #rsvp { background:transparent; }
-    #gallery  .section-label { color:var(--c-green); }
-    #details  .section-label { color:var(--c-blue); }
-    #travel   .section-label { color:var(--c-lav); }
-    #registry .section-label { color:var(--c-yellow); }
-    #rsvp     .section-label { color:var(--c-pink); }
-    .event-tag, .travel-card-tag, .gh-tag { color:var(--c-blue) !important; }
+    #gallery  .section-label { color:var(--c-gold); }
+    #details  .section-label { color:var(--c-gold); }
+    #travel   .section-label { color:var(--c-gold); }
+    #registry .section-label { color:var(--c-gold); font-size:1.36rem; }
+    #rsvp     .section-label { color:var(--c-gold); }
+    .event-tag, .travel-card-tag, .gh-tag { color:var(--c-gold) !important; }
 
     /* Paper-grain texture, layered over every mesh-gradient section for warmth/depth */
     #invitation::before, #gallery::before, #details::before, #travel::before, #registry::before, #rsvp::before {
@@ -706,7 +706,7 @@
     <p class="hero-eyebrow">Together forever begins</p>
     <h1 class="hero-names">Shivani<span class="amp">&amp;</span>Murali</h1>
     <div class="hero-rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
-    <p class="hero-date">April 23 &ndash; 24, 2027</p>
+    <p class="hero-date">April 24, 2027</p>
     <p class="hero-venue">Lakes at Lacey &middot; Downers Grove, IL</p>
     <div class="hero-countdown" id="countdown" aria-label="Countdown to the wedding"></div>
     <a href="#details" class="hero-cta">
@@ -768,24 +768,24 @@
         <div class="logo-medallion"><img src="images/logo-mark.png" alt="Shivani &amp; Murali"></div>
       </div>
       <div class="flourish"><span class="line"></span><span class="dot"></span><svg class="leaf" viewBox="0 0 30 18"><path fill="#c9a84c" d="M15 0c4 6 10 7 15 9-5 2-11 3-15 9-4-6-10-7-15-9 5-2 11-3 15-9z"/></svg><span class="dot"></span><span class="line r"></span></div>
-      <p class="lead">It is with hearts full of joy and gratitude that we request your gracious presence at the wedding and celebration of our beloved children</p>
+      <p class="lead">It is with hearts full of joy and gratitude that we request your presence at the wedding celebration of our beloved children</p>
       <div class="couple">
-        <div class="name">Shivani Kumar</div>
+        <div class="name">Shivani</div>
         <span class="amp">&amp;</span>
-        <div class="name">Murali Palathinkara</div>
+        <div class="name">Murali</div>
       </div>
       <div class="families">
         <div class="fam">
           <p class="side">The Bride</p>
-          <p class="role">Beloved daughter of</p>
+          <p class="role">Daughter of</p>
           <p class="ppl">Ritu &amp; Girish Kumar</p>
           <p class="role">Granddaughter of</p>
-          <p class="ppl grands"><span style="font-style:italic">the late</span> Shri Surinder Lal Kumar &amp; <span style="font-style:italic">the late</span> Smt. Raj Kumari<br><span style="font-style:italic">the late</span> Smt. Urmila Sawhney &amp; <span style="font-style:italic">the late</span> Shri SL Sawhney</p>
+          <p class="ppl grands"><span style="font-style:italic">the late</span> Smt. Raj Kumari &amp; <span style="font-style:italic">the late</span> Shri Surinder Lal Kumar<br><span style="font-style:italic">the late</span> Smt. Urmila Sawhney &amp; <span style="font-style:italic">the late</span> Shri Sardari Lal Sawhney</p>
         </div>
         <div class="fam-div"></div>
         <div class="fam">
           <p class="side">The Groom</p>
-          <p class="role">Beloved son of</p>
+          <p class="role">Son of</p>
           <p class="ppl">Raji &amp; Vinod Palathinkara</p>
           <p class="role">Grandson of</p>
           <p class="ppl grands">Leela Devi &amp; PVS Namboodiripad<br><span style="font-style:italic">the late</span> Santhakumari &amp; Kunnath Sreedharan Namboodiri</p>
@@ -802,7 +802,6 @@
 <section id="gallery">
   <p class="section-label reveal-up">A glimpse of us</p>
   <h2 class="section-title reveal-up">Shivani <em>&amp;</em> Murali</h2>
-  <p class="section-sub reveal-up">Captured moments from our journey</p>
   <div class="gallery-grid">
     <div class="gp gp-hayride reveal"><img src="images/hero.jpg" loading="lazy" alt="Fall hayride" onclick="openLightbox(this.src)"></div>
     <div class="gp gp-sunset reveal" style="transition-delay:.1s"><img src="images/sunset.jpg" loading="lazy" alt="Sunset" onclick="openLightbox(this.src)"></div>
@@ -818,7 +817,6 @@
 <section id="details">
   <p class="section-label reveal-up" style="position:relative;z-index:1">Join Us</p>
   <h2 class="section-title reveal-up" style="position:relative;z-index:1">Celebration <em>Events</em></h2>
-  <p class="section-sub reveal-up" style="position:relative;z-index:1">Two days of love, laughter &amp; tradition</p>
   <div class="events-wrapper">
     <div id="fridayBlock" style="display:none">
       <div class="day-header reveal">
@@ -873,7 +871,10 @@
             <p class="event-tag">Evening Celebration</p>
             <h3 class="event-name">Cocktail Hour <em>&amp; Reception</em></h3>
             <p class="event-meta">An elegant evening with cocktails, dinner, dancing, and the joyful beginning of a new chapter together.</p>
-            <span class="event-time-badge">6:00 PM &ndash; Cocktail Hour</span>
+            <div class="event-schedule">
+              <span class="event-schedule-item"><span class="es-label">Cocktail Hour</span><span class="es-time">6:30 PM</span></span>
+              <span class="event-schedule-item"><span class="es-label">Reception</span><span class="es-time">7:30 PM</span></span>
+            </div>
             <p class="event-dresscode">Dress suggestions: Formal Indian or Western</p>
           </div>
         </div>
@@ -919,7 +920,6 @@
   <div class="travel-inner">
     <p class="section-label reveal-up">Getting Here</p>
     <h2 class="section-title reveal-up">Travel &amp; <em>Lodging</em></h2>
-    <p class="section-sub reveal-up">Everything you need to plan your trip</p>
 
     <div class="map-wrap reveal">
       <iframe src="https://www.google.com/maps/d/u/0/embed?mid=15l0FGydnwhopMi3KkIkuM-4x5WiLnjU&ehbc=2E312F&noprof=1" allowfullscreen="" loading="lazy"></iframe>
@@ -1049,7 +1049,6 @@
   <div class="rsvp-inner">
     <p class="section-label reveal-up">Kindly Reply</p>
     <h2 class="section-title reveal-up">RSVP</h2>
-    <p class="section-sub reveal-up">We'd love to celebrate with you</p>
     <div class="rsvp-card reveal-up">
       <form id="rsvpForm" onsubmit="submitRSVP(event)">
         <div class="access-badge">
