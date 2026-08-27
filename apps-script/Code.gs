@@ -7,6 +7,7 @@ var GUESTS_TAB = 'Guests';
 var SUMMARY_TAB = 'RSVP Summary';
 var LOG_TAB = 'RSVP Log';
 var COUPLE = 'Shivani & Murali';
+var SITE_URL = 'https://tinyurl.com/muralishivaniwedding';
 
 function ss_() {
   return SPREADSHEET_ID
@@ -138,9 +139,11 @@ function escapeHtmlEmail_(s) {
 }
 
 function buildEmailText_(recObj, attending) {
+  var returnSection = '\nTo return to the website click on this link and use this password: ' +
+    SITE_URL + '\nPassword: ' + recObj['Password'] + '\n';
   if (!attending) {
-    return 'Thank you for letting us know, ' + recObj['Primary Guest'] + '. We\'ll miss you!\n\n' +
-      'With love,\n' + COUPLE;
+    return 'Thank you for letting us know, ' + recObj['Primary Guest'] + '. We\'ll miss you!\n' +
+      returnSection + '\nWith love,\n' + COUPLE;
   }
   var lines = 'Thank you, ' + recObj['Primary Guest'] + '!\n\n' +
     'We received your RSVP for ' + recObj['Confirmed Count'] + ' guest(s).\n\n' +
@@ -148,7 +151,8 @@ function buildEmailText_(recObj, attending) {
     'Wedding: ' + (recObj['Wedding'] || '—') + '\n' +
     'Reception: ' + (recObj['Reception'] || '—') + '\n';
   if (recObj['Milwaukee']) lines += 'Milwaukee Meet & Greet (Sun, Apr 25): ' + recObj['Milwaukee'] + '\n';
-  return lines + '\nYou can update your RSVP anytime by logging back in.\n\nWith love,\n' + COUPLE;
+  return lines + '\nYou can update your RSVP anytime by logging back in.\n' + returnSection +
+    '\nWith love,\n' + COUPLE;
 }
 
 function emailEventRows_(recObj, fontBody) {
@@ -218,6 +222,19 @@ function buildEmailHtml_(recObj, attending, hasLogo) {
       '<td style="width:54px;height:9px;border-bottom:1px solid #e3d2a0;font-size:0;line-height:0;">&nbsp;</td>' +
     '</tr></table>';
 
+  var returnBox =
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" ' +
+      'style="background:#f7e7e6;border:1px solid #e8d5a3;border-radius:4px;margin-top:22px;">' +
+      '<tr><td style="padding:20px 26px;text-align:center;">' +
+        '<div style="font-family:' + FONT_BODY + ';font-size:16px;line-height:1.6;color:#3a3a3a;">' +
+          'To return to the website click on ' +
+          '<a href="' + SITE_URL + '" style="color:#7a1320;font-weight:600;text-decoration:underline;">this link</a>' +
+          ' and use this password:</div>' +
+        '<div style="font-family:' + FONT_LABEL + ';font-size:18px;letter-spacing:3px;color:#7a1320;' +
+          'font-weight:700;padding-top:10px;">' + escapeHtmlEmail_(recObj['Password']) + '</div>' +
+      '</td></tr>' +
+    '</table>';
+
   return '' +
   '<!DOCTYPE html><html><head><meta charset="utf-8">' +
   '<meta name="viewport" content="width=device-width,initial-scale=1"><style>' +
@@ -245,7 +262,7 @@ function buildEmailHtml_(recObj, attending, hasLogo) {
               'April 23 &ndash; 24, 2027 &middot; Downers Grove, Illinois</div>' +
           '</td></tr>' +
           '<tr><td style="padding:22px 52px 6px;">' + diamond + '</td></tr>' +
-          '<tr><td class="cardpad" style="padding:10px 52px 40px;">' + body + '</td></tr>' +
+          '<tr><td class="cardpad" style="padding:10px 52px 40px;">' + body + returnBox + '</td></tr>' +
           '<tr><td style="background:#3d5c3a;padding:28px 52px;text-align:center;">' +
             '<div style="font-family:' + FONT_BODY + ';font-style:italic;font-size:15px;color:#dfe6da;letter-spacing:1px;">with love &amp; gratitude</div>' +
             '<div style="font-family:' + FONT_HEAD + ';font-size:22px;color:#ffffff;padding-top:6px;">' +
