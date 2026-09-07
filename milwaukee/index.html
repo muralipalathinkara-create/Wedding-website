@@ -57,7 +57,7 @@
     .hero-logo-wrap { width:260px; margin-bottom:1.3rem; }
     .hero-logo-wrap img { width:100%; height:auto; display:block; }
     .hero-eyebrow { font-size:.65rem; font-weight:500; letter-spacing:.35em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:.8rem; }
-    .hero-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.4rem); font-weight:400; line-height:1.15; color:var(--text-dark); }
+    .hero-title { font-family:'Playfair Display',serif; font-size:clamp(1.7rem,3.4vw,2.7rem); font-weight:400; line-height:1.22; color:var(--text-dark); }
     .hero-title em { font-style:italic; color:var(--blue-deep); }
     .hero-rule { display:flex; align-items:center; gap:.8rem; margin:1.3rem 0 1.1rem; }
     .rule-line { width:50px; height:1px; background:var(--blue); }
@@ -106,6 +106,16 @@
     .gp { border-radius:6px; overflow:hidden; position:relative; cursor:zoom-in; aspect-ratio:4/3; }
     .gp img { width:100%; height:100%; object-fit:cover; transition:transform .55s ease; display:block; }
     .gp:hover img { transform:scale(1.05); }
+
+    /* REGISTRY */
+    #registry { padding:5.5rem 2rem; background:var(--gold-pale); }
+    .registry-inner { max-width:660px; margin:2.5rem auto 0; text-align:center; }
+    .registry-card { padding:3rem 3.2rem; background:linear-gradient(135deg,var(--blue-pale),var(--gold-pale)); border-radius:8px; border:1px solid rgba(91,151,201,.2); box-shadow:0 8px 32px rgba(46,111,176,.08); position:relative; overflow:hidden; }
+    .registry-card::before { content:'"'; position:absolute; top:-.5rem; left:1.5rem; font-family:'Playfair Display',serif; font-size:8rem; line-height:1; color:rgba(91,151,201,.14); pointer-events:none; }
+    .registry-quote { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:300; font-style:italic; line-height:1.85; color:var(--text-dark); position:relative; z-index:1; }
+    .registry-quote strong { font-weight:500; color:var(--blue-deep); }
+    .registry-hearts { margin-top:1.5rem; color:var(--gold-deep); font-size:1.1rem; letter-spacing:.3rem; }
+    @media(max-width:600px) { .registry-card { padding:2.2rem 1.6rem; } }
 
     /* RSVP */
     #rsvp { padding:6rem 2rem; background:var(--warm-white); }
@@ -173,6 +183,7 @@
   <ul id="navMenu">
     <li><a href="#details">Details</a></li>
     <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#registry">Registry</a></li>
     <li><a href="#rsvp">RSVP</a></li>
   </ul>
   <div class="hamburger" onclick="document.getElementById('navMenu').classList.toggle('open')">
@@ -189,13 +200,11 @@
     <div class="hero-logo-wrap">
       <img src="../images/logo.png" alt="S &amp; M">
     </div>
-    <p class="hero-eyebrow">Vinod &amp; Raji invite you to a</p>
-    <h1 class="hero-title">Milwaukee <em>Meet &amp; Greet</em></h1>
+    <p class="hero-eyebrow">You're Invited &middot; Milwaukee Meet &amp; Greet</p>
+    <h1 class="hero-title">Vinod &amp; Raji invite you to meet &amp; greet <em>Murali &amp; Shivani</em></h1>
     <div class="hero-rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
     <p class="hero-date">Sunday, April 25, 2027 &middot; 5:30 &ndash; 8:00 PM</p>
     <p class="hero-venue">Crowne Plaza Milwaukee Airport</p>
-    <p class="hero-note">A relaxed afternoon for our Milwaukee-area family and friends to celebrate together
-      — casual attire, good food, and time to catch up. No formal ceremony, just a fun get-together!</p>
     <a href="#rsvp" class="hero-cta">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
       RSVP
@@ -250,6 +259,22 @@
     <div class="gp reveal"><img src="../images/hero.jpg" loading="lazy" alt="Shivani and Murali" onclick="openLightbox(this.src)"></div>
     <div class="gp reveal" style="transition-delay:.1s"><img src="../images/proposal.jpg" loading="lazy" alt="Proposal" onclick="openLightbox(this.src)"></div>
     <div class="gp reveal" style="transition-delay:.2s"><img src="../images/seated.jpg" loading="lazy" alt="By the lake" onclick="openLightbox(this.src)"></div>
+  </div>
+</section>
+
+<!-- REGISTRY -->
+<section id="registry">
+  <p class="section-label reveal">Registry</p>
+  <h2 class="section-title reveal">A <em>Gift</em> Note</h2>
+  <div class="registry-inner">
+    <div class="registry-card reveal">
+      <p class="registry-quote">
+        We do not have a registry and we mean it sincerely when we say
+        <strong>your presence is the greatest gift of all.</strong>
+        Having you by our side as we begin this new chapter is everything we could ever ask for. We know how wonderfully generous you are and that alone fills our hearts.
+      </p>
+      <div class="registry-hearts">&#9829; &nbsp; &#9829; &nbsp; &#9829;</div>
+    </div>
   </div>
 </section>
 
