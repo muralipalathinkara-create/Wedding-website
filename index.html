@@ -118,7 +118,7 @@
     /* ── HERO ─────────────────────────────────── */
     #hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; }
     .hero-photo-half { position:relative; overflow:hidden; }
-    .hero-photo-half img { width:100%; height:100%; object-fit:cover; object-position:center 15%; }
+    .hero-photo-half img { width:100%; height:100%; object-fit:cover; object-position:center 100%; }
     .hero-photo-half::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,transparent 50%,rgba(253,252,248,.5)); }
     .hero-content-half {
       display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
@@ -147,7 +147,7 @@
     @media(max-width:768px) {
       #hero { grid-template-columns:1fr; min-height:auto; }
       .hero-photo-half { height:75vw; max-height:420px; }
-      .hero-photo-half img { object-position:center 10%; }
+      .hero-photo-half img { object-position:center 100%; }
       .hero-photo-half::after { background:linear-gradient(to bottom,transparent 35%,rgba(253,252,248,.8)); }
       .hero-content-half { padding:2.5rem 1.5rem 3rem; align-items:center; text-align:center; }
       .hero-content-half::before { display:none; }
@@ -172,7 +172,7 @@
     .gp:hover { box-shadow:0 20px 46px rgba(61,92,58,.18); transform:translateY(-4px); }
     .gp:hover img { transform:scale(1.06); filter:saturate(1.06) contrast(1.03); }
     .gp:hover::after { box-shadow:inset 0 0 0 2px rgba(201,168,76,.55); }
-    .gp-hero       { grid-column:1/3; grid-row:1/2; } .gp-hero img       { object-position:center 24%; }
+    .gp-hero       { grid-column:1/3; grid-row:1/2; } .gp-hero img       { object-position:center 95%; }
     .gp-seated     { grid-column:1/3; grid-row:2/3; } .gp-seated img     { object-position:center 88%; }
     .gp-sunset     { grid-column:3/4; grid-row:1/3; } .gp-sunset img     { object-position:center 30%; }
     .gp-riverside  { grid-column:4/5; grid-row:1/3; } .gp-riverside img  { object-position:center 85%; }
