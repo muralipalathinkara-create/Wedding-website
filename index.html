@@ -195,6 +195,8 @@
       .gallery-grid { grid-template-columns:1fr; }
       .gp-hero,.gp-seated,.gp-atrium,.gp-bridge { grid-column:auto; }
       .gp { aspect-ratio:4/5; }
+      /* Keep the phone version short: show a curated 6 of the 14 instead of the full set. */
+      .gp-riverside,.gp-ring,.gp-walk,.gp-stairskiss,.gp-stairsdown,.gp-handhold,.gp-bridge,.gp-stairsup { display:none; }
     }
 
     /* ── EVENTS ───────────────────────────────── */
@@ -886,7 +888,7 @@
         </div>
         <div id="receptionCard" class="event-card reveal" style="display:none;transition-delay:.18s">
           <div class="event-card-photo">
-            <img src="images/event-reception.jpg" loading="lazy" alt="Reception">
+            <img src="images/event-reception.jpg" loading="lazy" alt="Reception" style="object-position:center 65%">
             <div class="event-card-photo-overlay"></div>
           </div>
           <div class="event-card-body">
