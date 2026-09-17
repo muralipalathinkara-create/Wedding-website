@@ -183,17 +183,35 @@
 
   function lbPad2(n) { return n < 10 ? '0' + n : '' + n; }
 
+  // Extra photos we chose but don't show in the teaser grid (keeps the page fast to load).
+  // They're only fetched once someone actually opens the lightbox and scrolls this far.
+  var lbExtraPhotos = [
+    { src: 'images/gallery-riverside.jpg',   alt: 'By the river' },
+    { src: 'images/gallery-walk.jpg',        alt: 'Along the riverwalk' },
+    { src: 'images/gallery-stairs-kiss.jpg', alt: 'A quiet moment' },
+    { src: 'images/gallery-stairs-down.jpg', alt: 'Down the staircase' },
+    { src: 'images/gallery-handhold.jpg',    alt: 'Holding hands' },
+    { src: 'images/gallery-bridge.jpg',      alt: 'Through the gallery doorway' },
+    { src: 'images/gallery-stairs-up.jpg',   alt: 'Among the museum columns' }
+  ];
+
   function lbBuild() {
     if (!lbTrack) return;
     var imgs = Array.prototype.slice.call(document.querySelectorAll('.gallery-grid img'));
+    var teaserSrcs = imgs.map(function (im) { return im.src; });
+    var sources = imgs.map(function (im) { return { src: im.src, alt: im.getAttribute('alt') || '' }; });
+    lbExtraPhotos.forEach(function (p) {
+      var resolved = new URL(p.src, window.location.href).href;
+      if (teaserSrcs.indexOf(resolved) === -1) sources.push({ src: p.src, alt: p.alt });
+    });
     lbTrack.innerHTML = '';
     if (lbObserver) lbObserver.disconnect();
-    lbSlides = imgs.map(function (im) {
+    lbSlides = sources.map(function (s) {
       var slide = document.createElement('div');
       slide.className = 'lb-slide';
       var img = document.createElement('img');
-      img.src = im.src; // resolved URL, matches what onclick="openLightbox(this.src)" passes
-      img.alt = im.getAttribute('alt') || '';
+      img.src = s.src; // resolved URL, matches what onclick="openLightbox(this.src)" passes
+      img.alt = s.alt;
       img.addEventListener('click', function (e) { e.stopPropagation(); });
       slide.appendChild(img);
       lbTrack.appendChild(slide);

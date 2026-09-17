@@ -165,38 +165,29 @@
 
     /* ── GALLERY ──────────────────────────────── */
     #gallery { padding:5.5rem 2rem; background:var(--cream); position:relative; z-index:0; overflow:hidden; }
-    .gallery-grid { display:grid; grid-template-columns:repeat(6,1fr); grid-auto-rows:180px; gap:1.15rem; max-width:1220px; margin:0 auto; }
+    .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:210px; gap:1.15rem; max-width:1000px; margin:0 auto; }
     .gp { border-radius:11px; overflow:hidden; position:relative; cursor:zoom-in; box-shadow:0 6px 22px rgba(61,92,58,.07); transition:box-shadow .55s cubic-bezier(.16,.8,.24,1), transform .55s cubic-bezier(.16,.8,.24,1); }
     .gp::after { content:''; position:absolute; inset:0; border-radius:inherit; box-shadow:inset 0 0 0 0 rgba(201,168,76,0); transition:box-shadow .5s ease; pointer-events:none; }
     .gp img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.93) contrast(1.02); transition:transform .8s cubic-bezier(.16,.8,.24,1), filter .6s ease; }
     .gp:hover { box-shadow:0 20px 46px rgba(61,92,58,.18); transform:translateY(-4px); }
     .gp:hover img { transform:scale(1.06); filter:saturate(1.06) contrast(1.03); }
     .gp:hover::after { box-shadow:inset 0 0 0 2px rgba(201,168,76,.55); }
-    .gp-hero       { grid-column:1/3; grid-row:1/2; } .gp-hero img       { object-position:center 95%; }
-    .gp-seated     { grid-column:1/3; grid-row:2/3; } .gp-seated img     { object-position:center 88%; }
-    .gp-sunset     { grid-column:3/4; grid-row:1/3; } .gp-sunset img     { object-position:center 30%; }
-    .gp-riverside  { grid-column:4/5; grid-row:1/3; } .gp-riverside img  { object-position:center 85%; }
-    .gp-ring       { grid-column:5/6; grid-row:1/2; } .gp-ring img       { object-position:center 50%; }
-    .gp-walk       { grid-column:6/7; grid-row:1/2; } .gp-walk img       { object-position:center 84%; }
-    .gp-stairskiss { grid-column:5/6; grid-row:2/3; } .gp-stairskiss img { object-position:center 30%; }
-    .gp-stairsdown { grid-column:6/7; grid-row:2/3; } .gp-stairsdown img { object-position:center 25%; }
-    .gp-proposal   { grid-column:1/2; grid-row:3/5; } .gp-proposal img   { object-position:center 38%; }
-    .gp-handhold   { grid-column:2/3; grid-row:3/5; } .gp-handhold img   { object-position:center 28%; }
-    .gp-atrium     { grid-column:3/5; grid-row:3/4; } .gp-atrium img     { object-position:center 65%; }
-    .gp-bridge     { grid-column:3/5; grid-row:4/5; } .gp-bridge img     { object-position:center 40%; }
-    .gp-columns    { grid-column:5/6; grid-row:3/5; } .gp-columns img    { object-position:center 25%; }
-    .gp-stairsup   { grid-column:6/7; grid-row:3/5; } .gp-stairsup img   { object-position:center 22%; }
+    .gp-hero     { grid-column:1/3; grid-row:1/3; } .gp-hero img     { object-position:center 50%; }
+    .gp-sunset   { grid-column:3/4; grid-row:1/3; } .gp-sunset img   { object-position:center 30%; }
+    .gp-ring     { grid-column:4/5; grid-row:1/2; } .gp-ring img     { object-position:center 50%; }
+    .gp-walk     { grid-column:4/5; grid-row:2/3; } .gp-walk img     { object-position:center 85%; }
+    .gp-atrium   { grid-column:1/3; grid-row:3/4; } .gp-atrium img   { object-position:center 65%; }
+    .gp-proposal { grid-column:3/4; grid-row:3/4; } .gp-proposal img { object-position:center 90%; }
+    .gp-columns  { grid-column:4/5; grid-row:3/4; } .gp-columns img  { object-position:center 25%; }
     @media(max-width:900px) {
       .gallery-grid { grid-template-columns:1fr 1fr; grid-auto-rows:auto; gap:.75rem; }
       .gp { grid-column:auto; grid-row:auto; aspect-ratio:3/4; }
-      .gp-hero,.gp-seated,.gp-atrium,.gp-bridge { grid-column:span 2; aspect-ratio:16/10; }
+      .gp-hero,.gp-atrium { grid-column:span 2; aspect-ratio:16/10; }
     }
     @media(max-width:520px) {
       .gallery-grid { grid-template-columns:1fr; }
-      .gp-hero,.gp-seated,.gp-atrium,.gp-bridge { grid-column:auto; }
+      .gp-hero,.gp-atrium { grid-column:auto; }
       .gp { aspect-ratio:4/5; }
-      /* Keep the phone version short: show a curated 6 of the 14 instead of the full set. */
-      .gp-riverside,.gp-ring,.gp-seated,.gp-stairskiss,.gp-stairsdown,.gp-handhold,.gp-bridge,.gp-stairsup { display:none; }
     }
 
     /* ── EVENTS ───────────────────────────────── */
@@ -818,20 +809,13 @@
   <p class="section-label reveal-up">A glimpse of us</p>
   <h2 class="section-title reveal-up">Shivani <em>&amp;</em> Murali</h2>
   <div class="gallery-grid">
-    <div class="gp gp-hero reveal"><img src="images/gallery-hero-tile.jpg" loading="lazy" alt="A close embrace downtown" style="object-position:center 50%" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-sunset reveal" style="transition-delay:.04s"><img src="images/sunset.jpg" loading="lazy" alt="Under the bridge" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-riverside reveal" style="transition-delay:.08s"><img src="images/gallery-riverside.jpg" loading="lazy" alt="By the river" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-hero reveal"><img src="images/gallery-hero-tile.jpg" loading="lazy" alt="A close embrace downtown" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-sunset reveal" style="transition-delay:.06s"><img src="images/sunset.jpg" loading="lazy" alt="Under the bridge" onclick="openLightbox(this.src)"></div>
     <div class="gp gp-ring reveal" style="transition-delay:.12s"><img src="images/ring.jpg" loading="lazy" alt="Engagement" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-walk reveal" style="transition-delay:.16s"><img src="images/seated.jpg" loading="lazy" alt="Coffee by the river" style="object-position:center 85%" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-seated reveal" style="transition-delay:.2s"><img src="images/gallery-walk.jpg" loading="lazy" alt="Along the riverwalk" style="object-position:center 82%" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-stairskiss reveal" style="transition-delay:.24s"><img src="images/gallery-stairs-kiss.jpg" loading="lazy" alt="A quiet moment" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-stairsdown reveal" style="transition-delay:.28s"><img src="images/gallery-stairs-down.jpg" loading="lazy" alt="Down the staircase" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-proposal reveal" style="transition-delay:.32s"><img src="images/proposal.jpg" loading="lazy" alt="On the staircase" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-handhold reveal" style="transition-delay:.36s"><img src="images/gallery-handhold.jpg" loading="lazy" alt="Holding hands" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-atrium reveal" style="transition-delay:.4s"><img src="images/gallery-atrium.jpg" loading="lazy" alt="At the museum" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-bridge reveal" style="transition-delay:.44s"><img src="images/gallery-bridge.jpg" loading="lazy" alt="Beneath the bridge" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-columns reveal" style="transition-delay:.48s"><img src="images/gallery-columns.jpg" loading="lazy" alt="By the columns" onclick="openLightbox(this.src)"></div>
-    <div class="gp gp-stairsup reveal" style="transition-delay:.52s"><img src="images/gallery-stairs-up.jpg" loading="lazy" alt="Up the stairs" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-walk reveal" style="transition-delay:.18s"><img src="images/seated.jpg" loading="lazy" alt="Coffee by the river" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-atrium reveal" style="transition-delay:.24s"><img src="images/gallery-atrium.jpg" loading="lazy" alt="At the museum" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-proposal reveal" style="transition-delay:.3s"><img src="images/proposal.jpg" loading="lazy" alt="On the staircase" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-columns reveal" style="transition-delay:.36s"><img src="images/gallery-columns.jpg" loading="lazy" alt="By the columns" onclick="openLightbox(this.src)"></div>
   </div>
 </section>
 
@@ -879,7 +863,7 @@
             <div class="event-schedule">
               <span class="event-schedule-item"><span class="es-label">Baraat</span><span class="es-time">10:00 AM</span></span>
               <span class="event-schedule-item"><span class="es-label">Wedding Ceremony</span><span class="es-time">11:00 AM</span></span>
-              <span class="event-schedule-item"><span class="es-label">Lunch</span><span class="es-time">12:00 PM</span></span>
+              <span class="event-schedule-item"><span class="es-label">Lunch</span><span class="es-time">12:15 PM</span></span>
               <span class="event-schedule-item"><span class="es-label">Vidaai</span><span class="es-time">1:45 PM</span></span>
               <span class="event-schedule-item"><span class="es-label">Kudiveppu</span><span class="es-time">2:00 PM</span></span>
             </div>
@@ -1035,20 +1019,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="getting-here reveal">
-      <div>
-        <p class="gh-tag">The Venue</p>
-        <h3>Lakes at Lacey</h3>
-        <p><strong>3500 Lacey Rd, Downers Grove, IL 60515</strong><br>
-        Free, covered parking is available in the garage.<br>
-        Rideshare (Uber / Lyft) recommended for evening events.</p>
-      </div>
-      <a href="https://maps.google.com/?q=3500+Lacey+Rd+Downers+Grove+IL+60515" target="_blank" class="btn-directions">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        Get Directions
-      </a>
     </div>
 
   </div>
