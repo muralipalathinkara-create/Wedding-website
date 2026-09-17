@@ -197,12 +197,6 @@
       img.alt = im.getAttribute('alt') || '';
       img.addEventListener('click', function (e) { e.stopPropagation(); });
       slide.appendChild(img);
-      if (img.alt) {
-        var cap = document.createElement('p');
-        cap.className = 'lb-caption';
-        cap.textContent = img.alt;
-        slide.appendChild(cap);
-      }
       lbTrack.appendChild(slide);
       return slide;
     });
