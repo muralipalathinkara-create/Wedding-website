@@ -102,10 +102,28 @@
 
     /* GALLERY */
     #gallery { padding:5.5rem 2rem; background:var(--cream); }
-    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; max-width:1100px; margin:0 auto; }
-    .gp { border-radius:6px; overflow:hidden; position:relative; cursor:zoom-in; aspect-ratio:4/3; }
+    .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:210px; gap:1.15rem; max-width:1000px; margin:0 auto; }
+    .gp { border-radius:6px; overflow:hidden; position:relative; cursor:zoom-in; box-shadow:0 6px 22px rgba(46,111,176,.08); transition:box-shadow .4s ease, transform .4s ease; }
     .gp img { width:100%; height:100%; object-fit:cover; transition:transform .55s ease; display:block; }
+    .gp:hover { box-shadow:0 16px 38px rgba(46,111,176,.16); transform:translateY(-3px); }
     .gp:hover img { transform:scale(1.05); }
+    .gp-hero     { grid-column:1/3; grid-row:1/3; } .gp-hero img     { object-position:center 50%; }
+    .gp-sunset   { grid-column:3/4; grid-row:1/3; } .gp-sunset img   { object-position:center 30%; }
+    .gp-ring     { grid-column:4/5; grid-row:1/2; } .gp-ring img     { object-position:center 50%; }
+    .gp-walk     { grid-column:4/5; grid-row:2/3; } .gp-walk img     { object-position:center 85%; }
+    .gp-atrium   { grid-column:1/3; grid-row:3/4; } .gp-atrium img   { object-position:center 65%; }
+    .gp-proposal { grid-column:3/4; grid-row:3/4; } .gp-proposal img { object-position:center 90%; }
+    .gp-columns  { grid-column:4/5; grid-row:3/4; } .gp-columns img  { object-position:center 25%; }
+    @media(max-width:900px) {
+      .gallery-grid { grid-template-columns:1fr 1fr; grid-auto-rows:auto; gap:.75rem; }
+      .gp { grid-column:auto; grid-row:auto; aspect-ratio:3/4; }
+      .gp-hero,.gp-atrium { grid-column:span 2; aspect-ratio:16/10; }
+    }
+    @media(max-width:520px) {
+      .gallery-grid { grid-template-columns:1fr; }
+      .gp-hero,.gp-atrium { grid-column:auto; }
+      .gp { aspect-ratio:4/5; }
+    }
 
     /* REGISTRY */
     #registry { padding:5.5rem 2rem; background:var(--gold-pale); }
@@ -203,7 +221,7 @@
     <p class="hero-eyebrow">You're Invited &middot; Milwaukee Meet &amp; Greet</p>
     <h1 class="hero-title">Vinod &amp; Raji invite you to meet &amp; greet <em>Murali &amp; Shivani</em></h1>
     <div class="hero-rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
-    <p class="hero-date">Sunday, April 25, 2027 &middot; 5:30 &ndash; 8:00 PM</p>
+    <p class="hero-date">Sunday, April 25, 2027 &middot; 5:30 &ndash; 8:30 PM</p>
     <p class="hero-venue">Crowne Plaza Milwaukee Airport</p>
     <a href="#rsvp" class="hero-cta">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
@@ -222,7 +240,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       <p class="info-card-tag">When</p>
       <p class="info-card-main">Sunday, April 25, 2027</p>
-      <p class="info-card-sub">5:30 &ndash; 8:00 PM</p>
+      <p class="info-card-sub">5:30 &ndash; 8:30 PM</p>
     </div>
     <div class="info-card reveal" style="transition-delay:.1s">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -254,11 +272,14 @@
 <section id="gallery">
   <p class="section-label reveal">A Few Favorites</p>
   <h2 class="section-title reveal">Shivani <em>&amp;</em> Murali</h2>
-  <p class="section-sub reveal">Photos will be added here as we have more to share</p>
   <div class="gallery-grid">
-    <div class="gp reveal"><img src="../images/hero.jpg" loading="lazy" alt="Shivani and Murali" onclick="openLightbox(this.src)"></div>
-    <div class="gp reveal" style="transition-delay:.1s"><img src="../images/proposal.jpg" loading="lazy" alt="Proposal" onclick="openLightbox(this.src)"></div>
-    <div class="gp reveal" style="transition-delay:.2s"><img src="../images/seated.jpg" loading="lazy" alt="By the lake" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-hero reveal"><img src="../images/gallery-hero-tile.jpg" loading="lazy" alt="A close embrace downtown" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-sunset reveal" style="transition-delay:.06s"><img src="../images/sunset.jpg" loading="lazy" alt="Under the bridge" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-ring reveal" style="transition-delay:.12s"><img src="../images/ring.jpg" loading="lazy" alt="Engagement" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-walk reveal" style="transition-delay:.18s"><img src="../images/seated.jpg" loading="lazy" alt="Coffee by the river" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-atrium reveal" style="transition-delay:.24s"><img src="../images/gallery-atrium.jpg" loading="lazy" alt="At the museum" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-proposal reveal" style="transition-delay:.3s"><img src="../images/proposal.jpg" loading="lazy" alt="On the staircase" onclick="openLightbox(this.src)"></div>
+    <div class="gp gp-columns reveal" style="transition-delay:.36s"><img src="../images/gallery-columns.jpg" loading="lazy" alt="By the columns" onclick="openLightbox(this.src)"></div>
   </div>
 </section>
 
