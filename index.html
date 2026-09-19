@@ -513,11 +513,15 @@
       #invitation .ornate-corner { width:32px; height:32px; }
       /* A single stretched vine reads as an odd, distorted smear once the family
          block stacks to one column and the card gets much taller — so on mobile
-         only, tile the same artwork as a repeating pattern down the side instead. */
+         only, tile the same artwork as a repeating pattern down the side instead.
+         Exactly 7 tiles (7 x 102px = 714px), vertically centered in the original
+         top:150/bottom:183 band, so every vine is a full copy — never a partial
+         one clipped top or bottom, however tall a given guest's family list makes
+         the card. */
       #invitation .invite-side-vine {
-        width:30px; top:150px; bottom:183px;
+        width:30px; height:714px; top:calc(50% - 373.5px); bottom:auto;
         background-image:url('images/invite-vine-side.svg');
-        background-repeat:repeat-y; background-size:30px 102px; background-position:bottom center;
+        background-repeat:repeat-y; background-size:30px 102px; background-position:top center;
         opacity:.75;
       }
       #invitation .invite-side-vine img { display:none; }
@@ -528,7 +532,7 @@
       #invitation .invite-side-vine::after {
         -webkit-mask-size:30px 102px; mask-size:30px 102px;
         -webkit-mask-repeat:repeat-y; mask-repeat:repeat-y;
-        -webkit-mask-position:bottom center; mask-position:bottom center;
+        -webkit-mask-position:top center; mask-position:top center;
       }
       /* Smaller couple names + grandparent lines so they don't run under the side vines */
       #invitation .couple .name { font-size:1.45rem; }
