@@ -237,7 +237,9 @@ function buildEmailHtml_(recObj, attending, hasLogo) {
 
   return '' +
   '<!DOCTYPE html><html><head><meta charset="utf-8">' +
-  '<meta name="viewport" content="width=device-width,initial-scale=1"><style>' +
+  '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+  '<meta name="format-detection" content="telephone=no,address=no,email=no,date=no">' +
+  '<style>' +
     "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');" +
     'body{margin:0;padding:0;background:#f3efe6;}' +
     '@media only screen and (max-width:620px){.cardpad{padding-left:26px!important;padding-right:26px!important;}}' +
@@ -268,7 +270,9 @@ function buildEmailHtml_(recObj, attending, hasLogo) {
             '<div style="font-family:' + FONT_HEAD + ';font-size:22px;color:#ffffff;padding-top:6px;">' +
               'Shivani <span style="font-style:italic;color:#e8d5a3;">&amp;</span> Murali</div>' +
             '<div style="font-family:' + FONT_LABEL + ';font-size:10px;color:#aebaa7;letter-spacing:1.5px;padding-top:14px;">' +
-              'LAKES AT LACEY &middot; 3500 LACEY RD, DOWNERS GROVE, IL</div>' +
+              '<a href="https://maps.google.com/?q=3500+Lacey+Rd+Downers+Grove+IL+60515" ' +
+                'style="color:#ffffff;text-decoration:none;" x-apple-data-detectors="false">' +
+                'LAKES AT LACEY &middot; 3500 LACEY RD, DOWNERS GROVE, IL</a></div>' +
           '</td></tr>' +
         '</table>' +
       '</td></tr>' +
