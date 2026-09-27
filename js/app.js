@@ -186,13 +186,13 @@
   // Extra photos we chose but don't show in the teaser grid (keeps the page fast to load).
   // They're only fetched once someone actually opens the lightbox and scrolls this far.
   var lbExtraPhotos = [
-    { src: 'images/gallery-riverside.jpg',   alt: 'By the river' },
-    { src: 'images/gallery-walk.jpg',        alt: 'Along the riverwalk' },
-    { src: 'images/gallery-stairs-kiss.jpg', alt: 'A quiet moment' },
-    { src: 'images/gallery-stairs-down.jpg', alt: 'Down the staircase' },
-    { src: 'images/gallery-handhold.jpg',    alt: 'Holding hands' },
-    { src: 'images/gallery-bridge.jpg',      alt: 'Through the gallery doorway' },
-    { src: 'images/gallery-stairs-up.jpg',   alt: 'Among the museum columns' }
+    { src: 'images/gallery-riverside.jpg',    alt: 'By the river' },
+    { src: 'images/gallery-embrace2.jpg',     alt: 'By the bridge' },
+    { src: 'images/gallery-stairs-kiss.jpg',  alt: 'A quiet moment' },
+    { src: 'images/gallery-bench-kiss.jpg',   alt: 'A quiet moment at the museum' },
+    { src: 'images/gallery-handhold.jpg',     alt: 'Holding hands' },
+    { src: 'images/gallery-bridge.jpg',       alt: 'Through the gallery doorway' },
+    { src: 'images/gallery-doorway-bw.jpg',   alt: 'Among the museum columns' }
   ];
 
   function lbBuild() {
