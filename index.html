@@ -163,6 +163,13 @@
     .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s ease,transform .65s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
 
+    /* photo credits */
+    .photo-credit { max-width:1000px; margin:2.2rem auto 0; text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.02rem; color:var(--text-light); line-height:1.9; }
+    .photo-credit .pc-sep { display:inline-block; margin:0 .9rem; color:var(--gold); font-style:normal; }
+    .photo-credit a { color:var(--gold-deep); text-decoration:none; border-bottom:1px solid rgba(201,168,76,.45); transition:color .3s, border-color .3s; }
+    .photo-credit a:hover { color:var(--text-dark); border-color:var(--gold-deep); }
+    @media(max-width:600px) { .photo-credit .pc-sep { display:block; height:0; overflow:hidden; margin:0; } }
+
     /* ── GALLERY ──────────────────────────────── */
     #gallery { padding:5.5rem 2rem; background:var(--cream); position:relative; z-index:0; overflow:hidden; }
     .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:210px; gap:1.15rem; max-width:1000px; margin:0 auto; }
@@ -821,6 +828,11 @@
     <div class="gp gp-proposal reveal" style="transition-delay:.3s"><img src="images/proposal-v2.jpg" loading="lazy" alt="The proposal" onclick="openLightbox(this.src)"></div>
     <div class="gp gp-columns reveal" style="transition-delay:.36s"><img src="images/gallery-columns.jpg" loading="lazy" alt="By the columns" onclick="openLightbox(this.src)"></div>
   </div>
+  <p class="photo-credit reveal">
+    Engagement photos by <a href="https://www.instagram.com/graydayphoto/" target="_blank" rel="noopener">Gray Day Photo</a>
+    <span class="pc-sep">&#9670;</span>
+    Proposal photos by <a href="https://www.instagram.com/shannontonphoto/" target="_blank" rel="noopener">Shannon Ton</a>
+  </p>
 </section>
 
 <div class="sec-divider d-blu"><img src="images/divider-blue.svg" alt=""></div>
