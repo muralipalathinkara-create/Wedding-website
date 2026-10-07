@@ -6,6 +6,7 @@ var SPREADSHEET_ID = '';          // empty = container-bound active spreadsheet
 var GUESTS_TAB = 'Guests';
 var SUMMARY_TAB = 'RSVP Summary';
 var LOG_TAB = 'RSVP Log';
+var VIEW_ONLY_CODE = 'guest';   // can view the site but not RSVP
 var COUPLE = 'Shivani & Murali';
 var SITE_URL = 'https://tinyurl.com/muralishivaniwedding';
 
@@ -66,6 +67,7 @@ function handleRsvp_(data) {
     var gv = ss_().getSheetByName(GUESTS_TAB).getDataRange().getValues();
     var res = findGuest(gv.slice(1), gv[0], data.password);
     if (res.status !== 'ok') return jsonOut_({ ok: false, error: 'invalid guest' });
+    if (norm(res.record.password).toLowerCase() === VIEW_ONLY_CODE) return jsonOut_({ ok: false, error: 'view-only code' });
     var valid = validateRsvp(data, res.record);
     if (!valid.ok) return jsonOut_({ ok: false, error: valid.errors.join('; ') });
     var recObj = buildRsvpRecord(data, res.record, new Date());

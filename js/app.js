@@ -5,6 +5,9 @@
   var L = window.RSVPLogic;
   var guest = null;        // logged-in guest record from the server
   var prefill = null;      // prefill state from an existing RSVP (or empty)
+  // View-only code: sees the site and the events on its Guests-tab row, but no RSVP.
+  var VIEW_ONLY_CODE = 'guest';
+  function isViewOnly(pw) { return String(pw || '').trim().toLowerCase() === VIEW_ONLY_CODE; }
 
   function $(id) { return document.getElementById(id); }
 
@@ -57,6 +60,10 @@
     $('weddingCard').style.display = inv.Wedding ? '' : 'none';
     $('receptionCard').style.display = inv.Reception ? '' : 'none';
     var mlBlock = $('milwaukeeBlock'); if (mlBlock) mlBlock.style.display = inv.Milwaukee ? 'block' : 'none';
+    var viewOnly = isViewOnly(guest.password);
+    $('rsvp').style.display = viewOnly ? 'none' : '';
+    var rsvpLink = document.querySelector('#navMenu a[href="#rsvp"]');
+    if (rsvpLink && rsvpLink.parentNode) rsvpLink.parentNode.style.display = viewOnly ? 'none' : '';
     $('accessLabel').textContent = guest.eventsInvited.join(' · ') || 'Your Invitation';
     if (prefill.email) $('f_email').value = prefill.email;
     if (prefill.phone) $('f_phone').value = prefill.phone;
@@ -123,6 +130,7 @@
   // ---- Submit ----
   window.submitRSVP = async function (e) {
     e.preventDefault();
+    if (guest && isViewOnly(guest.password)) return;
     var status = $('submitStatus');
     var email = $('f_email').value.trim();
     if (!L.isValidEmail(email)) { status.textContent = 'Please enter a valid email address.'; return; }
