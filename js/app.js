@@ -196,7 +196,7 @@
   var lbExtraPhotos = [
     { src: 'images/gallery-riverside.jpg',    alt: 'By the river' },
     { src: 'images/gallery-embrace2.jpg',     alt: 'By the bridge' },
-    { src: 'images/gallery-stairs-kiss.jpg',  alt: 'A quiet moment' },
+    { src: 'images/gallery-ivy-ledge.jpg',   alt: 'By the ivy wall' },
     { src: 'images/gallery-bench-kiss.jpg',   alt: 'A quiet moment at the museum' },
     { src: 'images/gallery-handhold.jpg',     alt: 'Holding hands' },
     { src: 'images/gallery-mural.jpg',        alt: 'Hand in hand at the museum' },
