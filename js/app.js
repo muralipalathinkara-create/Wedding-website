@@ -199,8 +199,8 @@
     { src: 'images/gallery-stairs-kiss.jpg',  alt: 'A quiet moment' },
     { src: 'images/gallery-bench-kiss.jpg',   alt: 'A quiet moment at the museum' },
     { src: 'images/gallery-handhold.jpg',     alt: 'Holding hands' },
-    { src: 'images/gallery-bridge.jpg',       alt: 'Through the gallery doorway' },
-    { src: 'images/gallery-doorway-bw.jpg',   alt: 'Among the museum columns' }
+    { src: 'images/gallery-mural.jpg',        alt: 'Hand in hand at the museum' },
+    { src: 'images/gallery-lampposts.jpg',    alt: 'On the river bridge' }
   ];
 
   function lbBuild() {
