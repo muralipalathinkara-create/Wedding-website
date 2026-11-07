@@ -144,7 +144,12 @@ function buildEmailText_(recObj, attending) {
   var returnSection = '\nTo return to the website click on this link and use this password: ' +
     SITE_URL + '\nPassword: ' + recObj['Password'] + '\n';
   if (!attending) {
-    return 'Thank you for letting us know, ' + recObj['Primary Guest'] + '. We\'ll miss you!\n' +
+    return 'Dear ' + recObj['Primary Guest'] + ',\n\n' +
+      'Thank you for letting us know. We\'re so sorry you won\'t be able to join us, and we will truly ' +
+      'miss celebrating with you.\n\n' +
+      'We hope to share the day with you anyway: we will likely add a livestream link to the website ' +
+      'closer to the wedding, so please check back.\n\n' +
+      'If your plans change, you can update your RSVP anytime by logging back in.\n' +
       returnSection + '\nWith love,\n' + COUPLE;
   }
   var lines = 'Thank you, ' + recObj['Primary Guest'] + '!\n\n' +
@@ -212,9 +217,12 @@ function buildEmailHtml_(recObj, attending, hasLogo) {
         'Plans change &mdash; you can update your RSVP anytime by logging back in with your invitation code.</p>';
   } else {
     body = greeting +
-      '<p style="' + p + '">Thank you for letting us know. We&rsquo;ll truly miss celebrating with you &mdash; ' +
-        'but we&rsquo;re so grateful you replied. If anything changes, you can update your RSVP anytime by ' +
-        'logging back in.</p>';
+      '<p style="' + p + '">Thank you for letting us know. We&rsquo;re so sorry you won&rsquo;t be able to ' +
+        'join us, and we will truly <em>miss</em> celebrating with you.</p>' +
+      '<p style="' + p + '">We still hope to share the day with you &mdash; we will likely add a ' +
+        '<strong>livestream link</strong> to the website closer to the wedding, so please check back.</p>' +
+      '<p style="' + p + 'font-size:15px;color:#8a8a8a;font-style:italic;">' +
+        'If your plans change, you can update your RSVP anytime by logging back in.</p>';
   }
 
   var diamond =
@@ -249,7 +257,7 @@ function buildEmailHtml_(recObj, attending, hasLogo) {
   '<body style="margin:0;padding:0;background:#f3efe6;">' +
     '<div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">' +
       (attending ? 'We&rsquo;ve received your RSVP &mdash; we can&rsquo;t wait to celebrate with you.'
-                 : 'We&rsquo;ve received your RSVP. We&rsquo;ll miss you!') +
+                 : 'We&rsquo;ll miss you &mdash; watch the website for a livestream link.') +
       '&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;' +
     '</div>' +
     '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3efe6;">' +

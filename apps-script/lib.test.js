@@ -126,6 +126,14 @@ test('buildRsvpRecord marks decline when nobody attends', () => {
   assert.equal(out['Confirmed Count'], 0);
 });
 
+test('buildRsvpRecord treats attendees with no events as a decline', () => {
+  const lib = loadLib();
+  const rec = lib.findGuest([GUEST_B], HEADERS, 'JRivers').record;
+  const out = lib.buildRsvpRecord({ attendees: [{ name: 'Jordan Rivers', isPrimary: true, events: [] }] }, rec, 'TS');
+  assert.equal(out['Attending?'], 'No');
+  assert.equal(out['Confirmed Count'], 0);
+});
+
 test('recordToRow aligns to header order by name', () => {
   const lib = loadLib();
   const obj = { 'Password': 'X', 'Note': 'hi' };

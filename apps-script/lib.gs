@@ -110,7 +110,11 @@ function formatDietary(attendees) {
 }
 
 function buildRsvpRecord(payload, record, timestamp) {
-  var attendees = (payload && payload.attendees) || [];
+  // Only people with at least one event count as attending — a guest who
+  // leaves their name checked but unticks every event is sending regrets.
+  var attendees = ((payload && payload.attendees) || []).filter(function (a) {
+    return (a.events || []).length > 0;
+  });
   return {
     'Last Updated': timestamp,
     'Password': record.password,
