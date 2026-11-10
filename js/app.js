@@ -195,7 +195,7 @@
   // They're only fetched once someone actually opens the lightbox and scrolls this far.
   var lbExtraPhotos = [
     { src: 'images/gallery-embrace2.jpg',     alt: 'By the bridge' },
-    { src: 'images/gallery-bench-kiss.jpg',   alt: 'A quiet moment at the museum' },
+    { src: 'images/gallery-riverside.jpg',    alt: 'By the river' },
     { src: 'images/gallery-handhold.jpg',     alt: 'Holding hands' },
     { src: 'images/gallery-mural.jpg',        alt: 'Hand in hand at the museum' },
     { src: 'images/gallery-lampposts.jpg',    alt: 'On the river bridge' }
